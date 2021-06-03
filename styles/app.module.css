@@ -1,0 +1,29 @@
+.apps{
+    display:flex;
+    flex-direction:column; 
+    /* align-items: center; */
+    /* justify-content: flex-start; */
+}
+.appSection{
+    display:flex;
+    flex-direction:row;
+}
+
+.coverApp{
+    align-self: center;
+}
+.appName{
+    margin-left:8px;
+    align-self: center;
+    
+}
+.description{
+    margin-left:16px;
+    text-align: justify;
+    font-size:14px;
+}
+.status{
+    width:8px;
+    height: 8px;
+    border-radius:20px;
+}

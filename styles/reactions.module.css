@@ -1,0 +1,25 @@
+.reactions{
+    display:flex;
+    align-items:center;
+    justify-content: space-around;
+    flex-direction:row;
+}
+.buttonSend{
+    background-color:rgb(49, 49, 49);
+    border-radius:100px;
+    width:100px;
+    height:28px;
+    color:white;
+    text-align:center;
+    border:none;
+}
+.buttonSend:hover{
+    color:rgb(20, 20, 20);
+    transition:0.2s ease-in-out;
+    background-color:white;
+}
+.reactions p > span{
+    color:rgb(1, 76, 161);
+    margin-left:6px;
+    font-weight: 10px;;
+}

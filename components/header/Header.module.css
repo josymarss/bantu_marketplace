@@ -1,0 +1,25 @@
+.menu{
+    display:flex;
+    height: 50px;
+    background-color:rgb(243, 243, 243);
+    width:100%;
+    align-items: center;
+    justify-content: space-between;
+    padding:18px;
+    box-shadow:5px 10px 12px #dfdfdf;
+}
+.menu h5{
+    font-size:20px;
+    color:rgb(49, 49, 49);
+}
+.menuElements ul{
+    display:flex;
+}
+.menuElements ul li{
+    list-style: none;
+    flex-direction:row;
+    margin-left:25px;
+}
+.menuElements ul li:hover{
+    color:rgb(20, 91, 134);
+}

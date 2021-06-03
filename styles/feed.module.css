@@ -1,0 +1,64 @@
+.feed{
+     display:flex;
+     margin-top:25px;
+     flex-direction:column;
+}
+.container{
+     display:flex;
+     flex-direction:row;
+     justify-content: space-between;
+     margin:5px;
+     padding:10px;
+     /* margin-top:10px; */
+} 
+.myApps{
+     width:250px;
+     justify-content:flex-start;
+     align-items:center;
+     padding:10px;
+     background-color:rgb(238, 238, 238);
+}
+.mostPopular{
+     width:250px;
+     background-color:rgb(238, 238, 238);
+     padding:10px;
+     justify-content:flex-start;
+     align-items:center;
+
+}
+.activities{
+     width:450px;
+     border-radius:8px;
+     background-color:rgb(238, 238, 238);
+     padding:10px;
+     justify-content:flex-start;
+     align-items:center;
+}
+.search{
+     width:250px;
+     height:15px;
+     border-radius:75px;
+     border:1px solid rgb(231, 231, 231);
+     padding:12px;
+     color:black;
+     align-self: center;
+}
+.searchContainer{
+     display:flex;
+     align-items:center;
+     justify-content:center;
+     
+}
+.button{
+     border-radius:90px;
+     width:60px;
+     height:25px;
+     border:none;
+     background-color:rgb(31, 31, 31);
+     margin-left:10px;
+     color:white;
+}
+.button:hover{
+     background-color: rgb(233, 233, 233);
+     color:rgb(20, 91, 134); ;
+}
