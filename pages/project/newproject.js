@@ -19,7 +19,10 @@ export default function NewProject(){
                method: 'POST'
           }) 
      }
+     const loadImage = () => {
 
+     }
+     
      return(
           <form onSubmit={onAdd} className='container'>
                <h1>Add new project</h1>
@@ -38,7 +41,7 @@ export default function NewProject(){
                     />
                </div>
                <div className='image'>
-                    <Image width={60} height={60} src='' alt='Add an image' />
+                    <input type='file' name='file' onChange={loadImage}/>
                     <button>Add image</button>
                </div>
                <button>Save</button>

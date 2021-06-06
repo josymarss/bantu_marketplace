@@ -38,5 +38,5 @@ export default function Feed(){
 }
 
 const getServerSideProps = async () => {
-
+     
 }

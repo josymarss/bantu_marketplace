@@ -9,6 +9,9 @@ export default function Profile(){
     const onFollow = ()  => {
         console.log('seguindo')
     }
+    const onSolicitar = () => {
+
+    }
 
     return(
         <div>
@@ -25,7 +28,10 @@ export default function Profile(){
                 <input type='text' name='procurar' ploaceholder='procurar um app'/>
                 <div className={styles.connections}>
                     <p><span>Meus aplicativos</span></p>
-                    <App width={22} height={22} name='Tupuca'/>
+                    <div className={styles.appSolicitar}>
+                        <App width={22} height={22} name='Tupuca'/>
+                        <button onClick={onSolicitar}>Solicitar</button>
+                    </div>
                 </div>
                 <div className={styles.negociations}>
                     <p><span>solicitações de negociações</span></p>

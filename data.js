@@ -21,6 +21,40 @@ const data = {
                          image:'/favicon.ico',
                          status:'' //em curso, sucesso, falhada
                     }]
+               },
+                {
+                    payment:0,
+                    id:1,
+                    name:'Kone',
+                    description:'A popular game in kilamba centrality',
+                    icon:'/favicon.ico',
+                    requests:[{
+                         user:{//Have some id, automaticly from mongodb
+                              id:1,
+                              name:'josymar',
+                              aboutUser:'Programmer'
+                         },
+                         description:' I do it it and more stuff!',
+                         image:'/favicon.ico',
+                         status:'' //em curso, sucesso, falhada
+                    }]
+               },
+                {
+                    payment:0,
+                    id:1,
+                    name:'Kone',
+                    description:'A popular game in kilamba centrality',
+                    icon:'/favicon.ico',
+                    requests:[{
+                         user:{//Have some id, automaticly from mongodb
+                              id:1,
+                              name:'josymar',
+                              aboutUser:'Programmer'
+                         },
+                         description:' I do it it and more stuff!',
+                         image:'/favicon.ico',
+                         status:'' //em curso, sucesso, falhada
+                    }]
                }
           ],// for each app should have negociations
           followers:[{// Should be, an user object with the same informations
@@ -31,6 +65,11 @@ const data = {
           {
                id:2,
                name:'ferrazzo',
+               aboutUser:'Stuff 1, and more'
+          },
+          {
+               id:2,
+               name:'megana',
                aboutUser:'Stuff 1, and more'
           }],
           myfeedposts:[{
