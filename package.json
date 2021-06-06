@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "js-cookie": "^2.2.1",
-    "mongoose": "^5.12.12",
+    "mongodb": "^3.6.9",
     "nexmo": "^2.9.1",
     "next": "^10.2.2",
     "react": "17.0.2",

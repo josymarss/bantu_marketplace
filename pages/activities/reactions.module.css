@@ -1,8 +1,10 @@
 .reactions{
     display:flex;
+    flex-direction:row;
     align-items:center;
     justify-content: space-around;
-    flex-direction:row;
+    width:auto;  
+    padding:10px;;
 }
 .buttonSend{
     background-color:rgb(49, 49, 49);
@@ -10,16 +12,24 @@
     width:100px;
     height:28px;
     color:white;
+    font-size:16px;
     text-align:center;
     border:none;
+    margin-left:12px;
+    text-align:center;
+    align-self:center;
 }
 .buttonSend:hover{
     color:rgb(20, 20, 20);
     transition:0.2s ease-in-out;
-    background-color:white;
+    background-color:#6C63FF;
+    color:white;
 }
 .reactions p > span{
     color:rgb(1, 76, 161);
-    margin-left:6px;
+    margin-left:10px;
     font-weight: 10px;;
+}
+.reactions p {
+    margin-left:12px;
 }

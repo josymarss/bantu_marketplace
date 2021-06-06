@@ -18,10 +18,15 @@ const AppSchema = new Schema({
     reactions:{
         _idUser:mongoose.Types.ObjectId,
         stars:Number,
-        solicitations:Number    
+        solicitations:Number
     },
     negociations:[{
-        user:User,
+        _iduser:String,
+        name:String,
+        avatar:{
+            data:Buffer,
+            type:String
+        },
         description:String,
         status:['ongoing','acept','fail']
     }]

@@ -1,7 +1,11 @@
 .feed{
+     /* wrap:nowrap; */
      display:flex;
-     margin-top:25px;
+     margin-top:60px;
      flex-direction:column;
+     background-color:#f6f6f6;
+     width:100%;
+     height:auto;
 }
 .container{
      display:flex;
@@ -9,6 +13,8 @@
      justify-content: space-between;
      margin:5px;
      padding:10px;
+     background-color:#f6f6f6;
+     /* position:fixed; */
      /* margin-top:10px; */
 } 
 .myApps{
@@ -16,23 +22,29 @@
      justify-content:flex-start;
      align-items:center;
      padding:10px;
-     background-color:rgb(238, 238, 238);
+     /* position:fixed; */
 }
 .mostPopular{
      width:250px;
-     background-color:rgb(238, 238, 238);
      padding:10px;
      justify-content:flex-start;
      align-items:center;
-
+     /* position:fixed; */
 }
 .activities{
-     width:450px;
+     width:400px;
+     margin-top:8px;
+     height:auto;
+}
+.card{
+     box-shadow:5px 10px 12px 5px #dfdfdf;
+     margin-top:10px;
      border-radius:8px;
-     background-color:rgb(238, 238, 238);
+     background-color:'#ffffff';
      padding:10px;
      justify-content:flex-start;
      align-items:center;
+     height:250px;
 }
 .search{
      width:250px;
@@ -46,8 +58,7 @@
 .searchContainer{
      display:flex;
      align-items:center;
-     justify-content:center;
-     
+     justify-content:center;    
 }
 .button{
      border-radius:90px;
@@ -60,5 +71,5 @@
 }
 .button:hover{
      background-color: rgb(233, 233, 233);
-     color:rgb(20, 91, 134); ;
+     color:#6C63FF;
 }

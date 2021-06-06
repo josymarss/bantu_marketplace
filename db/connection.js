@@ -1,13 +1,21 @@
-import mongoose from 'mongoose'
+import { MongoClient } from 'mongodb' 
 
-export async function ConnectToDB(){
-    return mongoose.connect(process.env.DB, {
+export async function ConnectToDatabase(){
+    const client = await new MongoClient.connect(process.env.DB, {
         useUnifiedTopology:true,
         useNewUrlParser:true,
         useFindAndModify:true
     })
+
+    if(!client.isConnect()){
+        return await client.Connect()
+    }
+
+    const db = await client.db(process.env.MONGODB_NAME)
+
+    return {db}
 }
 
 export function jsonsify(obj){
-    return JSON.stringify(JSON.parse(obj))
+    return JSON.stringify(JSON.parse(obj)) 
 }

@@ -1,6 +1,6 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 
 export default function Login(){
 
@@ -10,11 +10,7 @@ export default function Login(){
     const onLogin = (e) =>{
         e.preentDefault()
         const router = useRouter()
-        //search on database
-        //login
-        // if(user){
-        //     router.push('/feed/feed')
-        // }
+        
     }
     return(
         <div className='container'>

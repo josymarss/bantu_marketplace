@@ -1,0 +1,93 @@
+.container{
+    margin-top:80px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    height:auto;
+    /* position:fixed; */
+}
+.profile{
+    margin-left:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    margin-bottom:18px;
+}
+.profile button{
+    width:80px;
+    height:30px;
+    border-radius:160px;
+    border:none;
+    background-color:black;
+    color:white;
+}
+.profile button :hover{
+    background-color:#6C63FF;
+    color:white;
+    transition: 2s ease-in-out;
+}
+.borderImage{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border: 0.8 #dbdbdb solid;
+    border-radius:160px;
+    width:80px;
+    height:80px;
+}
+.profile > img{
+    width:60px;
+    height:60px;
+    border-radius:160px;
+}
+.appSection{
+    display:flex;
+    align-self:flex-start;
+    margin-left:20px;
+    flex-direction:column;
+}
+.appSection input {
+    width:50px;
+    height:18px;
+    border-radius:160px;
+    border: 0.8px solid #f6f6f6;
+}
+.appSection p > span {
+    font-weight:bold;
+    font-size:20px;
+    justify-content:flex-start;
+    color:#6C63FF;
+}
+.solicitation{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    background-color:red;
+}
+.solicitationsButton{
+    margin-left:20px;
+    margin-bottom:28px;
+}
+.btnBusiness{
+    margin-left:4px;
+    width:70px;
+    height:28px;
+    border-radius:80px;
+    border:none;
+    background-color:rgb(26, 26, 26);
+    color:white;
+}
+.btnBusiness > button:hover{
+    box-shadow: 5px 2px 12px rgb(53, 53, 53);
+    font-weight: bold;
+}
+.aceitar {
+    background-color:rgb(93, 224, 93);
+    color:white;
+    border-radius:80px;
+    border:none;
+    width:70px;
+    height:28px;
+}

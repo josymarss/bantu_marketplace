@@ -1,5 +1,5 @@
 import App from './app'
-import styles from '../../styles/mostpopular.module.css'
+import styles from './mostpopular.module.css'
 
 export default function MostPopular(){
      return(

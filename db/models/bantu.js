@@ -1,7 +1,7 @@
 import mongoose, {Schema} from 'mongoose'
 
 
-const dataSchema = new Schema({
+const bantuSchema = new Schema({
     users:[User],
     appstoAcept:[{
         id_person:mongoose.Schema.Types.ObjectId,
@@ -13,4 +13,4 @@ const dataSchema = new Schema({
     }]
 })
 
-export default mongoose.model('data', dataSchema)
+export default mongoose.model('bantu', bantuSchema)

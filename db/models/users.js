@@ -4,7 +4,7 @@ import App from '../apps'
 
 const userSchema = new Schema({
     name:String,
-    photo:{
+    avatar:{
         data:Buffer,
         type:String,
     },
@@ -12,7 +12,14 @@ const userSchema = new Schema({
     province:String,
     description:String,
     apps:[App],
-    followers:[userSchema],
+    followers:[{
+        avatar:{
+            data:Buffer,
+            type:String
+        },
+        idUser:mongoose.Types.ObjectId
+    }],
+    password:String
 })
 
 export default mongoose.model('User', userSchema);

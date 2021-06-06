@@ -1,4 +1,4 @@
-import styles from '../../styles/app.module.css'
+import styles from './app.module.css'
 
 export default function App({ width, height, name,description,status}){
     return(

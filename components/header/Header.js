@@ -16,16 +16,16 @@ export default function Header(){
             }
       }
       return (
-            <nav className={styles.menu}>
-                  <h5>bantu-marketplace</h5>
-                  <div className={styles.menuElements}>
-                        <ul>
-                              <li><Link href='/feed/feed'>Home</Link></li>
-                              <li><Link href='/'>Aplicativos</Link></li>
-                              <li><Link href='/profile/profile'>Perfil</Link></li>
-                        </ul>
-                  </div>
-                  <p>{!logedIn? 'Login' : 'Log out'}</p>
-            </nav>
+                  <nav className={styles.menu}>
+                        <h5>bantu-marketplace</h5>
+                        <div className={styles.menuElements}>
+                              <ul>
+                                    <li><Link href='/feed/feed'>Home</Link></li>
+                                    <li><Link href='/'>Aplicativos</Link></li>
+                                    <li><Link href='/profile/profile'>Perfil</Link></li>
+                              </ul>
+                        </div>
+                        <p>{!logedIn? 'Login' : 'Log out'}</p>
+                  </nav>
       );
 }

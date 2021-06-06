@@ -1,5 +1,5 @@
 import App from './app'
-import styles from '../../styles/myapps.module.css'
+import styles from './myapps.module.css'
 
 export default function MyApps(){
      return(

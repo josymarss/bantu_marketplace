@@ -1,19 +1,24 @@
 .menu{
+    top:0;
+    padding:8px;
     display:flex;
-    height: 50px;
-    background-color:rgb(243, 243, 243);
+    height: 48px;
+    background-color:#ffffff;
     width:100%;
-    align-items: center;
+    align-items:center;
     justify-content: space-between;
-    padding:18px;
+    padding:8px;
     box-shadow:5px 10px 12px #dfdfdf;
+    position:fixed;
+    z-index:9000;
 }
 .menu h5{
     font-size:20px;
-    color:rgb(49, 49, 49);
+    color:#6C63FF;
 }
 .menuElements ul{
     display:flex;
+    align-self:center;
 }
 .menuElements ul li{
     list-style: none;
@@ -21,5 +26,5 @@
     margin-left:25px;
 }
 .menuElements ul li:hover{
-    color:rgb(20, 91, 134);
+    color:#6C63FF;
 }
