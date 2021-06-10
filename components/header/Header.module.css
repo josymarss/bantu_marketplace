@@ -1,18 +1,17 @@
 .menu{
     top:0;
-    padding:8px;
     display:flex;
     height: 48px;
     background-color:#ffffff;
     width:100%;
     align-items:center;
     justify-content: space-between;
-    padding:8px;
     box-shadow:5px 10px 12px #dfdfdf;
     position:fixed;
     z-index:9000;
 }
 .menu h5{
+    margin-left:10px;
     font-size:20px;
     color:#6C63FF;
 }
@@ -27,4 +26,7 @@
 }
 .menuElements ul li:hover{
     color:#6C63FF;
+}
+.menu p {
+    margin-right:20px;
 }

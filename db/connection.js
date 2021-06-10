@@ -8,6 +8,7 @@ export async function ConnectToDatabase(){
     })
 
     if(!client.isConnect()){
+        console.log(client)
         return await client.Connect()
     }
 

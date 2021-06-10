@@ -1,10 +1,9 @@
 import mongoose, {Schema} from 'mongoose'
 
 
-const bantuSchema = new Schema({
-    users:[User],
+const adminSchema = new Schema({
     appstoAcept:[{
-        id_person:mongoose.Schema.Types.ObjectId,
+        _id:mongoose.Schema.Types.ObjectId,
         app:App
     }],
     appsAcepetd:[{
@@ -13,4 +12,4 @@ const bantuSchema = new Schema({
     }]
 })
 
-export default mongoose.model('bantu', bantuSchema)
+export default mongoose.model('adminData', bantuSchema)

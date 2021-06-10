@@ -9,6 +9,7 @@ export default function Header(){
       const [logedIn, setLogin] = useState(false)
 
       const makeLogin = () =>{
+            //search on local storage
             if(!logedIn){
                   //Login here
             }else{
@@ -25,7 +26,7 @@ export default function Header(){
                                     <li><Link href='/profile/profile'>Perfil</Link></li>
                               </ul>
                         </div>
-                        <p>{!logedIn? 'Login' : 'Log out'}</p>
+                        <p>{!logedIn? 'Login' : '@josymars'}</p>
                   </nav>
       );
 }
