@@ -14,22 +14,20 @@ export default function Login(){
         
     }
     return(
-        <form>
-            <div className={styles.container}>
+            <form className={styles.container}>
                 <input 
                     type='text'
                     name='phone'
+                    placeholder='phone'
                     onChange={e => setNumber(e.target.value)}
-                    required 
                 />
                 <input 
                     type='text'
                     name='password'
+                    placeholder='password'
                     onChange={e => setPass(e.target.value)}
-                    required 
                 />
                 <button onClick={onLogin}>Entrar</button>
-            </div>
-        </form>
+            </form>
     )
 }
