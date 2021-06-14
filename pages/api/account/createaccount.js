@@ -1,9 +1,6 @@
 import db from '../../../db/connection'
 
 export default (req,res) => {
-    if(req.method == 'POST'){
-        res.send(req.query)
-        console.log(req.query)
+    res.json({_id:'iahnfohfoiDdj29328r7yhKinbJ'})
         //Save into the database 
-    }    
 }

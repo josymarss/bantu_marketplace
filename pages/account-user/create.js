@@ -1,16 +1,14 @@
 import {useState,useEffect} from 'react'
-import Link from 'next/link'
 import { UseRouter } from 'next/router'
 
 import styles from './createaccount.module.css'
-import db from '../../db/connection'
 
 export default function Create(){
     
     const [name,setName] = useState('')
     const [province,setProvince] = useState('')
     const [description,setDescription] = useState('')
-    const [pass,setPass] = useState('')
+    const [password,setPass] = useState('')
     const [confirmPass,setConfirmPass] = useState('')
     const [phone,setPhone] = useState('')
     const [href, setHref] = useState('')
@@ -19,33 +17,30 @@ export default function Create(){
         setHref(URL.createObjectURL(e.target.files[0]))
     }
 
-    const onCreateAccount = (e) => {
+     async function onCreateAccount(e){
         e.preventDefault()
         if(name == '' || pass == '' || confirmPass == '' || pass != confirmPass || description == '' || province == ''){
             alert('as palavras passes devem ser iguais e nenhum campo deve estar vazio')
         }else{
             const router = useRouter()
-            fetch(`${process.env.END_POINT}/account/createaccount`, {
+            const userCreated = await fetch(`${process.env.END_POINT}/account/createaccount`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name:'josymar',
-                    avatar,
-                    phone,
-                    province,
-                    description,
-                    apps:[],
-                    followers:[],
-                    password:pass
-                })
-            })
-
+                headers:{'Content-Type':'application/json','Accept': 'application/json'},
+                body: JSON.stringify(
+                    {name,avatar,phone,province,description,apps:[],followers:[], password}
+                )
+            }).then(res => res.json())
+            if(userCreated){
+                const { _id } = userCreated
+            }
+            
+             
         }
     }
 
     return(
-        <form onSubmit={onCreateAccount}>
-            <div className={styles.container}>
+        <div className={styles.container}>
+            <form>
                 <img src={href} className={styles.image}/>
                 <input type='file' 
                         name='image' 
@@ -82,8 +77,8 @@ export default function Create(){
                     name='confirmpass' 
                     onChange={e => setConfirmPass(e.target.value)}
                 />
-                <button>Criar conta</button>
-            </div>
-        </form>
+                <button onClick={onCreateAccount}>Criar conta</button>
+            </form>
+        </div>
     )
 }

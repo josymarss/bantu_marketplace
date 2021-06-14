@@ -1,11 +1,11 @@
 import {useEffect,useState} from 'react'
 
 import Feed from './feed/feed'
-import LeadingPage from './leading'
+import LeadingPage from './leading/leading'
 
 export default function Home() {
 
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({token:'wertyulop09483'})
 
   useEffect(() => {
     //search user on Cookies
@@ -15,7 +15,8 @@ export default function Home() {
   })
 
   return (
-    user !== {} ? <Feed /> : <LeadingPage />
+    // user !== {} ? <Feed /> : <LeadingPage />
+    <LeadingPage />
   );
 }
 

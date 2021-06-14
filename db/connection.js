@@ -1,14 +1,13 @@
 import { MongoClient } from 'mongodb' 
 
 export async function ConnectToDatabase(){
-    const client = await new MongoClient.connect(process.env.DB, {
+    const client = await new MongoClient.connect(process.env.MONGODB_URL, {
         useUnifiedTopology:true,
         useNewUrlParser:true,
         useFindAndModify:true
     })
 
     if(!client.isConnect()){
-        console.log(client)
         return await client.Connect()
     }
 
