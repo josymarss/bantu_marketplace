@@ -1,18 +1,19 @@
-import mongoose,{Schema} from 'mongoose'
+// // import mongoose,{Schema} from 'mongoose'
 
-// import App from '../apps'
+// // import App from '../apps'
 
-// const userSchema = new Schema({
+// const Usuario = new Schema(
+// {
 //     name:String,
-//     avatar:{
+//     foto:{
 //         data:Buffer,
 //         type:String,
 //     },
-//     phone:Number,
+//     telefone:String,
 //     province:String,
 //     description:String,
 //     apps:[App],
-//     followers:[{
+//     seguidores:[{
 //         avatar:{
 //             data:Buffer,
 //             type:String

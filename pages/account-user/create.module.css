@@ -1,23 +1,23 @@
-.input{
+.container {
+    display:flex;
+    margin-top: 100px;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:4px;
+}
+.container img{
+    width:100px;
+    height:100px;
+    border-radius:100%;
+}
+.myForm {
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center; 
-    margin-top:100px;
+    justify-content:center;
 }
-.input h1 {
-    color:#6C63FF;
-}
-.input h1 span{
-    text-decoration:underline;
-    cursor:cell;
-}
-.input{
-    display:flex;
-    flex-direction:column;
-    /* margin-top:10px; */
-}
-.input input {
+.myForm input {
     margin-top:6px;
     width:500px;
     padding:10px;
@@ -26,7 +26,7 @@
     border-radius:4px;
     font-size:18px;
 }
-.input button {
+.myForm button {
     margin-top:4px;
     width:500px;
     padding:10px;

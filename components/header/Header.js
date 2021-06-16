@@ -26,7 +26,7 @@ export default function Header(){
                                     <li><Link href='/profile/profile'>Perfil</Link></li>
                               </ul>
                         </div>
-                        <p>{!logedIn? 'Login' : '@josymars'}</p>
+                        <p>{!logedIn? ' ' : '@josymars'}</p>
                   </nav>
       );
 }

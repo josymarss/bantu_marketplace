@@ -2,7 +2,8 @@
 
 // import User from '../user'
 
-// const AppSchema = new Schema({
+// const Aplicativos = new Schema(
+// {
 //     name:String,
 //     tpye:String,
 //     avatar:{
@@ -21,7 +22,7 @@
 //         solicitations:Number
 //     },
 //     negociations:[{
-//         _iduser:String,
+//         _iduser:mongoose.Types.ObjectId,
 //         name:String,
 //         avatar:{
 //             data:Buffer,

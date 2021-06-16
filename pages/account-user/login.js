@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 import styles from './login.module.css'
 
@@ -16,22 +17,26 @@ export default function Login(){
         //redirect to homepage/profile
     }
     return(
-            <div className={styles.container}>
-                <form>
-                    <input 
-                        type='text'
-                        name='phone'
-                        placeholder='phone'
-                        onChange={e => setNumber(e.target.value)}
-                    />
-                    <input 
-                        type='text'
-                        name='password'
-                        placeholder='password'
-                        onChange={e => setPass(e.target.value)}
-                    />
-                    <button onClick={onLogin}>Entrar</button>
-            </form>
-        </div>
+            <div className={styles.input}>
+                <h1>
+                    Faca login ou 
+                    <Link href='/account-user/create'>
+                        <span> cria uma conta</span>
+                    </Link>
+                </h1>
+                <input 
+                    type='text'
+                    name='phone'
+                    placeholder='phone'
+                    onChange={(e) => setPhone(e.target.value)}
+                />
+                <input 
+                    type='password'
+                    name='password'
+                    placeholder='password'
+                    onChange={(e) => setPass(e.target.value)}
+                />
+                <button onClick={onLogin}>Entrar</button>
+            </div>
     )
 }
