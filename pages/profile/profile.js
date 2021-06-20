@@ -30,7 +30,7 @@ export default function Profile(){
                     <p><span>Meus aplicativos</span></p>
                     <div className={styles.appSolicitar}>
                         <App width={22} height={22} name='Tupuca'/>
-                        <button onClick={onSolicitar}>Solicitar</button>
+                        <button onClick={onSolicitar}> </button>
                     </div>
                 </div>
                 <div className={styles.negociations}>

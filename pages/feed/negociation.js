@@ -10,8 +10,8 @@ export default function Negociation(){
         e.preventDefault()
         console.log(description)
         const data = await fetch(`${process.env.END_POINT}/negociation/new`,{
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({description})
         }).then(res => res.json())
         console.log(data)   

@@ -1,0 +1,138 @@
+.contanier {
+    /* margin-top:200px; */
+    display:flex;
+}
+.container h2 {
+    font-size:55px;
+}
+.container span {
+    color:#6C63FF;
+}
+.container h1{
+    width:450px;
+    font-size:40px;
+}
+.container p {
+    color:#adadad;
+    font-size:22px;
+}
+.header{
+    padding:26px;
+    margin-top:20px;
+    display:flex;
+    align-items:center;
+    flex-direction:row;
+    background-color:white;
+}
+.info{
+    padding:4px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+}
+.info > a {
+    color:#6C63FF;
+    border:1px solid #dddddd;
+    padding:14px;
+    font-size:20px;
+    font-weight:bold;
+    text-transform:uppercase;
+    border-radius:4px;
+    margin-top:20px;
+}
+.info > a:hover{
+    background-color:white;
+    color:#5249fd;
+}
+
+.header img{
+    margin-top:90px;
+    width:529px;
+    height:326px;
+}
+.acionista{
+    display:flex;
+    align-items:center;
+    flex-direction:row;
+    justify-content:space-around;
+    margin-top:60px;
+}
+.acionista img{
+    width:494px;
+    height:441px;
+}
+.content {
+    display:flex;
+    flex-direction:column;
+}
+.content p {
+    width:450px;
+    text-align:center;
+}
+.content h1{
+    text-align:center;
+}
+.people{
+    display:flex;
+    align-items:center;
+    flex-direction:row;
+    justify-content:space-around;
+    margin-top:60px;
+}
+.people img{
+    width:544px;
+    height:441px;
+}
+.peopleContent {
+    display:flex;
+    flex-direction:column;
+}
+.peopleContent p {
+    width:450px;
+    text-align:center;
+}
+.peopleContent h1{
+    text-align:center;
+}
+
+.moreDetails{
+    margin-top:60px;
+    margin-bottom:70px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+.moreDetails h1{
+    text-align:center;
+}
+.detailsInfo{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+.borderText{
+    /* align-self:center; */
+    margin:12px;
+    width:320px;
+    height:150px;
+    padding:20px;
+    font-size:14px;
+    border:1px solid #dddddd;
+    color:#c5c5c5;
+    text-align:center;
+}
+.borderText:hover{
+    border-color:#6C63FF;
+    border-radius:2px;
+}
+.footer{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    height:50px;
+    width:100%;
+    box-shadow: 8px 2px 10px #4b4b4b;
+}
