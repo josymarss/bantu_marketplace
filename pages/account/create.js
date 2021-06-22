@@ -1,10 +1,10 @@
 import {useState,useEffect} from 'react'
-import { UseRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 import styles from './create.module.css'
 
 export default function Create(){
-    
+    const provinces = ['Bengo', 'Benguela','Bié','Cabinda','Cuando-Cubango','Kwanza norte','Kwanza sul','Cunene','Huambo','Huíla','Luanda','Lunda norte','Lunda sul','Malange','Muxico','Namibe','Uíge','Zaire']
     const [name,setName] = useState('')
     const [province,setProvince] = useState('')
     const [description,setDescription] = useState('')
@@ -19,16 +19,24 @@ export default function Create(){
 
      async function onCreateAccount(e){
         e.preventDefault()
-        if(name == '' || pass == '' || confirmPass == '' || pass != confirmPass || description == '' || province == ''){
+        if(name == '' || password == '' || confirmPass == '' || password !== confirmPass || description == '' || province == ''){
             alert('as palavras passes devem ser iguais e nenhum campo deve estar vazio')
         }else{
-            const router = useRouter()
-            const userCreated = await fetch(`${process.env.END_POINT}/account/createaccount`, {
+            // const router = useRouter()
+            const userCreated = await fetch(`/api/account/createaccount`, {
                 method: 'POST',
                 headers:{'Content-Type':'application/json'},
                 body: JSON.stringify(
-                    {name,avatar,phone,province,description,apps:[],followers:[], password}
-                )
+                    {
+                        name,
+                        href,
+                        phone,
+                        province,
+                        description,
+                        apps:[],
+                        followers:[], 
+                        password
+                    })
             }).then(res => res.json())
             if(userCreated){
                 const { token } = userCreated
@@ -37,13 +45,13 @@ export default function Create(){
              
         }
     }
-
     return(
         <div className={styles.container}>
             <img src={href}/>
             <div className={styles.myForm}>
                     <input type='file' 
-                            name='image' 
+                            name='image'
+                            filename='escolher foto' 
                             className={styles.btnLoad} 
                             onChange={loadImage}
                     />
@@ -61,12 +69,6 @@ export default function Create(){
                     />
                     <input 
                         type='text' 
-                        name='province'
-                        placeholder='província'
-                        onChange={e => setProvince(e.target.value)}
-                    />
-                    <input 
-                        type='text' 
                         name='description'
                         placeholder='descrição sobre você' 
                         onChange={e => setDescription(e.target.value)}
@@ -79,10 +81,22 @@ export default function Create(){
                     />
                     <input 
                         type='password' 
-                        name='comfirmpassword' 
-                        placeholder='comfirmar palavra passe'
+                        name='confirmpassword' 
+                        placeholder='confirmar palavra passe'
                         onChange={e => setConfirmPass(e.target.value)}
                     />
+                     <select
+                        name='provincias'
+                        value='província'
+                        className={styles.province}
+                    >
+                        {provinces.map( province => {
+                             <option 
+                                 value={province} 
+                                 Key={province}>{province}
+                            </option>
+                        })}
+                    </select>
                     <button onClick={onCreateAccount}>Criar conta</button>
             </div>
         </div>

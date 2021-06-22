@@ -6,15 +6,26 @@ import styles from './login.module.css'
 
 export default function Login(){
 
+    const router = useRouter()
     const [phone, setPhone] = useState('')
     const [password, setPass] = useState('')
 
-    const onLogin = async (e) => {
-        e.preentDefault()
-         // search on database 
-         // to localstorage
-        const router = useRouter()
+    const onLogin = async (event) => {
+        event.preventDefault()
+        const data = await fetch(`/api/account/login`,{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                // 'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                phone,
+                password
+            })
+        }).then(res => res.json())
+        console.log(data)
         //redirect to homepage/profile
+        // router.push(`${myIdToken}`)
     }
     return(
             <div className={styles.input}>
@@ -36,7 +47,9 @@ export default function Login(){
                     placeholder='password'
                     onChange={(e) => setPass(e.target.value)}
                 />
-                <button onClick={onLogin}>Entrar</button>
+                
+                <a onClick={onLogin}>Entrar</a>
+                
             </div>
     )
 }

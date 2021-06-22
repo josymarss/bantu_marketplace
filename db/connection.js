@@ -16,6 +16,3 @@ export async function ConnectToDatabase(){
     return {db}
 }
 
-export function jsonsify(obj){
-    return JSON.stringify(JSON.parse(obj)) 
-}
