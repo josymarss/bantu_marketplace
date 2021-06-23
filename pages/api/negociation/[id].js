@@ -1,7 +1,10 @@
-// import { db } from '../../../db/connection'
+import { ConnectToDatabase } from '../../../db/connection'
 
-export default(req,res) => {
-    const { id } = req.body
+export default async (req,res) => {
+
+    const db = ConnectToDatabase()
+    const { idWhoWantMakeNegociation, idUser, description } = req.body
+    
     const appNegociation = db.collection('users').findOne({ id })
     res.json({appNegociation})
 }

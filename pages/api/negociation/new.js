@@ -1,10 +1,20 @@
 import { db } from '../../../db/connection'
 
+import { ConnectToDatabase } from '../../../db/connection'
+
 export default (req,res) => {
-    //const { description } = req.body
-    const { method } = req.body
+    
+    const db = ConnectToDatabase()
+    const  { negociation, nameApp, idUser, idUserOfApp }  = req.body
+    const  method  = req.method
+
     if(method === 'POST'){
-        res.json({token:'ajfuwgr16523vbjsdbjfk82bhjg'})
+        const users = await db.collection('users')
+        const result = await users.updateOne(
+            { _id:idUserOfApp, name:nameApp }, 
+            {$set:{apps:{ $push:{idUser,nameApp,negociation} } } }
+        )
+        console.log(result)
     }
     
 }

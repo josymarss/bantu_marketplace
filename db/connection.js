@@ -11,7 +11,7 @@ export async function ConnectToDatabase(){
     const client = await MongoClient.connect(process.env.MONGODB_URL, {
         useUnifiedTopology:true,
         useNewUrlParser:true,
-        //useFindAndModify:true
+        // useFindAndModify:true
     })
 
     const db = await client.db(process.env.DB_NAME)

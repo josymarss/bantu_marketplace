@@ -1,7 +1,7 @@
 import { useStrate } from 'react'
 import {useRouter} from 'next/router'
 
-import { db } from '../db/connection'
+import { db } from '../../db/connection'
 
 export default function Change({ _id }){
 

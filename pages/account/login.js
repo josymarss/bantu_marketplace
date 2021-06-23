@@ -18,6 +18,16 @@ export default function Login(){
             password
         })
 
+        const { tokenId, message } = data
+        
+        if(tokenId){
+            router.push({
+                pathname:'/profile/[id]',
+                query:{ id: tokenId }
+            })
+        }else {
+            return (<p>{ message }</p>)
+        }
     }
     return(
             <div className={styles.input}>
