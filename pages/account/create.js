@@ -1,9 +1,12 @@
 import {useState,useEffect} from 'react'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 import styles from './create.module.css'
+import Error from '../error/error'
 
 export default function Create(){
+    const router = useRouter()
     const provinces = ['Bengo', 'Benguela','Bié','Cabinda','Cuando-Cubango','Kwanza norte','Kwanza sul','Cunene','Huambo','Huíla','Luanda','Lunda norte','Lunda sul','Malange','Muxico','Namibe','Uíge','Zaire']
     const [name,setName] = useState('')
     const [province,setProvince] = useState('')
@@ -17,87 +20,77 @@ export default function Create(){
         setHref(URL.createObjectURL(e.target.files[0]))
     }
 
-     async function onCreateAccount(e){
+    async function onCreateAccount(e){
         e.preventDefault()
-        if(name == '' || password == '' || confirmPass == '' || password !== confirmPass || description == '' || province == ''){
-            alert('as palavras passes devem ser iguais e nenhum campo deve estar vazio')
-        }else{
-            // const router = useRouter()
-            const userCreated = await fetch(`/api/account/createaccount`, {
-                method: 'POST',
-                headers:{'Content-Type':'application/json'},
-                body: JSON.stringify(
-                    {
-                        name,
-                        href,
-                        phone,
-                        province,
-                        description,
-                        apps:[],
-                        followers:[], 
-                        password
-                    })
-            }).then(res => res.json())
-            if(userCreated){
-                const { token } = userCreated
-            }
-            
-             
-        }
+        const user = await axios.post('/api/account/create', {
+            name,photo:href,
+            phone,province,description,
+            apps:[],followers:[], password
+        })
+
+        const { tokenId } = user.data
+        router.push({
+            pathname:'/profile/[id]',
+            query:{id:tokenId}
+        })
+          
     }
     return(
         <div className={styles.container}>
-            <img src={href}/>
+            <img 
+                src={href === '' ? '/camera.png' : href } 
+                className={styles.imageContainer}
+            />
             <div className={styles.myForm}>
-                    <input type='file' 
-                            name='image'
-                            filename='escolher foto' 
-                            className={styles.btnLoad} 
-                            onChange={loadImage}
-                    />
-                    <input 
-                        type='text' 
-                        name='username'
-                        placeholder='nome de usuário'
-                        onChange={e => setName(e.target.value)}
-                    />
-                    <input 
-                        type='text' 
-                        name='phone'
-                        placeholder='telefone'
-                        onChange={e => setPhone(e.target.value)}
-                    />
-                    <input 
-                        type='text' 
-                        name='description'
-                        placeholder='descrição sobre você' 
-                        onChange={e => setDescription(e.target.value)}
-                    />
-                    <input 
-                        type='password' 
-                        name='password'
-                        placeholder='palavra passe'
-                        onChange={e => setPass(e.target.value)}
-                    />
-                    <input 
-                        type='password' 
-                        name='confirmpassword' 
-                        placeholder='confirmar palavra passe'
-                        onChange={e => setConfirmPass(e.target.value)}
-                    />
-                     <select
+                <input 
+                    type='file' 
+                    name='image'
+                    // filename='escolher foto' 
+                    className={styles.btnLoad} 
+                    onChange={loadImage}
+                />
+                <input 
+                    type='text' 
+                    name='username'
+                    placeholder='nome de usuário'
+                    onChange={e => setName(e.target.value)}
+                />
+                <input 
+                    type='tel' 
+                    name='telefone'
+                    placeholder='telefone'
+                    onChange={e => setPhone(e.target.value)}
+                />
+                <input 
+                    type='password' 
+                    name='password'
+                    placeholder='palavra passe'
+                    onChange={e => setPass(e.target.value)}
+                />
+                <input 
+                    type='password' 
+                    name='confirmpassword' 
+                    placeholder='confirmar palavra passe'
+                    onChange={e => setConfirmPass(e.target.value)}
+                />
+                <input 
+                    type='textarea' 
+                    name='description'
+                    placeholder='descrição sobre você' 
+                    onChange={e => setDescription(e.target.value)}
+                />
+                <div className={styles.select}>
+                    <select
                         name='provincias'
-                        value='província'
-                        className={styles.province}
                     >
                         {provinces.map( province => {
-                             <option 
-                                 value={province} 
-                                 Key={province}>{province}
+                            <option value={province} Key={province}>
+                                { province }
                             </option>
                         })}
                     </select>
-                    <button onClick={onCreateAccount}>Criar conta</button>
+                </div>
+                <button onClick={onCreateAccount}>Criar conta</button>
             </div>
         </div>
     )

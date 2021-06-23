@@ -1,0 +1,19 @@
+.container{
+    position:absolute;
+    width:100px;
+    height:80px;
+    display:flex;
+    align-items:flex-start;
+    justify-content: center;
+    background-color:whitesmoke;
+    box-shadow: 1px solid gray;
+}
+.message{
+    font-size:14px;
+    color:indianred;
+    font-weight:300px;
+}
+.sugestion{
+    font-size:10px;
+    color:lightgray;
+}

@@ -21,7 +21,7 @@ export default function Change({ _id }){
             })
         })
             //save on local storage the token
-            result.tokenId ? router.push(`/profile${_id}`) : '/account/create'
+            result.tokenId ? router.push(`/profile/${_id}`) : '/account/create'
         }else{
             alert('As palavras passes devem ser iguais!')
         }

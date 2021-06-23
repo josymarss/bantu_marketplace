@@ -1,14 +1,13 @@
-import { db } from '../../../db/connection'
+import { ConnectToDatabase } from '../../../db/connection'
 
-export default (req, res) => {
+export default async (req, res) => {
+    const db = await ConnectToDatabase()
     const httpMethod = req.method
     const { phone, password } = req.body
     if (httpMethod === 'POST'){
-        const users = db.collection('users')
-        const result = users.findOne({phone},{password})
-        result ? res.status(200).json({token:result._id}) : 'User not found!'
-    }
-    else{
-        res.send({message:'Not found user'}).json()
+        const users = await db.collection('users')
+        const result = await users.find({phone:phone},{_id:1})//not working
+        console.log(result)
+        result ? res.status(200).send({token:result._id}) : 'User not found!'
     }
 }

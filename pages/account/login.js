@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import axios from 'axios'
 
 import styles from './login.module.css'
 
@@ -12,20 +13,11 @@ export default function Login(){
 
     const onLogin = async (event) => {
         event.preventDefault()
-        const data = await fetch(`/api/account/login`,{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json',
-                // 'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                phone,
-                password
-            })
-        }).then(res => res.json())
-        console.log(data)
-        //redirect to homepage/profile
-        // router.push(`${myIdToken}`)
+        const data = await axios.post(`/api/account/login`,{
+            phone,
+            password
+        })
+
     }
     return(
             <div className={styles.input}>
@@ -36,7 +28,7 @@ export default function Login(){
                     </Link>
                 </h1>
                 <input 
-                    type='text'
+                    type='tel'
                     name='phone'
                     placeholder='phone'
                     onChange={(e) => setPhone(e.target.value)}

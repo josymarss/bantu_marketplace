@@ -1,18 +1,23 @@
 import { MongoClient } from 'mongodb' 
 
+let cacheDb = null 
+
 export async function ConnectToDatabase(){
-    const client = await new MongoClient.connect(process.env.MONGODB_URL, {
+
+    if(cacheDb){
+        return cacheDb
+    }
+    
+    const client = await MongoClient.connect(process.env.MONGODB_URL, {
         useUnifiedTopology:true,
         useNewUrlParser:true,
-        useFindAndModify:true
+        //useFindAndModify:true
     })
 
-    if(!client.isConnect()){
-        return await client.Connect()
-    }
+    const db = await client.db(process.env.DB_NAME)
 
-    const db = await client.db(process.env.MONGODB_NAME)
-
-    return {db}
+    cacheDb = db
+    
+    return db 
 }
 

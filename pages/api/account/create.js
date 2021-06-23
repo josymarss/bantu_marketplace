@@ -1,26 +1,23 @@
-import db from '../../../db/connection'
+import  { ConnectToDatabase } from '../../../db/connection'
 
-export default (req,res) => {
-
-    const users = db.collection('users')
+export default async (req,res) => {
+    
+    const db = await ConnectToDatabase()
+    const users = await db.collection('users')
     const httpMethod = req.method
-    const { phone, ...rest } = req.body
+    const { ...user } = req.body
+    const { phone } = req.body
 
     if(httpMethod === 'POST'){
-        const someoneHas = users.find({phone})
-        if(someoneHas !== ''){
-            res.send({
-                error:'erro',
-                message:`Este número ${ phone } já está em uso`,
-                sugestion:'Clica em recuperar a conta!'
-            }).json()
-        }else{
-            const result = users.insertOne({...rest,phone})
-            res.status(200).send({token:result._id}) 
-        } 
+        if(phone === await users.findOne({phone})){
+            res.send('This number is alredy registered, try to login')
+            return
+        }
+
+        const result = await users.insertOne({user})
+
+        const { insertedId } = result
         
-    }else{
-        res.send('Only post request.')
+        res.status(200).send({tokenId:insertedId})
     }
-    
 }
