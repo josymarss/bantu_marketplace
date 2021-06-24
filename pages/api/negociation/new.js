@@ -5,7 +5,7 @@ import { ConnectToDatabase } from '../../../db/connection'
 export default (req,res) => {
     
     const db = ConnectToDatabase()
-    const  { negociation, nameApp, idUser, idUserOfApp }  = req.body
+    const  {  }  = req.body
     const  method  = req.method
 
     if(method === 'POST'){

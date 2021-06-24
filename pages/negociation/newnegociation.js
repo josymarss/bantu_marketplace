@@ -16,7 +16,7 @@ export default function NewNegociation({ idApp }){
         <div className={styles.container}>
             <input type='textarea' onChange={updateNegociation}/>
             <div className={styles.send}>
-                <button onClick={axios.post('/api/negociation/new',{
+                <button onClick={axios.post('/api/admin/appstoacept',{
                     negociation,
                     nameApp,
                     idUser,

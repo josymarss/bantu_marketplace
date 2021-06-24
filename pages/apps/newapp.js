@@ -28,11 +28,11 @@ export default function NewApp () {
                 <input type='text' onChange={e => updateLink(e.target.value)}/>
                 <input type='text' onChange={e => updateDescription(e.target.value)} />
             </div>
-            <button onClick={axios.post('/api/apps/newapp',{
+            <button onClick={axios.post('/api/admin/appstoacept',{
                 name,
                 description,
                 link,
-                reactions:0,
+                reactions:{},
                 href,
                 negociations:[],
                 myId
