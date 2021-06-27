@@ -4,11 +4,10 @@ import axios from 'axios'
 
 import styles from './index.module.css'
 
-export default function NewNegociation({ idApp }){
+export default function NewNegociation({ nameApp, idUser, idUserOfApp }){
 
     const [negociation, updateNegociation] = useState('')
-    const status = 'Em andamento'
-    const myId = ''
+    const [myId, updateMyId] = useState('')
 
     useEffect(() => { myId = Cookies.get('tokenId')})
 

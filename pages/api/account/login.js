@@ -8,18 +8,16 @@ export default async (req, res) => {
 
     if (httpMethod === 'POST'){
         const users = await db.collection('users')
-        const result = await users.findOne({}, { phone, password }) 
+        const resultIdToken = await users.findOne({}, { phone, password, _id:1 })
 
-        if(result === undefined){
+        if(!resultIdToken){
             res.status(200).json({
                 message:'Usário não encontrado!',
                 sugestion:'Tenta criar uma conta'
             })  
             return 
         }
-
-        const { _id } = result        
-
+        const { _id } = resultIdToken
         Cookies.set('tokenId',_id, { expires: 365 })
         res.status(200).send({
             tokenId:_id,

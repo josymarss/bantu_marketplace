@@ -13,19 +13,16 @@ export default function Login(){
 
     const onLogin = async (event) => {
         event.preventDefault()
-        const data = await axios.post(`/api/account/login`,{
+        const result = await axios.post(`/api/account/login`,{
             phone,
             password
         })
-
-        const { tokenId, message } = data
+        const { tokenId, message } = result.data 
         
-        if(tokenId){
-            router.push({
-                pathname:'/profile/[id]',
-                query:{ id: tokenId }
-            })
+        if(!!tokenId){
+            router.push({ pathname:`/profile/${tokenId}` })
         }else {
+            const { message } = result 
             return (<p>{ message }</p>)
         }
     }

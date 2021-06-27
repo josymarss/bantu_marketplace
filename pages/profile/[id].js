@@ -6,22 +6,25 @@ import axios from 'axios'
 import { ConnectToDatabase } from '../../db/connection'
 import styles from './profile.module.css'
 
-export default function User({ userInfo }){
+export default function User({ userInfo, apps }){
     
     const [follow, updateFollow] = useState(false)
-    const myId = ''
+    const [myId, updateMyId] = useState('')
     const router = useRouter()
 
-    useEffect(() => { myId = Cookies.get('tokenId') })
+    useEffect(() => {
+         myId = Cookies.get('tokenId') 
+         console.table(myId)
+    })
 
-    const onFollow = ()  => {
+    const onFollow = async ()  => {
         
         if(userInfo._id !== myId){
             const following = await axios.put('/api/user/follow',{
                 myId,
-                idUserWhoIwantToFollow:user.userInfo._id
+                idUserWhoIwantToFollow:userInfo._id
             })
-            updateFollow(follow)
+            updateFollow(following)
         }    
     }
 
@@ -50,7 +53,7 @@ export default function User({ userInfo }){
                                     query:{ 
                                         nameApp: app.name,
                                         idUser:myId,
-                                        idUserOfApp:userInfo._id
+                                        idUserOfTheApp:userInfo._id
                                     }})
                                 }>
                                     Negociar 
@@ -64,7 +67,7 @@ export default function User({ userInfo }){
                 <div className={styles.negociations}>
                     <p><span>solicitações de negociações</span></p>
                     <div className={styles.solicitation}>
-                        {apps.map(app => {
+                        {/* {apps.negociations.map(app => {
                             <Fragment>
                                 <App width={22} height={22} name='Tupuca'/>
                                 <div className={styles.solicitationsButton}>
@@ -72,7 +75,7 @@ export default function User({ userInfo }){
                                 <button className={styles.btnBusiness}>Editar</button>
                                 </div>
                             </Fragment>
-                        })}
+                        })} */}
                     </div>
                 </div>
             </div>
@@ -81,13 +84,13 @@ export default function User({ userInfo }){
 }
 export const getServerSideProps = async (context) => {
 
-    const id = context.query // id of the page not mine
+    const id = context.params.id // id of the page not mine
+
     const db = await ConnectToDatabase()
     const users = await db.collection('users')
-    const user = await users.findOne({ id })
-    const { aplicativos, ...userInfo } = user
-    const apps = null 
-    aplicativos.map(app => apps.push(app))
+    const data = await users.findOne({}, { "_id":id })
+    
+    const { apps, ...userInfo } = data.user
 
     return{
         props:{

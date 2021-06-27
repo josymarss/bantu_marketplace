@@ -1,9 +1,11 @@
 import { ConnectToDatabase } from "../../../db/connection"
 
 export default async(req,res) =>{
+
     const db = await ConnectToDatabase()
-    const myId = req.body
+    const { myId, idUserwhoIwantToFollow } = req.body
     const method = req.method
+
     if (method === 'PUT' && !!myId){
         const isAlredyThere = await db.users.findOne(
             {_id: idUserwhoIwantToFollow }, { followres: {_id: myId} }
