@@ -22,17 +22,14 @@ export default function Create(){
 
     async function onCreateAccount(e){
         e.preventDefault()
-        const user = await axios.post('/api/account/create', {
+        const result = await axios.post('/api/account/create', {
             name,photo:href,
             phone,province,description,
-            apps:[],followers:[], password
+            apps:[],followers:[], password, feed:[]
         })
-
-        const { tokenId } = user.data
-        router.push({
-            pathname:'/profile/[id]',
-            query:{id:tokenId}
-        })
+        
+        const { tokenId } = result.data
+        router.push(`/profile/${tokenId}`)
           
     }
     return(

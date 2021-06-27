@@ -7,19 +7,22 @@ export default async (req, res) => {
     const { phone, password } = req.body
 
     if (httpMethod === 'POST'){
-        const users = await db.collection('users')
-        const resultIdToken = await users.findOne({}, { phone, password, _id:1 })
 
-        if(!resultIdToken){
-            res.status(200).json({
+        const users = await db.collection('users')
+        const user = await users.findOne({phone, password}, { _id:1 })
+        
+        if(!user){
+            res.send({
                 message:'Usário não encontrado!',
                 sugestion:'Tenta criar uma conta'
             })  
             return 
         }
-        const { _id } = resultIdToken
-        Cookies.set('tokenId',_id, { expires: 365 })
-        res.status(200).send({
+        
+        const { _id } = user
+        //Cookies.set('tokenId',_id, { expires: 365 })
+        
+        res.send({
             tokenId:_id,
             message:'Agora estás logado.'
         })

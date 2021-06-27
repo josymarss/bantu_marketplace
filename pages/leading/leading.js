@@ -10,7 +10,7 @@ export default function LeadingPage(){
                <div className={styles.info}>
                     <h2>Desenvolva seu <span>aplicativo</span> e nós o ajudamos a lançar para o <span>mundo.</span></h2>
                     <p>O melhor lugar para programadores angolanos, lançar seus aplicativos para o exterior.</p>
-                        <Link href='/account-user/create'>
+                        <Link href='/account/create'>
                             <a>crate account</a>
                         </Link>
                </div>

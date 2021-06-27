@@ -5,19 +5,27 @@ export default async (req,res) => {
     const db = await ConnectToDatabase()
     const users = await db.collection('users')
     const httpMethod = req.method
-    const { ...user } = req.body
-    const { phone } = req.body
-
+    const { name,photo,phone,province,description,apps,followers, password,feed } = req.body
+    
     if(httpMethod === 'POST'){
-        if(phone === await users.findOne({phone})){
-            res.send('This number is alredy registered, try to login')
+        const alredyExist = await users.findOne({ phone }, {_id:1})
+       
+        if(alredyExist){
+            res.send({
+                message:'This number is alredy registered', 
+                sugestion: 'Try to login'
+            })
             return
         }
 
-        const result = await users.insertOne({user})
-
-        const { insertedId } = result
+        const result = await users.insertOne({
+             name,photo,phone,province,
+             description,apps,followers, 
+             password,feed 
+        })
+       
+        const { _id } = result.ops[0]
         
-        res.status(200).send({tokenId:insertedId})
+        res.send({tokenId:_id})
     }
 }

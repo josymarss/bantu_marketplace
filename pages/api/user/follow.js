@@ -13,7 +13,7 @@ export default async(req,res) =>{
         if(!isAlredyThere){
             await db.users.updateOne(
                 { _id: idUserWhoIwantToFollow }, 
-                { $set: { followers: { $push:{myId} } } }
+                { $set: { followers: { $push: myId } } }
             )
             res.send(true)
         } else{

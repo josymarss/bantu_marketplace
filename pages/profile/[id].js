@@ -6,23 +6,24 @@ import axios from 'axios'
 import { ConnectToDatabase } from '../../db/connection'
 import styles from './profile.module.css'
 
-export default function User({ userInfo, apps }){
+export default function User({ user }){
     
     const [follow, updateFollow] = useState(false)
     const [myId, updateMyId] = useState('')
+    const [userdata, updateUserdata] = useState('')
     const router = useRouter()
 
     useEffect(() => {
-         myId = Cookies.get('tokenId') 
-         console.table(myId)
+        updateUserdata(JSON.parse(user))
+        // myId = Cookies.get('tokenId')
     })
 
     const onFollow = async ()  => {
         
-        if(userInfo._id !== myId){
+        if(_idValue !== myId){
             const following = await axios.put('/api/user/follow',{
                 myId,
-                idUserWhoIwantToFollow:userInfo._id
+                idUserWhoIwantToFollow:userdata._id
             })
             updateFollow(following)
         }    
@@ -33,10 +34,10 @@ export default function User({ userInfo, apps }){
 
             <div className={styles.profile}>
                 <div className={styles.borderIamge}>
-                    <img src={userInfo.photo ? userInfo.photo : '/camera.png' }/>
+                    {/* <img src={user.photo ? user.photo : '/camera.png' }/> */}
                 </div>
-                <p className={styles.username}>{`@${userInfo.name}`}</p>
-                <p className={styles.descritpion}>{userInfo.description}</p>
+                <p className={styles.username}>{`@${userdata.name.toLowerCase()}`}</p>
+                <p className={styles.descritpion}>{userdata.description}</p>
                 <button onClick={ onFollow }>{ follow ? 'seguindo':'seguir' }</button>
             </div>
 
@@ -45,7 +46,8 @@ export default function User({ userInfo, apps }){
                 <div className={styles.connections}>
                     <p><span>Meus aplicativos</span></p>
                     <div className={styles.appSolicitar}>
-                        {apps.map(app => {
+                        {
+                            userdata.apps ? userdata.apps.map(app => {
                             <Fragment>
                                 <App width={22} height={22} name={app.name}/>
                                 <button onClick={router.push({
@@ -53,14 +55,13 @@ export default function User({ userInfo, apps }){
                                     query:{ 
                                         nameApp: app.name,
                                         idUser:myId,
-                                        idUserOfTheApp:userInfo._id
+                                        idUserOfTheApp:userdata._id
                                     }})
                                 }>
                                     Negociar 
                                 </button>
-                            </Fragment>
-                            
-                        })}
+                            </Fragment>}) : ' '
+                            }
                     </div>
                 </div>
 
@@ -84,18 +85,15 @@ export default function User({ userInfo, apps }){
 }
 export const getServerSideProps = async (context) => {
 
-    const id = context.params.id // id of the page not mine
-
+    const id = context.params.id
     const db = await ConnectToDatabase()
     const users = await db.collection('users')
-    const data = await users.findOne({}, { "_id":id })
+    const data = await users.findOne({}, {_id:id})
+    const user = JSON.stringify(data)
     
-    const { apps, ...userInfo } = data.user
-
     return{
         props:{
-            apps,
-            userInfo
+            user
         }
     }
 
