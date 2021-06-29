@@ -7,7 +7,7 @@ export default function App({ width, height, name,description,status, link }){
                 <img 
                     width={width ? width : 40} 
                     height={height ? height : 40} 
-                    src={ image ? image :'/favicon.ico' }
+                    src={ image ? image :'/camera.png' }
                     className={styles.coverApp}
                 />
                 <p className={styles.appName}>{name}</p>

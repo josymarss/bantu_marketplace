@@ -16,7 +16,7 @@ export default function User({ user }){
     useEffect(() => {
         updateUserdata(JSON.parse(user))
         // myId = Cookies.get('tokenId')
-    })
+    },[])
 
     const onFollow = async ()  => {
         
@@ -36,7 +36,7 @@ export default function User({ user }){
                 <div className={styles.borderIamge}>
                     {/* <img src={user.photo ? user.photo : '/camera.png' }/> */}
                 </div>
-                <p className={styles.username}>{`@${userdata.name.toLowerCase()}`}</p>
+                <p className={styles.username}>{`@${userdata.name}`}</p>
                 <p className={styles.descritpion}>{userdata.description}</p>
                 <button onClick={ onFollow }>{ follow ? 'seguindo':'seguir' }</button>
             </div>
@@ -86,10 +86,13 @@ export default function User({ user }){
 export const getServerSideProps = async (context) => {
 
     const id = context.params.id
+    
     const db = await ConnectToDatabase()
     const users = await db.collection('users')
-    const data = await users.findOne({}, {_id:id})
+    const data = await users.findOne({},{_id:id})
+
     const user = JSON.stringify(data)
+    console.log(user)
     
     return{
         props:{

@@ -17,10 +17,11 @@ export default function Login(){
             phone,
             password
         })
-        const { tokenId, message } = result.data 
         
+        const { tokenId, message, phone } = result.data
+        console.log(result.data)
         if(!!tokenId){
-            router.push({ pathname:`/profile/${tokenId}` })
+            router.push(`/profile/${tokenId}`)
         }else {
             const { message } = result 
             return (<p>{ message }</p>)

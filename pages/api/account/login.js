@@ -18,7 +18,7 @@ export default async (req, res) => {
             })  
             return 
         }
-        
+       
         const { _id } = user
         //Cookies.set('tokenId',_id, { expires: 365 })
         
