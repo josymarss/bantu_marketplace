@@ -1,31 +1,66 @@
-import { useEffect } from 'react'
+import { useEffect, useState, Fragment } from 'react'
 import axios from 'axios'
 
-import App from './apps'
+import App from './app'
+import { ConnectToDatabase } from '../../db/connection'
 import  styles  from './listofapps.module.css'
 
 export default function ListOfApps({ apps }){
 
-useEffect(() => {/* don't forget to unseriallize to JSON.parse the apps var */})
+    const [searched, updateSearch] = useState(false)
 
+    useEffect(() => {
+        /* don't forget to unseriallize to JSON.parse the apps var */
+        
+    },[searched])
+
+    const onSearch = (e) => {
+        const { value } = e.target
+        const appsSearched = axios.post('/api/apps/search',{
+            value
+        })
+        if(appsSearched){
+            updateSearch(!searched)
+        }    
+    }
+
+
+    const PageApps = () =>{
+        searched ? 
+            <Fragment>
+                {/* Maping all finded apps */}
+                <p>Aplicativos encontrados</p>
+            </Fragment>
+                :
+            <div className={styles.container}>// put it flex wrap to break into another line
+                <section className={styles.searchApp}>
+                    <input 
+                        type='text'
+                        placeholder='Preocurar um aplicativo' 
+                        onKeyUp={onSearch}
+                    />
+                </section>
+                <div className={styles.appSection}> /the section that will be gray
+                    <div className={styles.imageSection}>
+                        <img href={`./public/camera.png`} />
+                        <h1>App name</h1>
+                    </div>
+                    <p>Some deescription</p>
+                </div>    
+            </div>
+    }
+    
      return (
-        <div className={styles.container}>// put it flex wrap to break into another line
-            <div className={styles.appSection}> /the section that will be gray
-                <div className={styles.imageSection}>
-                    <img href={`./public/camera.png`} />
-                    <h1>App name</h1>
-                </div>
-                <p>Some deescription</p>
-            </div>    
-        </div>
+        //  map to apps who have likes between 20 and 
+        
+        <PageApps />
      );
 }
 
-
 const getServerSideProps = async (context) => {
-
+    const db = ConnectToDatabase()
     const apps = []
-
+    
     // don't forget to seriallize to JSON.stringify
 
     return {

@@ -1,7 +1,6 @@
 import  { ConnectToDatabase } from '../../../db/connection'
 
 export default async (req,res) => {
-    
     const db = await ConnectToDatabase()
     const users = await db.collection('users')
     const httpMethod = req.method
@@ -10,7 +9,7 @@ export default async (req,res) => {
     if(httpMethod === 'POST'){
         const alredyExist = await users.findOne({ phone }, {_id:1})
        
-        if(alredyExist){
+        if(!!alredyExist){
             res.send({
                 message:'This number is alredy registered', 
                 sugestion: 'Try to login'
@@ -23,9 +22,7 @@ export default async (req,res) => {
              description,apps,followers, 
              password,feed 
         })
-       
         const { _id } = result.ops[0]
-        
         res.send({tokenId:_id})
     }
 }

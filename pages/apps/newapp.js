@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
+import axios from 'axios'
 
-import styles from 'newapp.module.css'
+import styles from './newapp.module.css'
 
 export default function NewApp () {
     
@@ -9,8 +11,9 @@ export default function NewApp () {
     const [description, updateDescription] = useState('')
     const [link, updateLink] = useState('')
     const [href, updateHref] = useState('')
+    const [myId, updateMyId] = useState()
     
-    const myId = Cookies.get('tokenId')
+    useEffect(() => updateMyId(Cookies.get('tokenId')) )
 
     const onLoad = (e) => {
         updateHref(URL.createObjectURL(e.target.files[0]))
@@ -18,22 +21,25 @@ export default function NewApp () {
 
     return (
         <div className={styles.container}>
-            <h2>Fazer upload dos dados de um novo aplicativo</h2>
+            <h2>Fazer upload dos dados de um aplicativo</h2>
             <div className={styles.image}>
                 <img href={ href ? href : '/camera.png'}/>
-                <input type='file' onChange={onLoad} />
+                <input type='file' className={styles.input} onChange={onLoad} />
             </div>
             <div className={styles.inputText}>
-                <input type='text' onChange={e => updateName(e.target.value)}/>
-                <input type='text' onChange={e => updateLink(e.target.value)}/>
-                <input type='text' onChange={e => updateDescription(e.target.value)} />
+                <input type='text' className={styles.input} placeholder='Nome do aplicativo' onChange={e => updateName(e.target.value)}/>
+                <input type='text' className={styles.input} placeholder='descrição' onChange={e => updateLink(e.target.value)}/>
+                <input type='text' className={styles.input} placeholder='Link de uma mídea social' onChange={e => updateDescription(e.target.value)} />
             </div>
-            <button onClick={axios.post('/api/admin/appstoacept',{
+            <button className={styles.button} onClick={axios.post('/api/admin/appstoacept',{
                 name,
                 description,
                 link,
-                reactions:{},
-                href,
+                reactions:{
+                    users:[],
+                    likes:0
+                },
+                photo:href,
                 negociations:[],
                 myId
             })}>

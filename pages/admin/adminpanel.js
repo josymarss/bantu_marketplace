@@ -2,12 +2,14 @@ import { Fragment } from 'react'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
+import styles from './adminpanel.module.css'
+
 export default function AppsToAcept({ apps }) {
 
     const myId = Cookies.get('tokenId')
 
     return(
-        <div className={StyleSheet.container}>
+        <div className={styles.container}>
 
             {apps.map(app => {
                 <Fragment>
