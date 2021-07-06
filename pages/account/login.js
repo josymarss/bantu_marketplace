@@ -19,7 +19,7 @@ export default function Login(){
         })
         
         const { tokenId, message, phone } = result.data
-        console.log(result.data)
+        
         if(!!tokenId){
             router.push(`/profile/${tokenId}`)
         }else {

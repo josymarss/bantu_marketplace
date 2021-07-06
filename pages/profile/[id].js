@@ -25,7 +25,7 @@ export default function User({ user }){
                 myId,
                 idUserWhoIwantToFollow:userdata._id
             })
-            updateFollow(following)
+            updateFollow(!follow)
         }    
     }
 
@@ -50,7 +50,7 @@ export default function User({ user }){
                             userdata.apps ? userdata.apps.map(app => {
                             <Fragment>
                                 <App width={22} height={22} name={app.name}/>
-                                <button onClick={router.push({
+                                <button onClick={() => router.push({
                                     pathname:'/negociation/newnegociation',
                                     query:{ 
                                         nameApp: app.name,
@@ -89,7 +89,7 @@ export const getServerSideProps = async (context) => {
     
     const db = await ConnectToDatabase()
     const users = await db.collection('users')
-    const data = await users.findOne({},{_id:id})
+    const data = await users.findOne({_id:id},{_id:0})
 
     const user = JSON.stringify(data)
     console.log(user)

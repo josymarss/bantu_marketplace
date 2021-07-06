@@ -7,7 +7,6 @@ import Error from '../error/error'
 
 export default function Create(){
     const router = useRouter()
-    const provinces = ['Bengo', 'Benguela','Bié','Cabinda','Cuando-Cubango','Kwanza norte','Kwanza sul','Cunene','Huambo','Huíla','Luanda','Lunda norte','Lunda sul','Malange','Muxico','Namibe','Uíge','Zaire']
     const [name,setName] = useState('')
     const [province,setProvince] = useState('')
     const [description,setDescription] = useState('')
@@ -24,8 +23,11 @@ export default function Create(){
         e.preventDefault()
         const result = await axios.post('/api/account/create', {
             name,photo:href,
-            phone,province,description,
-            apps:[],followers:[], password, feed:[]
+            phone,description,
+            apps:[],
+            followers:[], 
+            password, 
+            feed:[]
         })
         
         const { tokenId } = result.data
@@ -76,17 +78,6 @@ export default function Create(){
                     placeholder='descrição sobre você' 
                     onChange={e => setDescription(e.target.value)}
                 />
-                <div className={styles.select}>
-                    <select
-                        name='provincias'
-                    >
-                        {provinces.map( province => {
-                            <option value={province} Key={province}>
-                                { province }
-                            </option>
-                        })}
-                    </select>
-                </div>
                 <button onClick={onCreateAccount}>Criar conta</button>
             </div>
         </div>

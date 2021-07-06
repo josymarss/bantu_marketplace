@@ -1,7 +1,12 @@
+/* import a css file that have the fonts */
 .container{
     display:flex;
     flex-direction:column;
 }
 .conatiner input {
     resize:none;
+    width:600px;
+    height:400px;
+    font-size:18px;
+    color:rgb(100, 100, 100);
 }

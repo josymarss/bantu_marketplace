@@ -10,7 +10,7 @@ export default function Negociation(){
     const router = useRouter()
 
     useEffect(() =>{
-        myId = Cookies.get('tokenId')
+        // myId = Cookies.get('tokenId')
     })
 
     const [description, setDescription] = useState('')

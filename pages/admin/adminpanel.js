@@ -4,14 +4,14 @@ import Cookies from 'js-cookie'
 
 import styles from './adminpanel.module.css'
 
-export default function AppsToAcept({ apps }) {
+export default function AppsToAcept({ appsToAcept, appsAcepted }) {
 
     const myId = Cookies.get('tokenId')
 
     return(
         <div className={styles.container}>
 
-            {apps.map(app => {
+            {appsToAcept.map(app => {
                 <Fragment>
                     <App 
                         width={20} 
@@ -41,15 +41,24 @@ export default function AppsToAcept({ apps }) {
 export const getServerSideProps = async () => {
 
     const db = await ConnectToDatabase()
+    
     const appstoacept = await db.collection('appstoacept')
     const aplicativosPorAceitar = await appstoacept.find({})
-    const apps = []
+
+    const appsacepted = await db.collection('appsacepted')
+    const aplicativosAceitados = await appsacepted.find({})
+
+    const appsAcepted = []
     
-    aplicativosPorAceitar.map(apli => apps.push(apli))
+    const appsToAcept = []
+    
+    aplicativosPorAceitar.map(apli => appsToAcept.push(apli))
+    aplicativosAceitados.map(apli => appsAcepted.push(apli))
 
     return {
         props: {
-            apps
+            appsAcepted,
+            appsToAcept
         }
     }
 
