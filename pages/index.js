@@ -1,4 +1,3 @@
-import {useEffect,useState} from 'react'
 
 import Feed from './feed/feed'
 import LeadingPage from './leading/leading'
