@@ -13,8 +13,23 @@ export default function NewApp () {
     const [href, updateHref] = useState('')
     const [myId, updateMyId] = useState()
     
-    useEffect(() => updateMyId(Cookies.get('tokenId')) )
+    //useEffect(() => updateMyId(Cookies.get('tokenId')) )
+    const onCreate = () => {
 
+        axios.post('/api/admin/appstoacept',{
+            name,
+            description,
+            link,
+            reactions:{
+                users:[],
+                likes:0
+            },
+            photo:href,
+            negociations:[],
+            myId
+        })
+           
+    }
     const onLoad = (e) => {
         updateHref(URL.createObjectURL(e.target.files[0]))
     }
@@ -31,18 +46,7 @@ export default function NewApp () {
                 <input type='text' className={styles.input} placeholder='descrição' onChange={e => updateLink(e.target.value)}/>
                 <input type='text' className={styles.input} placeholder='Link de uma mídea social' onChange={e => updateDescription(e.target.value)} />
             </div>
-            <button className={styles.button} onClick={axios.post('/api/admin/appstoacept',{
-                name,
-                description,
-                link,
-                reactions:{
-                    users:[],
-                    likes:0
-                },
-                photo:href,
-                negociations:[],
-                myId
-            })}>
+            <button className={styles.button} onClick={onCreate}>
                 Criar 
             </button>
             

@@ -1,6 +1,8 @@
 export default (req,res) =>{
-    // const { search } = req.body
-    //const data =  db.find(search, {})
+    
+    //const data =  db.find({})
+    //if(req.method.POST){ const data = re.body}
+    // searhc it on database
     const data = {
         name:'Kone',
         description:'something else'

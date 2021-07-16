@@ -8,7 +8,6 @@ import Error from '../error/error'
 export default function Create(){
     const router = useRouter()
     const [name,setName] = useState('')
-    const [province,setProvince] = useState('')
     const [description,setDescription] = useState('')
     const [password,setPass] = useState('')
     const [confirmPass,setConfirmPass] = useState('')
@@ -22,8 +21,10 @@ export default function Create(){
     async function onCreateAccount(e){
         e.preventDefault()
         const result = await axios.post('/api/account/create', {
-            name,photo:href,
-            phone,description,
+            name,
+            photo:href,
+            phone,
+            description,
             apps:[],
             followers:[], 
             password, 
@@ -32,13 +33,13 @@ export default function Create(){
         
         const { tokenId } = result.data
         router.push(`/profile/${tokenId}`)
+        
           
     }
     return(
         <div className={styles.container}>
             <img 
-                src={href === '' ? '/camera.png' : href } 
-                className={styles.imageContainer}
+                src={href === '' ? '/camera.png' : href }  className={styles.imageContainer}
             />
             <div className={styles.myForm}>
                 <input 

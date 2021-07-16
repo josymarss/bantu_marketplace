@@ -1,6 +1,6 @@
 import styles from './app.module.css'
 
-export default function App({ width, height, name,description,status, link }){
+export default function App({ width, height, name,description,status, link, image }){
     return(
         <div className={styles.apps}>
             <div className={styles.appSection}>

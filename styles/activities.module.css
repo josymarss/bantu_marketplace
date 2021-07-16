@@ -1,0 +1,71 @@
+.user{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content: flex-start;
+}
+.image{
+    width:45px;
+    height:45px;
+    border-radius:120px;
+    border: 4px solid black;
+    display:flex;
+}
+.coverImage{
+    align-items:center;
+    justify-content: center;
+}
+.userName{
+    margin-left:5px;
+    font-size:16px;
+    color:rgb(24, 25, 26);
+}
+.hr{ 
+    color:lightgrey;
+    opacity:0.5;
+    height:0.2px;
+    width:100%;
+}
+.apps{
+    display:flex;
+    flex-direction:column; 
+    /* align-items: center; */
+    /* justify-content: flex-start; */
+}
+.appSection{
+    display:flex;
+    flex-direction:row;
+}
+.coverApp{
+    align-items:center;
+    justify-content: center;
+}
+.reactions{
+    display:flex;
+    align-items:center;
+    justify-content: space-around;
+    flex-direction:row;
+}
+.appName{
+    margin-left:5px;
+}
+.description{
+    margin-left:16px;
+    text-align: justify;
+    font-size:14px;
+}
+.buttonSend{
+    background-color:rgb(49, 49, 49);
+    border-radius:100px;
+    width:100px;
+    height:28px;
+    color:white;
+    text-align:center;
+    border:none;
+
+}
+.buttonSend:hover{
+    color:rgb(20, 20, 20);
+    transition:0.2s ease-in-out;
+    background-color:white;
+}

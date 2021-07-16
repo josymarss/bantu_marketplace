@@ -28,12 +28,11 @@ export default function Login(){
         }
     }
     return(
+        <>
             <div className={styles.input}>
                 <h1>
-                    Faca login ou 
-                    <Link href='/account-user/create'>
-                        <span> cria uma conta</span>
-                    </Link>
+                    Autenticar 
+
                 </h1>
                 <input 
                     type='tel'
@@ -48,8 +47,13 @@ export default function Login(){
                     onChange={(e) => setPass(e.target.value)}
                 />
                 
-                <a onClick={onLogin}>Entrar</a>
-                
+                <a  onClick={onLogin}>Entrar</a>
             </div>
+            <div className= {styles.criarConta}>
+                <p > Ainda não tens uma conta?  <Link href='/account/create'>
+                                                <a className='semConta'> Clique aqui para criar</a>
+                                                </Link>
+                </p> </div>
+            </>
     )
 }

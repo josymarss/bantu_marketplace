@@ -5,6 +5,7 @@ import axios from 'axios'
 
 import { ConnectToDatabase } from '../../db/connection'
 import styles from './profile.module.css'
+import { ObjectId } from 'bson'
 
 export default function User({ user }){
     
@@ -89,8 +90,8 @@ export const getServerSideProps = async (context) => {
     
     const db = await ConnectToDatabase()
     const users = await db.collection('users')
-    const data = await users.findOne({_id:id},{_id:0})
-
+    const data = await users.findOne({"_id":ObjectId(id)},{password:0})
+    console.log(data)
     const user = JSON.stringify(data)
     console.log(user)
     
