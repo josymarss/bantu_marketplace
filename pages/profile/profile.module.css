@@ -5,7 +5,7 @@
     flex:1;
     height:auto;
     /* position:fixed; */
-}
+}   
 .profile{
     margin-left:10px;
     display:flex;
@@ -22,11 +22,45 @@
     background-color:black;
     color:white;
 }
-.profile button :hover{
+
+.newApp h3{
+     color: #6C63FF;
+     font-size: 12pt;
+     
+}
+
+.newApp button {
+    width:120px;
+    height:30px;
+    border-radius:4px;
+    border: 1px solid #ccc;
+    font-size:16px;
+    color: #000;
+    background-color:#ccc;
+    display: inline;
+    margin-right: 30px;
+}
+
+.newApp button:hover  {
+    color: #ccc;
+    background-color:#6C63FF;
+    transition: 0.6s ease-in;
+   
+}
+.profile button:hover{
     background-color:#6C63FF;
     color:white;
-    transition: 2s ease-in-out;
+    transition: 0.6s ease-in-out;
 }
+.newApp{
+     display: flex;
+    flex-direction:column;
+    align-content: flex-end;
+    align-items: flex-end;
+    margin-right: 5px;
+
+}
+
 .borderImage{
     display:flex;
     align-items:center;
@@ -43,15 +77,18 @@
 }
 .appSection{
     display:flex;
-    align-self:flex-start;
     margin-left:20px;
     flex-direction:column;
 }
 .appSection input {
-    width:50px;
+    width:200px;
     height:18px;
     border-radius:160px;
-    border: 0.8px solid #f6f6f6;
+    border: 0.8px solid #646464;
+    padding: 10px;
+    text-align: center;
+    outline:none;
+    
 }
 .appSection p > span {
     font-weight:bold;

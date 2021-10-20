@@ -29,4 +29,15 @@
 }
 .menu p {
     margin-right:20px;
+    cursor: pointer;
+    font-size: 15pt;
 }
+
+.menu p > span > span + span {
+     color: rgb(233, 111, 111)
+}
+.menu p > span > span + span:hover {
+    color: rgb(255, 0, 0)
+}
+
+/*Adicionando estilização no botão login, face o cursor pointer*/

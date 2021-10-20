@@ -1,24 +1,45 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState, Fragment } from 'react'
-import Cookies from 'js-cookie'
 import axios from 'axios'
 
+import App from '../../components/Apps'
 import { ConnectToDatabase } from '../../db/connection'
 import styles from './profile.module.css'
+import { ObjectId } from 'bson'
 
-export default function User({ user }){
-    
-    const [follow, updateFollow] = useState(false)
-    const [myId, updateMyId] = useState('')
-    const [userdata, updateUserdata] = useState('')
+export default function User({ user, apps }){
     const router = useRouter()
+    const [follow, updateFollow] = useState(false)
+    const [myId, updateMyId] = useState(null)
+    const [userdata, updateUserdata] = useState('')
+    const [app, updateApp] = useState([])
+    
+    console.log(app)
+     
+    
+
+     
 
     useEffect(() => {
         updateUserdata(JSON.parse(user))
-        // myId = Cookies.get('tokenId')
-    },[])
+        const aux = userdata._id
+        updateMyId(aux);
+        updateApp(JSON.parse(apps))
+        const userDataLocal = [{name: userdata.name, id: aux}]
 
+        sessionStorage.setItem('userDataLocal', JSON.stringify(userDataLocal));
+
+         
+         
+    },[userdata._id])
+
+    const goTo = () => {
+        router.push(`/apps/${myId}`)
+    }
+     
+    
     const onFollow = async ()  => {
+        
         
         if(_idValue !== myId){
             const following = await axios.put('/api/user/follow',{
@@ -42,9 +63,37 @@ export default function User({ user }){
             </div>
 
             <div className={styles.appSection}>
-                <input type='text' name='procurar' ploaceholder='procurar um app'/>
+                <input type='text' name='procurar' placeholder='procurar um app'/>
                 <div className={styles.connections}>
                     <p><span>Meus aplicativos</span></p>
+                    <div> {
+                            app.map((app, index)=> (
+                            <div>
+                              
+                                <h1> {app.app.name} </h1>
+                                <h3 className={styles.titulo}>Descrição:</h3 >
+                                <h3 className={styles.conteudo}> {app.app.link}</h3>
+                                <h3 className={styles.titulo}> Link</h3> 
+                                <h3 className={styles.conteudo}> {app.app.description}</h3>
+                             
+
+                               
+                                <hr/>
+
+
+                            </div> 
+                           ))
+                        }
+                        
+                        </div>        
+               </div>
+               <div>
+                    <div className={styles.newApp}>
+                        <button onClick={goTo}>
+                            Adicionar
+                        </button>
+                        <p> Cadastrar dados de aplicativo</p>
+                    </div>
                     <div className={styles.appSolicitar}>
                         {
                             userdata.apps ? userdata.apps.map(app => {
@@ -83,21 +132,30 @@ export default function User({ user }){
         </div>
     )
 }
+
 export const getServerSideProps = async (context) => {
 
     const id = context.params.id
     
     const db = await ConnectToDatabase()
     const users = await db.collection('users')
-    const data = await users.findOne({_id:id},{_id:0})
-
+    const data = await users.findOne({"_id":ObjectId(id)},{password:0})
     const user = JSON.stringify(data)
-    console.log(user)
+    
+
+    const appsacepted = await db.collection('aceptedapps') 
+    const appsAcepted  = [] 
+    
+    await appsacepted.find({'myId':id}).limit(5).
+                                   forEach(item => appsAcepted.push(item))
     
     return{
         props:{
-            user
+            user,
+            apps: JSON.stringify(appsAcepted)
         }
     }
 
 }
+ 
+
