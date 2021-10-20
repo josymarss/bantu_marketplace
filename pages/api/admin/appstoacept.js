@@ -3,8 +3,12 @@ import { ConnectToDatabase } from "../../../db/connection";
 export default async(req,res) =>{
     
     const db = await ConnectToDatabase()
+    const appstoacept = await db.collection('appstoacept')
     const method = req.method
-    const { 
+
+    // Aicionado pelo usuario      
+    if(method === 'POST'){
+        const { 
             name,
             description,
             link,
@@ -13,9 +17,6 @@ export default async(req,res) =>{
             negociations,
             myId
          } = req.body 
-         
-    if(method === 'POST'){
-        const appstoacept = await db.collection('appstoacept')
         const result = await appstoacept.insertOne({
          name, description,link,reactions,negociations,myId
     })

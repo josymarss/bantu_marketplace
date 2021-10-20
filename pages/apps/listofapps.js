@@ -42,10 +42,11 @@ export default function ListOfApps({ apps }){
                 </section>
                 <div className={styles.appSection}> /the section that will be gray
                     <div className={styles.imageSection}>
-                        <img href={`./public/camera.png`} />
+                        {/* <img href={`./public/camera.png`} /> */}
                         <h1>App name</h1>
+                        <p>Some deescription</p>
                     </div>
-                    <p>Some deescription</p>
+                   
                 </div>    
             </div>
     }
@@ -55,11 +56,15 @@ export default function ListOfApps({ apps }){
         
         <PageApps />
      );
-}
+} 
 
 const getServerSideProps = async (context) => {
-    const db = ConnectToDatabase()
+    const db = await ConnectToDatabase()
     const apps = []
+ 
+    await db.find.users({},{apps:1}).
+    forEach(app => apps.push(app))
+    
     
     // don't forget to seriallize to JSON.stringify
 

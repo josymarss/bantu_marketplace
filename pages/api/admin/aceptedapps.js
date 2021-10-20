@@ -1,20 +1,25 @@
+import { ObjectId } from "bson";
 import { ConnectToDatabase } from "../../../db/connection";
 
 export default async (req,res) => {
-    
+
     const db = await ConnectToDatabase()
-    const { myId, ...app } = req.body
+
+    const { name, description, link, reactions,negociations, myId } = req.body
+    const app = {name: name, description: description, link: link, reactions: reactions, negociations: negociations, myId:myId}
+    const method = req.method;
+    const appstoacept = await db.collection('appstoacept')
 
     if(method === 'POST'){
-
+        
         const aceptedapps = await db.collection('aceptedapps')
         const insertedIntoAceptedApps = await aceptedapps.insertOne({myId,app})
-
+       
         const users = await db.collection('users')
-        const insertedIntoUsers = await users.updateOne(
-            { _id:myId }, 
-            {$set:{apps:{ $push:{app} } } }
-        )
+        const insertedIntoUsers = await users.updateOne({'_id': ObjectId(myId)}, { $push: { apps: app } } )
+
+      
+        const appdetedafteracepted = appstoacept.deleteOne({'name': app.name})
         
         if(!(insertedIntoUsers && insertedIntoAceptedApps)){
             res.send({
@@ -23,14 +28,11 @@ export default async (req,res) => {
             })
             return 
         }
-        console.log(result)
         res.send({message:'Inserido com sucesso!'})
     }
-    if(method === 'DELETE' ){
-        const deleted = await db.collection('aceptedapps').deleteOne( {myId, app })
-        console.table(deleted)
+
     }
-}
+    
 
 
 

@@ -10,6 +10,7 @@ export default function Login(){
     const router = useRouter()
     const [phone, setPhone] = useState('')
     const [password, setPass] = useState('')
+    
 
     const onLogin = async (event) => {
         event.preventDefault()
@@ -18,7 +19,10 @@ export default function Login(){
             password
         })
         
-        const { tokenId, message, phone } = result.data
+        // const { tokenId, message, phone } = result.data
+        const { tokenId } = result.data
+
+        
         
         if(!!tokenId){
             router.push(`/profile/${tokenId}`)

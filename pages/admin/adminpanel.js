@@ -1,51 +1,44 @@
-import { useState,useEffect,Fragment } from 'react'
-import axios from 'axios'
-import Cookies from 'js-cookie'
+import { useState,useEffect } from 'react'
 import {ConnectToDatabase} from '../../db/connection'
 
-import App from '../apps/app'
-import styles from './adminpanel.module.css'
+import AplicativosForAcept  from './aplicativosForAcept'
+import AplicativosAcepted  from './AplicativosAcepted'
 
-export default function AppsToAcept({ appsToAcept, appsAcepted }) {
+import adminpanel from './adminpanel.module.css'
 
-    // const [myId, updateId] = useState(Cookies.get('tokenId'))
-    useEffect(() => {
-    console.log(appsToAcept);
-
+export default function AppsToAcept({ appsToAcept, appsToAcepted}) {
+    const [dataToAcept, updateDataToAcept] = useState(JSON.parse(appsToAcept))
+    const [dataToAcepted, updateDataToAcepted] = useState(JSON.parse(appsToAcepted))
+     
+    
+    
+    useEffect(( ) => {
         // appsToAcept = JSON.parse(appsToAcept)
+        // appsToAcepted = JSON.parse(appsToAcepted)
     },[])
-    const onAcept = ()=> {
-        
-    }
-
+ 
     return(
-        <div className={styles.container}>
+        <div className={adminpanel.container}>            
+            <input type='search' placeholder="Pesquisar por um aplicativo"/>
 
-            {appsToAcept.map(app => {
-                <Fragment>
-                    <App 
-                        width={20} 
-                        height={20} 
-                        name={app.name} 
-                        description={app.description}
-                    />
-                    <div className={styles.buttons}>
-                        <button onClick={() => axios.post('/api/admin/appstoacept',{
-                                app
-                            })
-                        }>
-                            Aceitar
-                        </button>
-                        <button onClick={() => axios.delete('/api/admin/aceptedapps',{
-                            app
-                        })}>
-                            Rejetar
-                        </button>
-                    </div>
-                </Fragment>
-                
-            })}
-        
+            <div className={adminpanel.aside}>  
+                <div className={adminpanel.aplicativoPorAceitar}>
+                    <h2>Aplicativos para aceitar</h2>
+                    { dataToAcept.map((app, index) => ( 
+                                               
+                      <AplicativosForAcept key={index}  app ={app} />    
+                        
+                    ))}
+                </div>
+                <div className={adminpanel.aplicativosAceites}>
+                    <h2>Aplicativos aceites</h2>
+                 { dataToAcepted.map((app, index) => ( 
+                                               
+                <AplicativosAcepted key={index}  app ={app} />    
+                                                 
+                ))}                    
+                </div>
+            </div>
         </div>
     )
 }
@@ -54,26 +47,25 @@ export const getServerSideProps = async () => {
     const db = await ConnectToDatabase()
     
     const appstoacept = await db.collection('appstoacept')
-    const appsToAcept = []
-    const aplicativosPorAceitar = await appstoacept.find({}).
-                                    forEach(item => appsToAcept.push(JSON.stringify(item)))
-
-    // const appsacepted = await db.collection('appsacepted')
-    // const aplicativosAceitados = await appsacepted.find({})
+    const appsToAcept  = [] 
+    const aplicativos = await appstoacept.find({}).limit(5).
+                                    forEach(item => appsToAcept.push(item))
     
 
-    const appsAcepted = []
-    
-    
-    
-    //aplicativosPorAceitar.ops[0].map(apli => appsToAcept.push(apli))
-   // aplicativosAceitados.ops[0].map(apli => appsAcepted.push(apli))
+     const appsacepted = await db.collection('aceptedapps') 
+     const appsAcepted  = [] 
+     const aplica = await appsacepted.find({}).limit(5).
+                                    forEach(item => appsAcepted.push(item))
+     
+
+  
 
     return {
         props: {
-            //appsAcepted,
-            appsToAcept
+            
+            appsToAcept: JSON.stringify(appsToAcept),
+            appsToAcepted: JSON.stringify(appsAcepted)
+            
         }
     }
-
 }

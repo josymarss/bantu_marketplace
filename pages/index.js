@@ -1,9 +1,9 @@
-import Feed from './feed/feed' 
+import LeadingPage  from './leading/leading' 
 
 export default function Home() {
   return (
     // hasAccoubnt ?  <Feed /> : CreateAccountComponent
-    <Feed />
+    <LeadingPage />
       
     
     );}

@@ -1,21 +1,25 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import Cookies from 'js-cookie'
 import axios from 'axios'
 
 import styles from './newapp.module.css'
 
-export default function NewApp () {
-    
+export default function NewApp ({ id }) {
+    const router = useRouter()
     const [name, updateName] = useState('')
     const [description, updateDescription] = useState('')
     const [link, updateLink] = useState('')
     const [href, updateHref] = useState('')
-    const [myId, updateMyId] = useState()
+    const [myId, updateMyId] = useState('')
     
-    //useEffect(() => updateMyId(Cookies.get('tokenId')) )
+    useEffect(() => {
+        updateMyId(id)
+        // console.log(id)
+        // const aux = router.query.id
+        // console.log('aux na casa ', aux)
+    },[])
     const onCreate = () => {
-
+       
         axios.post('/api/admin/appstoacept',{
             name,
             description,
@@ -28,6 +32,7 @@ export default function NewApp () {
             negociations:[],
             myId
         })
+        window.location
            
     }
     const onLoad = (e) => {
@@ -54,3 +59,12 @@ export default function NewApp () {
     )
 } 
 
+export const getServerSideProps = async (context)=>{
+    const id = context.params.id
+    // console.log('mostrando do server side',id)
+    return {
+        props:{
+            id
+        }
+    }
+}

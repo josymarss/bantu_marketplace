@@ -22,8 +22,8 @@ export default function Feed(){
                     </div>
                     <div className={styles.activities}>
                          <Search />
-                         {fakeData.map(item => 
-                              <div className={styles.card}>
+                         {fakeData.map((item, index) => 
+                              <div key={index} className={styles.card}>
                                    <Activities />
                               </div>
                          )}

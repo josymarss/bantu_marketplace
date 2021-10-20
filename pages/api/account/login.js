@@ -10,7 +10,7 @@ export default async (req, res) => {
 
         const users = await db.collection('users')
         const user = await users.findOne({phone, password}, { _id:1 })
-        console.log(user)
+       
         if(!user){
 
             res.send({
@@ -18,10 +18,15 @@ export default async (req, res) => {
                 sugestion:'Tenta criar uma conta'
             })  
             return 
-        }
+        } 
+
+
+            const { _id } = user
+            
           
-        const { _id } = user
-        //Cookies.set('tokenId',_id, { expires: 365 })
+        
+          Cookies.set('tokenId',_id, { expires: 365 })
+        
         
         res.send({
             tokenId:_id,

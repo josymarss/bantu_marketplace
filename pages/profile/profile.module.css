@@ -1,84 +1,11 @@
 .container{
     margin-top:80px;
-    flex-direction:column;
-    flex:1;
-    height:auto;
-    width: 70%;
-    margin: 0 auto;
-  
-}
-
-.container input {
-    text-align: center;
-    
-}
-
-.container h3 {
-    color: #6C63FF;
-}
-
-
-.profile  img{
-    border:1px solid;
-    border-color:#185a9d;
-    width:150px;
-    height:150px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:100%;
-}
-.profile{
-    margin-left:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    margin-top: 100px;
-}
-.containerRight input {
-     height: 25px;
-     border-radius: 20px;
-}
-
-.containerLeft p {
-     display: inline;
-     border: 1px solid #ccc;
-     padding: 1px;
-     color: #666;
-}
-
-.containerLeft input[type=button] {
-    margin-left: 2px;
-    padding: 4px;
-    width: 65px;
-    
-   
-}
-.containerLeft input {
-    margin-left: 2px;
-    padding: 4px;
-   
-   
-}
-
-
-.containerLeft {
-    float: right;
-    margin-top: -11%;
-
-}
-
-
-
-/*.container{
-    margin-top:80px;
     display:flex;
     flex-direction:column;
     flex:1;
     height:auto;
-    /* position:fixed; 
-}
+    /* position:fixed; */
+}   
 .profile{
     margin-left:10px;
     display:flex;
@@ -95,11 +22,45 @@
     background-color:black;
     color:white;
 }
-.profile button :hover{
+
+.newApp h3{
+     color: #6C63FF;
+     font-size: 12pt;
+     
+}
+
+.newApp button {
+    width:120px;
+    height:30px;
+    border-radius:4px;
+    border: 1px solid #ccc;
+    font-size:16px;
+    color: #000;
+    background-color:#ccc;
+    display: inline;
+    margin-right: 30px;
+}
+
+.newApp button:hover  {
+    color: #ccc;
+    background-color:#6C63FF;
+    transition: 0.6s ease-in;
+   
+}
+.profile button:hover{
     background-color:#6C63FF;
     color:white;
-    transition: 2s ease-in-out;
+    transition: 0.6s ease-in-out;
 }
+.newApp{
+     display: flex;
+    flex-direction:column;
+    align-content: flex-end;
+    align-items: flex-end;
+    margin-right: 5px;
+
+}
+
 .borderImage{
     display:flex;
     align-items:center;
@@ -116,15 +77,18 @@
 }
 .appSection{
     display:flex;
-    align-self:flex-start;
     margin-left:20px;
     flex-direction:column;
 }
 .appSection input {
-    width:50px;
+    width:200px;
     height:18px;
     border-radius:160px;
-    border: 0.8px solid #f6f6f6;
+    border: 0.8px solid #646464;
+    padding: 10px;
+    text-align: center;
+    outline:none;
+    
 }
 .appSection p > span {
     font-weight:bold;
@@ -184,5 +148,3 @@
     width:70px;
     height:28px;
 }
- 
-*/

@@ -9,7 +9,6 @@ export default (req,res) => {
     const { name, description,link,
         reactions,photo,negociations, myId
     } = req.body
-    console.log(name)
     if(mothod=='POST'){
         const data = appsToAcept.insertOne(
             { name, description,link,
