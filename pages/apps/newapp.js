@@ -1,24 +1,37 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import Cookies from 'js-cookie'
 import axios from 'axios'
 
 import styles from './newapp.module.css'
 
 export default function NewApp () {
+    const router = useRouter();
+    const [name, updateName] = useState('');
+    const [description, updateDescription] = useState('');
+    const [link, updateLink] = useState('');
+    const [href, updateHref] = useState('');
+    const [myId, updateMyId] = useState('');
     
-    const [name, updateName] = useState('')
-    const [description, updateDescription] = useState('')
-    const [link, updateLink] = useState('')
-    const [href, updateHref] = useState('')
-    const [myId, updateMyId] = useState()
-    
-    useEffect(() => updateMyId(Cookies.get('tokenId')) )
+    useEffect(() => updateMyId(sessionStorage.getItem('tokenId')) )
 
     const onLoad = (e) => {
         updateHref(URL.createObjectURL(e.target.files[0]))
     }
-
+    const addApp = () => {
+        axios.post('/api/apps/newapp',{
+            name,
+            description,
+            link,
+            reactions:{
+                users:[],
+                likes:0
+            },
+            photo:href,
+            negociations:[],
+            myId
+        });
+        router.push(`/profile/${myId}`);
+    }
     return (
         <div className={styles.container}>
             <h2>Fazer upload dos dados de um aplicativo</h2>
@@ -31,18 +44,7 @@ export default function NewApp () {
                 <input type='text' className={styles.input} placeholder='descrição' onChange={e => updateLink(e.target.value)}/>
                 <input type='text' className={styles.input} placeholder='Link de uma mídea social' onChange={e => updateDescription(e.target.value)} />
             </div>
-            <button className={styles.button} onClick={axios.post('/api/admin/appstoacept',{
-                name,
-                description,
-                link,
-                reactions:{
-                    users:[],
-                    likes:0
-                },
-                photo:href,
-                negociations:[],
-                myId
-            })}>
+            <button className={styles.button} onClick={addApp}>
                 Criar 
             </button>
             

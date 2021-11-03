@@ -1,25 +1,24 @@
 import { useState,useEffect } from 'react'
-import Cookies from 'js-cookies'
+import Router from 'next/router'
 import axios from 'axios'
 
 import styles from './index.module.css'
 
-export default function NewNegociation({ nameApp, idUser, idUserOfApp }){
+export default function NewNegociation({nameApp, idUser, idUserOfApp}){
 
-    const [negociation, updateNegociation] = useState('')
-    const [myId, updateMyId] = useState('')
-
-    useEffect(() => { myId = Cookies.get('tokenId')})
+    useEffect(() => {
+       
+    },[])
 
     return(
         <div className={styles.container}>
             <input type='textarea' onChange={updateNegociation}/>
             <div className={styles.send}>
-                <button onClick={axios.post('/api/admin/appstoacept',{
+                <button onClick={axios.post('/api/admin/negociation/new',{
                     negociation,
                     nameApp,
                     idUser,
-                    idUserOfApp
+                    idUserOfTheApp
                 })}>
                     Enviar
                 </button>
@@ -36,7 +35,7 @@ export const getServerSideProps = async (context) => {
         props:{
             nameApp, 
             idUser, 
-            idUserOfApp
+            idUserOfTheApp
         }
     }
 }

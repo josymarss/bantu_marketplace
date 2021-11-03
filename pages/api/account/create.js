@@ -8,15 +8,13 @@ export default async (req,res) => {
     
     if(httpMethod === 'POST'){
         const alredyExist = await users.findOne({ phone }, {_id:1})
-       
         if(!!alredyExist){
             res.send({
-                message:'This number is alredy registered', 
-                sugestion: 'Try to login'
+                message:'Este número já está cadastrado', 
+                sugestion: 'Faça login'
             })
             return
         }
-
         const result = await users.insertOne({
              name,photo,phone,province,
              description,apps,followers, 

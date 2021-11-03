@@ -30,12 +30,10 @@ export default function Create(){
             password, 
             feed:[]
         })
-        
         const { tokenId } = result.data
-        router.push(`/profile/${tokenId}`)
-        
-          
+        router.push(`/profile/${tokenId}`)      
     }
+    
     return(
         <div className={styles.container}>
             <img 

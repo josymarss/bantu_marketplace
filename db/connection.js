@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb' 
 
-let cacheDb = null 
+let cacheDb = null ;
 
 export async function ConnectToDatabase(){
 
@@ -8,16 +8,16 @@ export async function ConnectToDatabase(){
         return cacheDb
     }
     
-    const client = await MongoClient.connect(process.env.MONGODB_URL, {
+    const client = await MongoClient.connect('mongodb://localhost:27017', {
         useUnifiedTopology:true,
         useNewUrlParser:true,
         // useFindAndModify:true
-    })
+    });
 
-    const db = await client.db(process.env.DB_NAME)
+    const db = await client.db('bantu');
 
-    cacheDb = db
+    cacheDb = db;
     
-    return db 
+    return db ;
 }
 
