@@ -1,23 +1,38 @@
+import {ObjectId} from 'mongodb';
+
 import { ConnectToDatabase } from "../../../db/connection"
 
 export default async(req,res) =>{
+    const db = await ConnectToDatabase();
+    const users = await db.collection('users');
+    let state = false;
+    const { myId, idUserWhoIwantToFollow } = req.body;
+    const method = req.method;
 
-    const db = await ConnectToDatabase()
-    const { myId, idUserwhoIwantToFollow } = req.body
-    const method = req.method
-
-    if (method === 'PUT' && !!myId){
-        const isAlredyThere = await db.users.findOne(
-            {_id: idUserwhoIwantToFollow , followres:{$in:[myId]} }
+    if (method === 'PUT'){
+        const result = await users.findOne(
+            { _id:new ObjectId(idUserWhoIwantToFollow)},
         );
-        if(!isAlredyThere){
-            await db.users.updateOne(
-                { _id: idUserWhoIwantToFollow }, 
-                { $set: { followers: { $push: myId } } }
+        const {followers} = result;
+        const isAlredyThere = followers.filter(id => id == myId);
+        if(isAlredyThere.length == 0){
+            await users.updateOne(
+                {_id:new ObjectId(idUserWhoIwantToFollow)},
+                {$push:
+                    {followers:myId}
+                }
             );
-            res.send(true);
-        } else{
-            res.send(false);;
+            state = true;
+            res.send(state); 
+        }else{
+           await users.updateOne(
+                {_id:new ObjectId(idUserWhoIwantToFollow)},
+                {$pull:
+                    {followers:myId}
+                }
+            );
+            state= false;
+            res.send(state);
         }
     }
 }

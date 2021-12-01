@@ -1,75 +1,66 @@
-.feed{
-     /* wrap:nowrap; */
-     display:flex;
-     margin-top:60px;
-     flex-direction:column;
-     background-color:#f6f6f6;
-     width:100%;
-     height:auto;
+.activity{
+     margin-top:130px;
+     display: flex;
+     align-items:center;
+     justify-content: flex-start;
+     flex-direction:column; 
 }
-.container{
+.userdata{
+     display:flex;
+     align-items:center;
+     flex-direction:row;
+     align-self:flex-start;
+}
+.userdata img {
+     border:3px rgb(0, 102, 235) solid;
+     width: 35px;
+     height: 35px;
+     border-radius:100px;
+     
+}
+.userdata p {
+     margin-left:8px;
+     font-size:18px;
+     color:rgb(0, 102, 235);
+}
+.userdata p:hover {
+     text-decoration:underline;
+}
+.content{
+     border-radius:4px;
+     width:500px;
+     height:140px;
+     border:2px solid rgb(175, 175, 175);
+     margin:10px 0px 24px 0px;
+     padding:6px;
+}
+.appcontent{
+     display:flex;
+     flex-direction:column;
+     height:80px;
+     align-items:flex-start;
+     justify-content:space-around;
+}
+.appname{
+     color:rgb(0, 102, 235);
+     font-weight:bold;
+     font-size:17px;
+     margin-top:35px;
+}
+.appcontent span{
+     color:rgb(136, 136, 136);
+     font-size:15px;
+}
+.star{
      display:flex;
      flex-direction:row;
-     justify-content: space-between;
-     margin:5px;
-     padding:10px;
-     background-color:#f6f6f6;
-     /* position:fixed; */
-     /* margin-top:10px; */
-} 
-.myApps{
-     width:250px;
+     align-items:center;
      justify-content:flex-start;
-     align-items:center;
-     padding:10px;
-     /* position:fixed; */
+     height:50px;
 }
-.mostPopular{
-     width:250px;
-     padding:10px;
-     justify-content:flex-start;
-     align-items:center;
-     /* position:fixed; */
+.star span{
+     margin-right:10px;
 }
-.activities{
-     width:400px;
-     margin-top:8px;
-     height:auto;
-}
-.card{
-     box-shadow:5px 10px 12px 5px #dfdfdf;
-     margin-top:10px;
-     border-radius:8px;
-     background-color:'#ffffff';
-     padding:10px;
-     justify-content:flex-start;
-     align-items:center;
-     height:250px;
-}
-.search{
-     width:250px;
-     height:15px;
-     border-radius:75px;
-     border:1px solid rgb(231, 231, 231);
-     padding:12px;
-     color:black;
-     align-self: center;
-}
-.searchContainer{
-     display:flex;
-     align-items:center;
-     justify-content:center;    
-}
-.button{
-     border-radius:90px;
-     width:60px;
-     height:25px;
-     border:none;
-     background-color:rgb(31, 31, 31);
-     margin-left:10px;
-     color:white;
-}
-.button:hover{
-     background-color: rgb(233, 233, 233);
-     color:#6C63FF;
+.star span:hover{
+     color:rgb(0, 102, 235);
 }

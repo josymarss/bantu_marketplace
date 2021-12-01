@@ -1,14 +1,47 @@
 .container {
     display:flex;
-    margin-top: 100px;
-    flex-direction:column;
+    margin: 100px 30px 30px 30px;
+    flex-direction:row;
     align-items:center;
     justify-content:center;
     padding:4px;
 }
+.createaccount {
+    flex:1;
+}
+.createaccount img {
+    width:600px;
+    height:600px;
+}
+.formdata{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    border-radius:8px;
+    background-color: #1c1a1d;
+    width:700px;
+    height:auto;
+    padding:30px;
+    flex:1;
+}
+/* Estilizar input file  */
+.upload {
+    color:white !important;
+    background:#ffa502;
+    padding:10px;
+    border-radius:160px;
+    outline:none;
+    width:100px;
+}
+
+/* Fim da estilizacao do input file */
+.formdata h2{
+    color:#ffa502;
+    text-align: center;
+}
 .imageContainer{
-    border:5px solid;
-    border-color:#185a9d;
+    border:2px solid #ffa502;
     width:100px;
     height:100px;
     display:flex;
@@ -22,14 +55,25 @@
     align-items:center;
     justify-content:center;
 }
-.myForm input {
-    margin-top:6px;
+.myForm input{
+    margin-top:10px;
     width:500px;
     padding:10px;
     height:40px;
     border: 1.5px solid #e6e6e6;
     border-radius:4px;
     font-size:18px;
+    background-color:rgb(28, 28, 28);
+    color:white;
+    border:0.5px solid #1c1200;
+}
+.input input[type='file']{
+    color:white !important;
+    background:#ffa502;
+    padding:10px;
+    border-radius:160px;
+    outline:none;
+    width:100px;
 }
 .myForm input[type='textarea']{
     height:80px;
@@ -46,14 +90,14 @@
     border: 1.5px solid #e6e6e6;
 }
 .myForm button {
-    margin-top:4px;
+    margin-top:10px;
     width:500px;
     padding:10px;
     height:40px;
     border: 1.5px solid #e6e6e6;
     border-radius:4px;
-    background-color:#6C63FF;
-    color:white;
+    background-color:#ffffff;
+    color:rgb(28, 28, 28);
     font-weight:bold;
     font-size:20px;
     cursor: pointer;

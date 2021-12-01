@@ -1,111 +1,82 @@
-import { useRouter } from 'next/router'
-import { useEffect, useState, Fragment } from 'react'
-import axios from 'axios'
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { ObjectId } from 'mongodb';
+import axios from 'axios';
+import { ConnectToDatabase } from '../../db/connection';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCheck } from '@fortawesome/free-solid-svg-icons';
 
-import App from '../../components/Apps'
-import { ConnectToDatabase } from '../../db/connection'
-import styles from './profile.module.css'
-import { ObjectId } from 'bson'
+import styles from './profile.module.css';
+import App from '../apps/app';
 
-export default function User({ user }){
+export default function User({ user,apps }){
     const router = useRouter();
     const [follow, updateFollow] = useState(false);
-    const [myId, updateMyId] = useState(null);
-    
+    const [myId, updateMyId] = useState();
+
     useEffect(() => {
+        user.followers.map(id => {
+            if(id == myId){
+                updateFollow(!follow);
+            }
+        });
         updateMyId(sessionStorage.getItem('tokenId')); 
     },[]);
 
-    const goTo = () => {
-        if(myId != undefined || myId != ''){
-            router.push(`/apps/newapp`);
-        }else {
-            router.push(`/account/create`);
-        } 
-    }
-
-    const onFollow = async ()  => {
+    const verifyFollow = async () => {
         if(user._id !== myId){
             const following = await axios.put('/api/user/follow',{
                 myId,
                 idUserWhoIwantToFollow:user._id
-            })
-            following ? updateFollow(!follow) : '' ;
-        }    
+            });
+            
+            if(following.data.state == true){
+                updateFollow(!follow);
+            };
+            
+            router.reload(window.location.pathname);
+        }
     }
-
+    
     return(
         <div className={styles.container}>
             <div className={styles.profile}>
-                <div className={styles.borderIamge}>
-                    {/* <img src={user.photo ? user.photo : '/camera.png' }/> */}
+                <img src={user.avatar ? user.avatar : '/camera.png' }/>
+                <p className={styles.fullName}>{user.fullName}</p>
+                <div className={styles.tofollow}>
+                    <p className={styles.username}>{`@${user.name}`}</p>
+                    {user._id !== myId ? 
+                    <span>
+                        <FontAwesomeIcon 
+                        icon={faUserCheck}
+                        className={follow == true ? styles.seguindo : styles.notfollowing}
+                        onClick={ verifyFollow }
+                    />
+                    </span>
+                    : ''
+                }
                 </div>
-                <p className={styles.username}>{`@${user.name}`}</p>
-                <p className={styles.descritpion}>{user.description}</p>
-                <button onClick={ onFollow }>{ follow ? 'seguindo':'seguir' }</button>
+                
             </div>
+            <p className={styles.descritpion}>{user.description}</p>
 
             <div className={styles.appSection}>
-                <div className={styles.connections}>
-                    <p><span>Meus aplicativos</span></p>
-                    <div> {
-                            user.apps ? user.apps.map((app, index)=> (
-                            <div>
-                                <h1> {app.name} </h1>
-                                <h3 className={styles.titulo}>Descrição:</h3 >
-                                <h3 className={styles.conteudo}> {app.link}</h3>
-                                <h3 className={styles.titulo}> Link</h3> 
-                                <h3 className={styles.conteudo}> {app.description}</h3>
-                                <hr/>
-                            </div> 
-                           )) : ''
-                        }
-                        </div>        
-               </div>
-               <div>
-                    <div className={styles.newApp}>
-                        <button onClick={goTo}>
-                            Adicionar
-                        </button>
-                        <p> Cadastrar dados de aplicativo</p>
-                    </div>
-                    <div className={styles.appSolicitar}>
-                        {
-                            user.apps ? user.apps.map(app => {
-                            <Fragment>
-                                <App width={22} height={22} name={app.name}/>
-                                <button onClick={() => router.push({
-                                    pathname:'/negociation/newnegociation',
-                                    query:{ 
-                                        nameApp: app.name,
-                                        idUser:myId,
-                                        idUserOfTheApp:userdata._id
-                                    }})
-                                }>
-                                    Negociar 
-                                </button>
-                            </Fragment>}) : ' '
-                            }
-                    </div>
-                </div>
-
-                <div className={styles.negociations}>
-                    <p><span>solicitações de negociações</span></p>
-                    <div className={styles.solicitation}>
-                        {/* {apps.negociations.map(app => {
-                            <Fragment>
-                                <App width={22} height={22} name='Tupuca'/>
-                                <div className={styles.solicitationsButton}>
-                                <button className={styles.aceitar}><span>Aceitar</span></button>
-                                <button className={styles.btnBusiness}>Editar</button>
-                                </div>
-                            </Fragment>
-                        })} */}
-                    </div>
+                <h4>Meus aplicativos</h4>
+                <hr
+                style={{
+                    marginTop:'-8px',
+                    marginBottom:'12px',
+                    borderRadius:'6px',
+                    height:.2,
+                    width:'800px',
+                    color:'lightgray'
+                }}/>
+                <div className={styles.myapps}>
+                    {apps ? apps.map((app,index) => <App key={index} application={app} userid={user._id}/>) : ''}
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export const getServerSideProps = async (context) => {
@@ -113,16 +84,21 @@ export const getServerSideProps = async (context) => {
     const id = context.params.id;
     const db = await ConnectToDatabase();
     const users = await db.collection('users');
-    const data = await users.findOne({"_id":ObjectId(id)},{password:0});
+    const data = await users.findOne({"_id":new ObjectId(id)},{password:0});
     const user = JSON.parse(JSON.stringify(data));
-    console.log(user);
+
+    const app = await db.collection('apps');
+    const dataapp = await app.find({userId:id}).toArray();
+    const apps = JSON.parse(JSON.stringify(dataapp));
 
     return{
         props:{
-            user
+            user,
+            apps
         }
     }
 
 }
+
  
 

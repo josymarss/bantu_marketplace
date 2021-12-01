@@ -15,8 +15,7 @@ export default async (req, res) => {
             })  
             return 
         } 
-        const { _id } = user
-        session.setItem('tokenId',_id);
+        const { _id } = user;
         res.send({
             tokenId:_id,
             message:'Agora estás logado.'

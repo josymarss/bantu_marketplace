@@ -1,47 +1,65 @@
-
- .input {
+.general{
+    margin-top:70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    padding:20px;
+}
+.general img {
+    width: 300px;
+    height:300px;
+}
+.input {
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center; 
-    margin-top:100px;
+    background-color: #1c1a1d;
+    padding:20px;
+    height:auto;
+    width:400px;
+    border-radius:8px;
+    
+}
+.input input {
+    background-color: #1c1a1d;
+    color:white;
 }
 .input h1 {
-    color:#6C63FF;
+    color:#ffa502;
 }
 .input h1 span{
     text-decoration:underline;
     cursor:cell;
 }
-.input{
-    display:flex;
-    flex-direction:column;
-    /* margin-top:10px; */
-}
 .input input {
+    background-color:#1c1a1d;
     margin-top:6px;
-    width:500px;
+    width:350px;
     padding:10px;
-    height:60px;
-    border: 1.5px solid #e6e6e6;
+    height:40px;
+    border: 1.5px solid #2e1e01;
     border-radius:4px;
     font-size:18px;
 }
-.input a {
-    margin-top:4px;
-    width:500px;
+.input button {
+    margin-top:6px;
+    width:350px;
     padding:10px;
-    height:60px;
+    height:40px;
     border: 1.5px solid #e6e6e6;
     border-radius:4px;
-    background-color:#6C63FF;
+    background-color:#ffa502;
     color:white;
     font-weight:bold;
     font-size:20px;
     text-align:center;
 }
-
-
+.input button:hover{
+    background-color: #e99802;
+    cursor:hand;
+}
 .criarConta  {
     display:flex;
     flex-direction:column;
@@ -55,6 +73,6 @@
 
 .criarConta a:hover{
     text-decoration: none;
-    color: silver;
+    color: rgb(89, 57, 9);
 }
 

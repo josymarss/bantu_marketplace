@@ -6,14 +6,19 @@
     width:100%;
     align-items:center;
     justify-content: space-between;
-    box-shadow:5px 10px 12px #dfdfdf;
+    box-shadow: 1px 4px 4px #d0d0d0;
     position:fixed;
     z-index:9000;
+    padding:20px;
 }
 .menu h5{
     margin-left:10px;
     font-size:20px;
-    color:#6C63FF;
+    color:#292929;
+    
+}
+.menu h5:hover{
+    cursor:hand;
 }
 .menuElements ul{
     display:flex;
@@ -25,19 +30,48 @@
     margin-left:25px;
 }
 .menuElements ul li:hover{
-    color:#6C63FF;
+    color:rgb(0, 102, 235)
 }
-.menu p {
+.logout {
     margin-right:20px;
     cursor: pointer;
-    font-size: 15pt;
+    font-size: 14px;
 }
-
-.menu p > span > span + span {
-     color: rgb(233, 111, 111)
+.logout:hover{
+    color:rgb(250, 75, 75);
 }
-.menu p > span > span + span:hover {
-    color: rgb(255, 0, 0)
+.add {
+    width:180px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-around;
+}
+.addnewapp >span{
+    font-size:22px;
+}
+.notifications > span {
+    font-size:22px;
+}
+.addnewapp{}
+.notifications{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+.notifications > p{
+    font-size:14px;
+    text-align:center;
+    color:rgb(255, 255, 255);
+    background-color:rgb(255, 79, 79);
+    position:absolute;
+    margin-left:18px;
+    margin-bottom:34px;
+    font-weight: 570;
+    border-radius:500px;
+    width: 20px;
+    height:20px;
 }
 
 /*Adicionando estilização no botão login, face o cursor pointer*/

@@ -3,11 +3,12 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 
 import styles from './create.module.css'
-import Error from '../error/error'
 
 export default function Create(){
     const router = useRouter()
-    const [name,setName] = useState('')
+    const [name,setName] = useState('');
+    const [fullName,setFullName] = useState('');
+    const [province,setProvince] = useState('');
     const [description,setDescription] = useState('')
     const [password,setPass] = useState('')
     const [confirmPass,setConfirmPass] = useState('')
@@ -20,65 +21,100 @@ export default function Create(){
 
     async function onCreateAccount(e){
         e.preventDefault()
-        const result = await axios.post('/api/account/create', {
+        if(password === confirmPass){
+            const result = await axios.post( '/api/account/create',{
             name,
-            photo:href,
-            phone,
-            description,
-            apps:[],
-            followers:[], 
-            password, 
-            feed:[]
-        })
-        const { tokenId } = result.data
-        router.push(`/profile/${tokenId}`)      
+                    fullName,
+                    photo:href,
+                    phone,
+                    province,
+                    description,
+                    password, 
+                    feed:[],
+                    followers:[]
+                    
+            
+            });
+            const { tokenId } = result.data;
+            tokenId ? sessionStorage.setItem('tokenId',tokenId):'';
+            router.push(`/profile/${tokenId}`); 
+        }else{
+            alert('As palavras passes devem condizer e nenhum campo deve estar vazio');
+        }
+            
     }
     
     return(
+       
+      
         <div className={styles.container}>
-            <img 
-                src={href === '' ? '/camera.png' : href }  className={styles.imageContainer}
-            />
-            <div className={styles.myForm}>
-                <input 
-                    type='file' 
-                    name='image'
-                    // filename='escolher foto' 
-                    className={styles.btnLoad} 
-                    onChange={loadImage}
+
+            <div className={styles.createaccount}>
+                <img src='/createaccount.png'/>
+            </div>
+
+            <div className={styles.formdata}>
+                <h2>Crie uma conta para para descubrir aplicativos e divulgar os seus</h2>
+                <img 
+                    src={href === '' ? '/camera.png' : href }  className={styles.imageContainer}
                 />
-                <input 
-                    type='text' 
-                    name='username'
-                    placeholder='nome de usuário'
-                    onChange={e => setName(e.target.value)}
-                />
-                <input 
-                    type='tel' 
-                    name='telefone'
-                    placeholder='telefone'
-                    onChange={e => setPhone(e.target.value)}
-                />
-                <input 
-                    type='password' 
-                    name='password'
-                    placeholder='palavra passe'
-                    onChange={e => setPass(e.target.value)}
-                />
-                <input 
-                    type='password' 
-                    name='confirmpassword' 
-                    placeholder='confirmar palavra passe'
-                    onChange={e => setConfirmPass(e.target.value)}
-                />
-                <input 
-                    type='textarea' 
-                    name='description'
-                    placeholder='descrição sobre você' 
-                    onChange={e => setDescription(e.target.value)}
-                />
-                <button onClick={onCreateAccount}>Criar conta</button>
+                <div className={styles.myForm}>
+                <form action='/account/create' method="post" enctype="multipart/form-data">
+                    <input 
+                        className={styles.upload}
+                        type='file' 
+                        name='fileimage'
+                        onChange={loadImage}
+                    />
+                </form>
+                     <input 
+                        type='text' 
+                        name='fullname'
+                        placeholder='Primeiro e último nome'
+                        onChange={e => setFullName(e.target.value)}
+                    />
+                    <input 
+                        type='text' 
+                        name='username'
+                        placeholder='Nome de usuário'
+                        onChange={e => setName(e.target.value)}
+                    />
+
+                    <input 
+                        type='text' 
+                        name='province'
+                        placeholder='Província'
+                        onChange={e => setProvince(e.target.value)}
+                    />
+                    <input 
+                        type='tel' 
+                        name='telefone'
+                        placeholder='Telefone'
+                        onChange={e => setPhone(e.target.value)}
+                    />
+                    <input 
+                        type='password' 
+                        name='password'
+                        placeholder='Palavra passe'
+                        onChange={e => setPass(e.target.value)}
+                    />
+                    <input 
+                        type='password' 
+                        name='confirmpassword' 
+                        placeholder='Confirmar palavra passe'
+                        onChange={e => setConfirmPass(e.target.value)}
+                    />
+                    <input 
+                        type='textarea' 
+                        name='description'
+                        placeholder='descrição sobre você' 
+                        onChange={e => setDescription(e.target.value)}
+                    />
+                    <button onClick={onCreateAccount}>Criar conta</button>
+                </div>
             </div>
         </div>
+       
+
     )
 }
