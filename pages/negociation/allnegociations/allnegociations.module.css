@@ -1,4 +1,96 @@
 .container {
       margin-top:100px;
+      display:flex;
+      flex-direction:column;
+      padding:10px;
+      align-items: center;
+      justify-content:center;
 }
-.container h2 {}
+.container h3 {
+      color:rgb(0, 102, 235);
+      font-size:16px;
+      text-align:center;
+}
+.elements{
+      padding:10px;
+}
+.appcontainer{
+      display:flex;
+      flex-direction:column;
+      border:2px solid rgb(182, 182, 182);
+      border-radius:3px;
+      width:530px;
+      margin-bottom:10px;
+}
+.acept{
+      padding:8px;
+      display:flex;
+      flex-direction: row;
+      align-items:center;
+      justify-content:space-between;
+      border-bottom: 1px solid rgb(209, 209, 209);
+}
+.acept button {
+      width:80px; 
+      height:30px; 
+      border-radius:80px;
+      border:none;
+      margin-right:5px;
+}
+.acepted:hover{
+      background-color:rgb(47, 211, 157);
+      color:white;
+}
+.buttons{
+      display:flex;
+      flex-direction:row;
+      align-items:center;
+      justify-content:center;
+      margin-right:22px;
+}
+.appsection{
+      display:flex;
+      flex-direction:row;
+      align-items:center;
+      justify-content:flex-start;
+}
+.appsection img {
+      width:35px;
+      height:35px;
+      border-radius:120px;
+}
+.appsection p {
+      font-size:18px;
+      font-weight:bold;
+      color:rgb(22, 22, 22);
+      margin-left:8px;
+}
+/*Negociations section*/
+.content{
+      display:flex;
+      flex-direction:row;
+      align-items:center;
+      justify-content:space-between;
+}
+.negociations{
+      display:flex;
+      flex-direction:column;
+      padding:8px;
+}
+.negociations p > span{
+      font-weight:bold;
+      color:rgb(0, 102, 235); 
+}
+.negociations p > span:hover{text-decoration:underline;}
+.description{
+      margin-top:-6px;
+      font-size:20px;
+}
+.readmore{
+      font-weight:bold;
+      color:rgb(0, 102, 235);
+      font-size:14px;
+      margin-top:-10px;
+      margin-right:4px;
+}
+.readmore:hover{text-decoration:underline;}

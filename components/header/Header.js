@@ -10,15 +10,16 @@ import styles from './Header.module.css';
 export default function Header( {user} ){
       const router = useRouter();
       const [myId, setId] = useState('');
+      const [notifications,setNot] = useState();
 
       useEffect(() =>{
             setId(sessionStorage.getItem('tokenId'));
-      },[]);
+      },[router.isReady]);
 
-      const onLogOut = () =>{
-            sessionStorage.removeItem('tokenId');
-            sessionStorage.clear();
+      const onLogOut = async () =>{
             router.push('/account/login');
+            resultNotifications = await axios(`/api/apps/noti`,{myId});
+            setNot(resultNotifications.data);
       }
       return (
             <nav className={styles.menu}>
@@ -46,6 +47,7 @@ export default function Header( {user} ){
                                     <FontAwesomeIcon icon={faBell} />
                               </Link>
                               </span>
+                              <p>{notifications}</p>
                         </div>
                         <p className={styles.logout} onClick={onLogOut}>{myId ? 'Logout': 'Login'}</p>     
                         </>: 

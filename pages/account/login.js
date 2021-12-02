@@ -13,7 +13,6 @@ export default function Login(){
     
     const onLogin = async (event) => {
         event.preventDefault();
-
         const result = await axios.post(`/api/account/login`,{
             phone,
             password

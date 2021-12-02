@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react';
 import { ObjectId } from 'mongodb';
 import axios from 'axios';
 import { ConnectToDatabase } from '../../db/connection';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCheck } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './profile.module.css';
 import App from '../apps/app';
@@ -13,15 +11,18 @@ export default function User({ user,apps }){
     const router = useRouter();
     const [follow, updateFollow] = useState(false);
     const [myId, updateMyId] = useState();
-
-    useEffect(() => {
-        user.followers.map(id => {
-            if(id == myId){
-                updateFollow(!follow);
-            }
-        });
-        updateMyId(sessionStorage.getItem('tokenId')); 
-    },[]);
+    
+    useEffect(()=>{
+        if(router.isReady){
+            updateMyId(sessionStorage.getItem('tokenId'));
+            user.followers.map(id => {
+                if(id === myId){
+                    updateFollow(true);
+                }
+            });
+        }
+    },[router.isReady])
+   
 
     const verifyFollow = async () => {
         if(user._id !== myId){
@@ -29,9 +30,9 @@ export default function User({ user,apps }){
                 myId,
                 idUserWhoIwantToFollow:user._id
             });
-            
-            if(following.data.state == true){
-                updateFollow(!follow);
+            console.log(following)
+            if(following.data.state){
+                updateFollow(following.data.state);
             };
             
             router.reload(window.location.pathname);
@@ -47,11 +48,9 @@ export default function User({ user,apps }){
                     <p className={styles.username}>{`@${user.name}`}</p>
                     {user._id !== myId ? 
                     <span>
-                        <FontAwesomeIcon 
-                        icon={faUserCheck}
-                        className={follow == true ? styles.seguindo : styles.notfollowing}
-                        onClick={ verifyFollow }
-                    />
+                        <p className={follow == true ? styles.seguindo : styles.notfollowing} onClick={ verifyFollow }>
+                                {follow == true ? 'seguindo' : 'seguir'}
+                        </p>
                     </span>
                     : ''
                 }
@@ -90,7 +89,7 @@ export const getServerSideProps = async (context) => {
     const app = await db.collection('apps');
     const dataapp = await app.find({userId:id}).toArray();
     const apps = JSON.parse(JSON.stringify(dataapp));
-
+   
     return{
         props:{
             user,

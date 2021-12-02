@@ -38,6 +38,7 @@ export default function Feed({ user }){
                               avatar={content.avatar}
                               name={content.name}
                               app={content.app}
+                              key={index}
                          /> 
                     )}
           </div>
@@ -51,14 +52,6 @@ export async function getServerSideProps(context) {
 
      const data = await users.findOne({_id:new ObjectId(id)},{password:0});
      const user = JSON.parse(JSON.stringify(data));
-     let arraysIdApp = [];
-     user.feed.map(async (content) => {
-          arraysIdApp.push(await db.collection('apps')
-          .findOne({_id:new ObjectId(content.app._id)}));
-     })
-     
-
-     console.log(arraysIdApp);
           
      return {
           props:{

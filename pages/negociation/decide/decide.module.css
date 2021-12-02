@@ -1,0 +1,106 @@
+.container {
+      margin-top:100px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+}
+.appcontent{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      justify-content:center;
+}
+.appname{
+      font-size: 20px;
+      font-weight:bold;
+      color:rgb(0, 102, 235);
+}
+.negociations{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      justify-content:space-between;
+      border:1px solid rgb(226, 226, 226);
+      width:550px;
+      padding:8px;
+      margin-bottom:10px;
+}
+.situation{
+      display:flex;
+      flex:1;
+      flex-direction:row;
+      align-items:center;
+      justify-content:space-between;
+      width:500px;
+}
+.title{
+      font-size: 16px;
+      font-weight:bold;
+      color:rgb(0, 102, 235);
+}
+.padre{
+      font-size:12px;
+      color:rgb(33, 33, 33);
+      display:flex;
+      flex-direction:row;
+      margin-left:-10px;
+}
+.padre span:hover{
+      color:rgb(255, 255, 255);
+      font-size:18px;
+      transition:0.1s ease-in-out;
+}
+.reddiv{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:28px;
+      height:28px;
+      background-color:rgb(255, 98, 98);
+      border-radius:100px;
+}
+.greendiv{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-right: 8px;
+      width:28px;
+      height:28px;
+      background-color:rgb(98, 255, 124);
+      border-radius:100px;
+}
+.yellowdiv{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-right: 8px;
+      width:28px;
+      height:28px;;
+      background-color:rgb(255, 232, 59);
+      border-radius:100px;
+}
+.mynegociations{
+      display:flex;
+      flex:2;
+}
+.mynegociations p{
+      margin-top:-6px;
+      font-size:20px;
+}
+.userdata{
+      display:flex;
+      flex-direction:row;
+      align-items:center;
+}
+.userdata img {
+      width:35px;
+      height:35px;
+      border-radius:100px;
+      border:2px solid rgb(0, 102, 235);
+}
+.userdata > p{
+      font-size:16px;
+      margin-left:8px;
+      font-weight:bold;
+}
+.userdata > p:hover{text-decoration:underline;}

@@ -30,7 +30,7 @@
     margin-left:25px;
 }
 .menuElements ul li:hover{
-    color:rgb(0, 102, 235)
+    color:rgb(0, 102, 235);
 }
 .logout {
     margin-right:20px;
@@ -53,7 +53,6 @@
 .notifications > span {
     font-size:22px;
 }
-.addnewapp{}
 .notifications{
     display:flex;
     flex-direction:row;
@@ -63,15 +62,11 @@
 .notifications > p{
     font-size:14px;
     text-align:center;
-    color:rgb(255, 255, 255);
-    background-color:rgb(255, 79, 79);
+    color:rgb(255, 79, 79);
     position:absolute;
     margin-left:18px;
-    margin-bottom:34px;
+    margin-bottom:38px;
     font-weight: 570;
-    border-radius:500px;
-    width: 20px;
-    height:20px;
 }
 
 /*Adicionando estilização no botão login, face o cursor pointer*/
