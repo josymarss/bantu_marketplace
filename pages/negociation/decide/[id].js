@@ -65,7 +65,7 @@ export default function Acept({ app }){
                                           </div>
                                     </div>
                                     <div className={styles.mynegociations}>
-                                          <p>{neg.description}</p>
+                                          <p>{neg.description?neg.description:''}</p>
                                     </div>
                               </div>
                         )}

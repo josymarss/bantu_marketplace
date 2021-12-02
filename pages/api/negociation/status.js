@@ -13,7 +13,7 @@ export default async (req,res) => {
       
       switch(method){
             case 'PUT':
-
+                  
             break
 
             case'POST': 
