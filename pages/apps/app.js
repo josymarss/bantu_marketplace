@@ -3,9 +3,9 @@ import {useRouter} from 'next/router';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-
-import styles from './app.module.css';
+import Image from 'next/image';
 import axios from 'axios';
+import styles from './app.module.css';
 
 export default function App({ application, userid }){
     const router = useRouter();
@@ -27,7 +27,10 @@ export default function App({ application, userid }){
         <div>
         {application ? 
             <div className={styles.container}>
-                <img src={application.avatar} />
+                <img 
+                    className={styles.containerimg}
+                    src={application.avatar ? `/appfiles/${application.avatar}`:''}
+                />
                 <p className={styles.name}>
                     {application.name}
                 </p>

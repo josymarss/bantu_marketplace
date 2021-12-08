@@ -11,12 +11,9 @@
      flex-direction:row;
      align-self:flex-start;
 }
-.userdata img {
+.userdataimg {
      border:3px rgb(0, 102, 235) solid;
-     width: 35px;
-     height: 35px;
-     border-radius:100px;
-     
+     border-radius:100px; 
 }
 .userdata p {
      margin-left:8px;

@@ -49,7 +49,11 @@ export default function Header( {user} ){
                               </span>
                               <p>{notifications}</p>
                         </div>
-                        <p className={styles.logout} onClick={onLogOut}>{myId ? 'Logout': 'Login'}</p>     
+                        <p 
+                              className={styles.logout} 
+                              onClick={onLogOut}>
+                                    {myId !== null || myId !== undefined ? 'Logout': 'Login'}
+                        </p>     
                         </>: 
                         ''}
                   </div>

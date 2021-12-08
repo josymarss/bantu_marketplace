@@ -1,5 +1,6 @@
 import { useState,useEffect } from 'react';
 import {useRouter} from 'next/router';
+import Link from 'next/link';
 import axios from 'axios';
 import {ObjectId} from 'bson';
 import {ConnectToDatabase} from '../../db/connection';
@@ -22,6 +23,7 @@ export default function NewNegociation({ app, user }){
             idUser:myId,
             titulo,
             description,
+            status:false
         });
         if(result){
             router.push(`/negociation/allnegociations/${myId}`);
@@ -52,6 +54,7 @@ export default function NewNegociation({ app, user }){
                 <button onClick={onNegociar} className={styles.btnnegociar}>
                     Negociar
                 </button>
+                <p>Ao apertar negociar você se compromete em cumprir com os <span><Link href='/terms'>termos de uso</Link></span> da negociação </p>
             </div>
         </div>
     )

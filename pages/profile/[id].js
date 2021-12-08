@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { ObjectId } from 'mongodb';
-import axios from 'axios';
 import { ConnectToDatabase } from '../../db/connection';
+import axios from 'axios';
 
 import styles from './profile.module.css';
 import App from '../apps/app';
@@ -11,15 +11,15 @@ export default function User({ user,apps }){
     const router = useRouter();
     const [follow, updateFollow] = useState(false);
     const [myId, updateMyId] = useState();
-    
+   
     useEffect(()=>{
         if(router.isReady){
             updateMyId(sessionStorage.getItem('tokenId'));
-            user.followers.map(id => {
+            user.followers ? user.followers.map(id => {
                 if(id === myId){
                     updateFollow(true);
                 }
-            });
+            }) : updateFollow(false) ;
         }
     },[router.isReady])
    
@@ -42,14 +42,17 @@ export default function User({ user,apps }){
     return(
         <div className={styles.container}>
             <div className={styles.profile}>
-                <img src={user.avatar ? user.avatar : '/camera.png' }/>
+                <img 
+                    className={styles.img}
+                    src={user.avatar ? `/uploads/${user.avatar}` : '/camera.png' }
+                /> 
                 <p className={styles.fullName}>{user.fullName}</p>
                 <div className={styles.tofollow}>
                     <p className={styles.username}>{`@${user.name}`}</p>
                     {user._id !== myId ? 
                     <span>
-                        <p className={follow == true ? styles.seguindo : styles.notfollowing} onClick={ verifyFollow }>
-                                {follow == true ? 'seguindo' : 'seguir'}
+                        <p className={follow ? styles.seguindo : styles.notfollowing} onClick={ verifyFollow }>
+                                {follow? 'seguindo' : 'seguir'}
                         </p>
                     </span>
                     : ''
@@ -83,7 +86,7 @@ export const getServerSideProps = async (context) => {
     const id = context.params.id;
     const db = await ConnectToDatabase();
     const users = await db.collection('users');
-    const data = await users.findOne({"_id":new ObjectId(id)},{password:0});
+    const data = await users.findOne({"_id": new ObjectId(id)},{password:0});
     const user = JSON.parse(JSON.stringify(data));
 
     const app = await db.collection('apps');

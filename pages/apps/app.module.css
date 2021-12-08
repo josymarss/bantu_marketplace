@@ -9,10 +9,10 @@
       padding:6px;
       margin: 4px 10px;
 }
-.container > img{
-      width:150px;
-      height:150px;
+.containerimg{
       border-radius: 4px;
+      width:100px;
+      height:100px;
 }
 .container p > span {
       width:140px;

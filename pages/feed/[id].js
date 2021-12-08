@@ -7,13 +7,19 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 import {ConnectToDatabase} from '../../db/connection';
 import styles from './feed.module.css'
+import Image from 'next/image';
 
 export default function Feed({ user }){
 
      const FeedComponent = ({avatar, name, app}) =>(
           <div className={styles.feedcomponent}>
                <div className={styles.userdata}>
-                    <img src={avatar}/>
+                    <Image 
+                         className={styles.userdataimg}
+                         width={35}
+                         height={35} 
+                         src={avatar}
+                    />
                     <p>{name}</p>
                </div>
                <div className={styles.content}>

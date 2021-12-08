@@ -9,17 +9,20 @@ export default async (req,res) => {
 
     const user = await users.findOne({_id:new ObjectId(idUser)});
     const { followers, avatar, name } = user;
-
+    //Adicionar negociacao do respectivo app
     const result = await apps.updateOne(
         { _id:new ObjectId(_id) }, 
         {$push: { negociations:{titulo, description, idUser, nameuser:name, useravatar:avatar} }}
     );
     const app = await apps.findOne({ _id:new ObjectId(_id) });
+
+    // Adicionar negociacao solicitada nos meus dados
+    const negImade = await users.updateOne({_id:new ObjectId(idUser)},{
+       $push: {negociationsimade:{ titulo, description, idoftheapp:_id }}
+    });
+
     // Adicionar actividade no feed dos meus seguidores 
     //bucar meus seguidores 
-    
-
-
     //adicionar no feed deles
     followers.map(async id => {
         const result = await users.updateOne(
