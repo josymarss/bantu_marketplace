@@ -103,4 +103,7 @@
       margin-left:8px;
       font-weight:bold;
 }
-.userdata > p:hover{text-decoration:underline;}
+.userdata > p:hover{
+      text-decoration:underline; 
+      cursor:pointer;
+}

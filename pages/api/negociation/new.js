@@ -12,7 +12,16 @@ export default async (req,res) => {
     //Adicionar negociacao do respectivo app
     const result = await apps.updateOne(
         { _id:new ObjectId(_id) }, 
-        {$push: { negociations:{titulo, description, idUser, nameuser:name, useravatar:avatar} }}
+        {$push: { 
+            negociations:{
+                _id: new ObjectId(), 
+                titulo, 
+                description, 
+                idUser, 
+                nameuser:name, 
+                useravatar:avatar
+            } 
+        }}
     );
     const app = await apps.findOne({ _id:new ObjectId(_id) });
 
@@ -29,6 +38,7 @@ export default async (req,res) => {
             { _id:new ObjectId(id) },
             { $push:{
                     feed:{
+                        iduser:id,
                         name,
                         avatar,
                         app,

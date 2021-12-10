@@ -3,16 +3,21 @@ import { useEffect, useState } from 'react';
 import { ObjectId } from 'mongodb';
 import { ConnectToDatabase } from '../../db/connection';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './profile.module.css';
 import App from '../apps/app';
+import HeadComponent from '../Head';
 
 export default function User({ user,apps }){
     const router = useRouter();
     const [follow, updateFollow] = useState(false);
     const [myId, updateMyId] = useState();
-   
+    const [countNeg, setNeg] = useState(0);
+    
     useEffect(()=>{
+        apps ? apps.map(app => setNeg(countNeg + app.negociations.length)) : 0;
         if(router.isReady){
             updateMyId(sessionStorage.getItem('tokenId'));
             user.followers ? user.followers.map(id => {
@@ -40,24 +45,51 @@ export default function User({ user,apps }){
     }
     
     return(
+        <>
+        <HeadComponent title={`Perfil de ${user.fullName}`} />
         <div className={styles.container}>
+           
             <div className={styles.profile}>
+                
                 <img 
                     className={styles.img}
                     src={user.avatar ? `/uploads/${user.avatar}` : '/camera.png' }
                 /> 
-                <p className={styles.fullName}>{user.fullName}</p>
+                
+                <div className={styles.edit}>
+                    <p className={styles.fullName}>{user.fullName}</p>
+                    {user._id === myId ?
+                        <span>
+                            <FontAwesomeIcon 
+                                onClick={() => router.push('/profile/edit/'+myId) }
+                                icon={faPen} 
+                            />
+                        </span>: ''}
+                </div>
+                    
                 <div className={styles.tofollow}>
                     <p className={styles.username}>{`@${user.name}`}</p>
-                    {user._id !== myId ? 
-                    <span>
-                        <p className={follow ? styles.seguindo : styles.notfollowing} onClick={ verifyFollow }>
-                                {follow? 'seguindo' : 'seguir'}
-                        </p>
-                    </span>
-                    : ''
+                   
+                    {user._id !== myId ?
+                    
+                    <>
+                        <span>
+                            <p className={follow ? styles.seguindo : styles.notfollowing} onClick={ verifyFollow }>
+                                    {follow? 'seguindo' : 'seguir'}
+                            </p>
+                        </span>
+                    
+                    </>
+                    :  ''
+                   
                 }
                 </div>
+
+                <dic className={styles.dataapp}>
+                    <p>Aplicativos <span>{apps? apps.length: 0}</span></p>
+                    <p>Negociações <span>{apps? user.followers.length: 0}</span></p>
+                    <p>Seguidores <span>{user? user.followers.length: 0}</span></p>
+                </dic>
                 
             </div>
             <p className={styles.descritpion}>{user.description}</p>
@@ -78,7 +110,7 @@ export default function User({ user,apps }){
                 </div>
             </div>
         </div>
-    );
+    </>);
 }
 
 export const getServerSideProps = async (context) => {

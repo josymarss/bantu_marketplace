@@ -2,6 +2,7 @@ import {useState,useEffect} from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import {ObjectId} from 'mongodb';
+import swl from 'sweetalert';
 import styles from './decide.module.css';
 import { ConnectToDatabase } from '../../../db/connection';
 
@@ -17,22 +18,55 @@ export default function Acept({ app }){
       },[router.isReady]);
 
       const onAceitar = async (negociation)=>{
-            console.log(negociation);
-            const result = await axios.post('/api/negociation/status',{
-                  idapp:app._id,
-                  negociation,
-                  myId
-            });
-            router.reload(window.location.pathname);
+            swl({
+                  title:'Aceitar',
+                  text:`Tens a certeza que deseja aceitar
+                  a soliciatção de: ${negociation.nameuser}`,
+                  icon:'warning',
+                  buttons:['Não', 'Sim'],
+
+            }).then(async response => {
+                  if (response) {
+                        const result = await axios.post('/api/negociation/status',{
+                              idapp:app._id,
+                              negociation,
+                              myId
+                        });
+                        result ? swl({
+                              text:'Aceitado com sucesso, redirecionando...',
+                              icon:'success'
+                        }) : swl({
+                              text:'Algum erro ocorreu, redirecionando...',
+                              icon:'error'
+                  })
+                  setTimeout(() => router.reload(window.location.pathname) ,4000)
+            }});
       }
+
        const  onRejeitar =async (negociation)=> {
-            const result = await axios.delete('/api/negociation/status',{
-                  idaapp:app._id,
-                  negociation,
-                  myId
+            // const result = await axios.delete('/api/negociation/status',{
+            //       idaapp:app._id,
+            //       negociation,
+            //       myId
+            // });
+            swl({
+                  title:'Rejeitar',
+                  text:`Tens a certeza que deseja rejeitar
+                  a soliciatção de: ${negociation.nameuser}`,
+                  icon:'warning',
+                  buttons:['Não', 'Sim'],
+
+            }).then(response => {
+                  if (response) {
+                        swl({
+                              text:'Eliminado com sucesso, redirecionando...',
+                              icon:'success'
+                        });
+                  } 
+                  setTimeout(() => router.reload(window.location.pathname) ,4000)
             });
             //chama o axios e rejeita o app
-            router.reload(window.location.pathname);
+            
       }
       const onEditar = async (negociation)=>{
             const result = await axios.put('/api/negociation/status',{
@@ -40,12 +74,8 @@ export default function Acept({ app }){
                   negociation,
                   myId
             });
-            //chama o axios e edita o app
-            router.reload(window.location.pathname);
       }
-      const goToprofile = async() =>{
-
-      }
+      
       const AppComponent = () => (
             <div className={styles.appcontent}>
                   <p className={styles.appname}>{app.name}</p>
@@ -54,7 +84,7 @@ export default function Acept({ app }){
                               <div className={styles.negociations} key={index}>
                                     <div className={styles.userdata}>
                                           <img src={neg.useravatar ? neg.useravatar : ''} /> 
-                                          <p onClick={goToprofile}>{neg.nameuser?neg.nameuser:''}</p>
+                                          <p onClick={() => router.push('/profile/'+neg.idUser)}>{neg.nameuser?neg.nameuser:''}</p>
                                     </div>
                                     <div className={styles.situation}>
                                           <p className={styles.title}>{neg.titulo}</p>

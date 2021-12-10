@@ -13,18 +13,20 @@ export default async (req,res) => {
       
       switch(method){
             case 'PUT':
-                  
+                  res.send('something'); 
             break
 
             case'POST': 
             //verifica se já existe tal negociação seguidores
-            const alredyThere = await aceptednegociations.findOne({
-                  idapp,
-                  idproprietario:myId,
-                  idsolicitante:idUser,
-                  description,
-                  titulo
-            });
+                  const alredyThere = await aceptednegociations.findOne({
+                        idapp,
+                        idproprietario:myId,
+                        idsolicitante:idUser,
+                        description,
+                        titulo
+                  });
+                  res.send('something');
+            break;
             //aceitou
             if(!alredyThere){
                   const result = await aceptednegociations.insertOne({

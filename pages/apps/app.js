@@ -24,42 +24,58 @@ export default function App({ application, userid }){
         router.push('/account/login');    
     }
     const PageApp = () => (
-        <div>
-        {application ? 
+        application ? 
+
             <div className={styles.container}>
-                <img 
-                    className={styles.containerimg}
-                    src={application.avatar ? `/appfiles/${application.avatar}`:''}
-                />
-                <p className={styles.name}>
-                    {application.name}
-                </p>
-                <p className={styles.description}>
-                    {application.description}
-                </p>
-                <p>
+                {/* Name of the app an stars */}
+               <div className={styles.headernameandphoto}>
+                   {/* The image  */}
+                    <img 
+                        className={styles.containerimg}
+                        src={application.avatar ? `/appfiles/${application.avatar}`:''}
+                    />
+                 
+                   {/* Name and stars */}
+                   <div className={styles.nameandstars}>
+                        <p onClick={() => router.push('/apps/'+application._id)} className={styles.name}>
+                            {application.name}
+                        </p>
+                        <div className={styles.star}>
+                            <span><FontAwesomeIcon 
+                                icon={faStar} 
+                                onClick={ onStar }
+                            /></span>
+                            <p>{application.stars.likes}</p>
+                        </div>
+                    </div>
+               </div>
+
+                <div className={styles.content}>
+                    <p className={styles.description}>
+                        {application.description.substring(0,45)+'...'}
+                    </p>
+                    <a 
+                        href={'www.facebook.com/kidogzone'}
+                        target='_blank'
+                        className={styles.link}>
+                            {'Link of the appaijfiosfuyruxwumfryuf7ynx8nu8md980muxf'.substring(0,45)}
+                    </a>
+                </div>
+
                 { application.userId != myId ? 
-                    <span>
+                    <button>
                         <Link href={myId ? `/negociation/${application._id}`: `/account/login`}>
                             Negociar
                         </Link>
-                    </span> :' ' 
+                    </button> :' ' 
                 }
-                </p>
-                <div className={styles.star}>
-                    <span>
-                        <FontAwesomeIcon 
-                            icon={faStar} 
-                            onClick={ onStar }
-                        />
-                    </span> 
-                    <p>{application.stars.likes}</p>
-                </div>
-                
-            </div> 
-            : 'Sem aplicativos. Adiciona um aplicativo pressionando o botão + no menu acima'
-            }
-        </div>)
+            </div> :
+
+            <p>
+                Sem aplicativos. Adiciona um aplicativo pressionando o botão + no menu acima'
+            </p>
+
+       )
 
     return(
         <PageApp />

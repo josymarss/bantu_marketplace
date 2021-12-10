@@ -25,9 +25,11 @@
     align-self:center;
 }
 .menuElements ul li{
+    font-size:22px;
+    color:#c5c5c5;
     list-style: none;
     flex-direction:row;
-    margin-left:25px;
+    margin-left:38px;
 }
 .menuElements ul li:hover{
     color:rgb(0, 102, 235);
@@ -41,18 +43,28 @@
     color:rgb(250, 75, 75);
 }
 .add {
-    width:180px;
+    width:130px;
     display:flex;
     flex-direction:row;
     align-items:center;
     justify-content:space-around;
 }
-.addnewapp >span{
+.add span{
+    font-size:16px;
+    color:#c5c5c5;
+}   
+.add span:hover{
+    color:rgb(0, 102, 235);
+}
+.active{
+    color:rgb(0, 102, 235);
+}
+/* .addnewapp >span{
     font-size:22px;
 }
 .notifications > span {
     font-size:22px;
-}
+} */
 .notifications{
     display:flex;
     flex-direction:row;

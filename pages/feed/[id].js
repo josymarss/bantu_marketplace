@@ -1,31 +1,40 @@
 import {useState,useEffect, Fragment} from 'react';
 import {useRouter} from 'next/router';
-import Link from 'next/link';
 import {ObjectId} from 'mongodb';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 import {ConnectToDatabase} from '../../db/connection';
 import styles from './feed.module.css'
 import Image from 'next/image';
 
+import HeadComponent from '../Head'; 
+
 export default function Feed({ user }){
+     const router = useRouter();
 
      const FeedComponent = ({avatar, name, app}) =>(
           <div className={styles.feedcomponent}>
                <div className={styles.userdata}>
                     <Image 
                          className={styles.userdataimg}
-                         width={35}
-                         height={35} 
-                         src={avatar}
+                         width={45}
+                         height={45} 
+                         src={`/uploads/${avatar}`}
                     />
-                    <p>{name}</p>
+                    <p onClick={() => router.push('/profile/'+user._id)} className={styles.username}>{name} </p>
+                    <p><span>iniciou uma umanegociação.</span></p>
                </div>
                <div className={styles.content}>
                     <div className={styles.appcontent}>
-                         <p className={styles.appname}>{app.name}</p>
-                         <p><span>{app.description}</span></p>
+                         <p 
+                              onClick={() => router.push('/apps/'+app._id)} 
+                              className={styles.appname}
+                         >
+                              {app.name}
+                         </p>
+                         <p><span>{app.description.length>50?app.description.substring(0,55)+'...':app.description}</span></p>
                     </div>
                     <div className={styles.star}>
                          <span><FontAwesomeIcon icon={faStar} /></span>
@@ -34,21 +43,35 @@ export default function Feed({ user }){
                </div>
           </div>   
      )
+     const feedData = user.feed.length == 0 ? <p>Sem actividade, preocure por seguidores.</p>:
+          user.feed.map((content,index) =>
+               <FeedComponent 
+                    avatar={content.avatar?content.avatar:<p>NoPhoto</p>}
+                    name={content.name}
+                    app={content.app}
+                    key={index}
+               /> 
+          )
+     
+     const onSearch = async () => {
+
+     }
 
      useEffect(()=>[]);
-     return(
+     return(<>
+          <HeadComponent title='Actividades'/>
           <div className={styles.activity}>
-               {user.feed.length == 0 ? <p>Sem actividade, preocure por seguidores.</p>:
-                    user.feed.map((content,index) =>
-                         <FeedComponent 
-                              avatar={content.avatar}
-                              name={content.name}
-                              app={content.app}
-                              key={index}
-                         /> 
-                    )}
+               <div className={styles.searchContainer}>
+                    <input 
+                         className={styles.search}
+                         type='text' 
+                         placeholder='Pesquisar um usuário'
+                    />
+                    <button className={styles.buscar}onClick={onSearch}>Buscar</button>
+               </div>
+               {feedData}
           </div>
-     );
+     </>);
 }
 
 export async function getServerSideProps(context) {

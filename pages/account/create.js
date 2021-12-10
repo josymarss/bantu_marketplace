@@ -23,7 +23,7 @@ export default function Create(){
         const formData = new FormData();
         formData.append('file',href);
         formData.append('name',name);
-        formData.append('fullname',fullName);
+        formData.append('fullName',fullName);
         formData.append('province',province);
         formData.append('description',description);
         formData.append('password',password);

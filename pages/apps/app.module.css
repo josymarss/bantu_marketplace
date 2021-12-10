@@ -1,52 +1,82 @@
 .container{
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       flex-direction:column;
       border: 2px solid rgb(230, 230, 230);
       border-radius:6px;
-      width:350px;
-      height:380px;
-      padding:6px;
+      width:470px;
+      height:270px;
+      padding:10px;
       margin: 4px 10px;
 }
-.containerimg{
-      border-radius: 4px;
-      width:100px;
+.headernameandphoto {
+      display:flex;
+      flex-direction:row;
+      width:100%;
+}
+.headernameandphoto img {
+      width: 100px;
       height:100px;
 }
-.container p > span {
-      width:140px;
-      margin-top:60px;
-      background-color:rgb(22, 22, 22);
-      padding:10px;
-      border-radius:2px;
-      color:white;
-}
-.container p > :hover{
-      background-color:rgb(0, 102, 235);
+.nameandstars{
+      margin-left:10px;
+      padding:0%;
+      height:50px;
 }
 .name{
-      font-size:22px;
-      color:black;
+      margin-top:3px;
+      font-weight:bold;
+      font-size:16pt;
+      color:rgb(0, 102, 235);
 }
-.description{
-      font-size:16px; 
-      color:rgb(138, 138, 138);
-      margin-top:-10px;
+.name:hover{
+      cursor: pointer;
+      text-decoration:underline;
 }
 .star{
       display:flex;
       flex-direction:row;
       align-items:center;
-      justify-content:center;
-
+      margin-top:-20px;
 }
-.star > span {
-      font-size:24px;
+.star > span{
+      font-size:16pt;
 }
-.star span:hover{
+.star > span:hover{
       color:rgb(0, 102, 235);
+      transition:0.2s ease-in-out;
 }
 .star > p {
-      margin-left:14px;
+      padding-left:8pt;
+}
+.content{
+      width:100%;
+}
+.content a {
+      width:80%;
+      padding:8px;
+      border-radius:4px;
+      border:2px solid rgb(218, 218, 218);
+}
+.content a:hover{
+      border-color:rgb(100, 165, 250);
+      transition:0.2s ease-in-out;
+}
+.description{
+      font-size:14pt;
+      color:rgb(70, 70, 70);
+}
+.container button {
+      margin-top:20px;
+      padding:9px;
+      width:120px;
+      border: none;
+      background-color:rgb(26, 26, 26);
+      color:white;
+      font-size:12pt;
+      border-radius:3px;
+}
+.container button:hover{
+      background-color:rgb(0, 102, 235);
+      transition:0.1s ease-in-out;
 }

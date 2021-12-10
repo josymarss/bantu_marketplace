@@ -1,3 +1,20 @@
 .container{
+      margin-top:100px;
       display:flex;
+      background-color: lightgoldenrodyellow;
+}
+.block{
+      display:flex;
+      flex-direction:column;
+}
+.contentapp{
+      display:flex;
+      flex-direction:row;
+}
+.header {
+      display:flex;
+      flex-direction:row;
+}
+.disabled{
+      display:none;
 }

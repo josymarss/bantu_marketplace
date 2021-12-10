@@ -4,6 +4,7 @@ import {ConnectToDatabase} from '../../db/connection';
 import axios from 'axios'
 import styles from './listingapps.module.css';
 
+import HeadComponent from '../Head';
 import App from './app';
 
 export default function Apps({apps}){
@@ -28,6 +29,8 @@ export default function Apps({apps}){
             } 
       }
       return(
+      <>
+            <HeadComponent title='Aplicativos'/>
             <div className={styles.container}>
                   <div className={styles.searchContainer}>
                         <input 
@@ -46,7 +49,7 @@ export default function Apps({apps}){
                   </div>
                  
             </div>
-      )
+      </>)
 }
 
 export async function getServerSideProps (context) {
