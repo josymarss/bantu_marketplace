@@ -10,7 +10,7 @@ import styles from './profile.module.css';
 import App from '../apps/app';
 import HeadComponent from '../Head';
 
-export default function User({ user,apps }){
+export default function User({ user,apps,id }){
     const router = useRouter();
     const [follow, updateFollow] = useState(false);
     const [myId, updateMyId] = useState();
@@ -87,8 +87,8 @@ export default function User({ user,apps }){
 
                 <dic className={styles.dataapp}>
                     <p>Aplicativos <span>{apps? apps.length: 0}</span></p>
-                    <p>Negociações <span>{apps? user.followers.length: 0}</span></p>
-                    <p>Seguidores <span>{user? user.followers.length: 0}</span></p>
+                    <p>Negociações <span>{apps.negociations > 0 ? apps.negociations.length: 0}</span></p>
+                    <p className={styles.followers} onClick={() => router.push('/profile/followers/'+id)}>Seguidores <span>{user? user.followers.length: 0}</span></p>
                 </dic>
                 
             </div>
@@ -128,7 +128,8 @@ export const getServerSideProps = async (context) => {
     return{
         props:{
             user,
-            apps
+            apps, 
+            id
         }
     }
 

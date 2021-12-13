@@ -1,6 +1,7 @@
 import {useState,useEffect} from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import swl from 'sweetalert';
 import styles from './create.module.css'
 
 export default function Create(){
@@ -31,7 +32,7 @@ export default function Create(){
        
         // formData.forEach(file => console.log(file));
 
-        if(password === confirmPass){
+        if(password === confirmPass && href && name && fullName && province && description && phone){
             const result = await axios.post('/api/account/create',
                 formData
             );
@@ -42,7 +43,14 @@ export default function Create(){
             router.push('/account/login'); 
 
         }else{
-            alert('As palavras passes devem condizer e nenhum campo deve estar vazio');
+            swl({
+                title:'Algum erro aconteceu',
+                text:`1- As palavras passes devem ser iguais. 
+                2- Carrega uma imagem de tamnho 1080 x 1080
+                3- Nenhum campo deve estar vazio`,
+                icon:'error'
+          });
+           
         }
             
     }

@@ -12,6 +12,7 @@ import Image from 'next/image';
 import HeadComponent from '../Head'; 
 
 export default function Feed({ user }){
+     const [data,setData] = useState();
      const router = useRouter();
 
      const FeedComponent = ({avatar, name, app}) =>(
@@ -53,22 +54,13 @@ export default function Feed({ user }){
                /> 
           )
      
-     const onSearch = async () => {
-
-     }
+     
 
      useEffect(()=>[]);
      return(<>
           <HeadComponent title='Actividades'/>
           <div className={styles.activity}>
-               <div className={styles.searchContainer}>
-                    <input 
-                         className={styles.search}
-                         type='text' 
-                         placeholder='Pesquisar um usuário'
-                    />
-                    <button className={styles.buscar}onClick={onSearch}>Buscar</button>
-               </div>
+               
                {feedData}
           </div>
      </>);

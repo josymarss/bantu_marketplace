@@ -29,6 +29,12 @@
     text-decoration:underline;
     cursor:pointer;
 }
+.followers:hover{
+    text-decoration:underline;
+    color:rgb(0, 102, 235);
+    cursor:pointer;
+    font-size:12pt;
+}
 .edit{
     display:flex;
     flex-direction:row;

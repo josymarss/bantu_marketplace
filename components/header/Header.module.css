@@ -42,6 +42,10 @@
 .logout:hover{
     color:rgb(250, 75, 75);
 }
+
+.searchIcon {
+    margin-right:8px;
+}
 .add {
     width:130px;
     display:flex;

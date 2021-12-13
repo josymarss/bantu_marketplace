@@ -1,8 +1,9 @@
-import { faCaretSquareUp } from "@fortawesome/free-solid-svg-icons";
+import { ObjectId } from 'mongodb';
 import { ConnectToDatabase } from "../../../db/connection";
 
 export default async (req,res) => {
       const db = await ConnectToDatabase();
+      const users = await db.collection('users');
       const apps = await db.collection('apps');
       const aceptednegociations = await db.collection('acepted');
 
@@ -17,38 +18,36 @@ export default async (req,res) => {
             break
 
             case'POST': 
+            //Buscar o App 
+            const acepetedApp = await apps.findOne({_id:ObjectId(idapp)});
+            const usersolicitou = await users.findOne({_id:ObjectId(idUser)});
             //verifica se já existe tal negociação seguidores
                   const alredyThere = await aceptednegociations.findOne({
-                        idapp,
-                        idproprietario:myId,
-                        idsolicitante:idUser,
-                        description,
-                        titulo
+                        _id:ObjectId(idapp),
                   });
-                  res.send('something');
-            break;
-            //aceitou
-            if(!alredyThere){
-                  const result = await aceptednegociations.insertOne({
-                        idapp,
-                        idproprietario:myId,
-                        idsolicitante:idUser,
-                        description,
-                        titulo
-                  });
+                  if(!alredyThere){
+                        await aceptednegociations.insertOne({
+                              idapp,
+                              acepetedApp,
+                              idproprietario:myId,
+                              usuariosolicitante:usersolicitou,
+                              titulo,
+                              description, 
+                        });
+                  }
 
-            }
-            //gerar pdf // aqui
-            
-            //Mudar o status do aplicativo aceitado
-
+                  //Apagar o aplicativo
+                  await apps.deleteOne({_id:ObjectId(idapp)});
+                  res.send({result:'apagado'});
             break;
 
-            case'DELETE':
-                  await apps.deleteOne({
-                        negociations:{description,idUser,titulo}
+            case 'DELETE':
+                  const result = await apps.updateOne({"negociations._id":negociation._id},{
+                        $pull:{
+                              "negociations._idUser":idUser
+                        }
                   });
-                  res.send(true);
+                  result ? res.send({result:'apagado'}) : null ;
             break;
       }
 }

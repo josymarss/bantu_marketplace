@@ -32,7 +32,7 @@ export default async (req,res) => {
         //section database 
         
         if(httpMethod === 'POST'){
-        const { fullname, name,phone,province,description,password } = fields;
+        const { fullName, name,phone,province,description,password } = fields;
  
             const alredyExist = await users.findOne({ phone }, {_id:1});
             if(!!alredyExist){
@@ -43,7 +43,7 @@ export default async (req,res) => {
                 return;
             }
             const result = await users.insertOne({
-                fullname,
+                fullName,
                 name,
                 phone,
                 province,
@@ -51,7 +51,8 @@ export default async (req,res) => {
                 password,
                 avatar:files.file.newFilename,
                 feed:[],
-                followers:[]
+                followers:[],
+                negociationsimade:[]
             });
              
             const { _id } = result.ops[0];
@@ -80,10 +81,11 @@ export default async (req,res) => {
                     password:userFinded.password,
                     avatar:userFinded.avatar,
                     feed:userFinded.feed,
-                    followers:userFinded.followers
+                    followers:userFinded.followers,
+                    negociationsimade:userFinded.negociationsimade
                 }
             });
-            res.send({success:'success!'})
+            res.send({success:'success!'});
         }    
     }); 
     res.send({tokenId:_idGlobal}); 

@@ -81,7 +81,7 @@
       font-weight:bold;
       color:rgb(0, 102, 235); 
 }
-.negociations p > span:hover{text-decoration:underline;}
+.negociations p > span:hover{text-decoration:underline;cursor:pointer;}
 .description{
       margin-top:-6px;
       font-size:20px;

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusSquare,faBell, faHome,faTablet,faUser,faInfo } from '@fortawesome/free-solid-svg-icons';
+import { faPlusSquare,faBell, faHome,faTablet,faUser,faInfo,faSearch } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 // import {ObjectId} from 'mongodb';
 
@@ -14,15 +14,20 @@ export default function Header( {user} ){
       const [myId, setId] = useState('');
       const [notifications,setNot] = useState();
       const [statusMenu,setStatus] = useState([]);
-      useEffect(() =>{
+      const [negociations,setNeg] = useState([]);
+
+      useEffect(async () =>{
             setId(sessionStorage.getItem('tokenId'));
-      },[]);
+            const result = await axios.put('/api/negociation/new',{myId});
+            setNeg(result.data.neg);
+      },[router.isReady]);
+
       useEffect(() => { HeaderMenu() },[statusMenu])
 
       const onLogOut = async () =>{
+            sessionStorage.removeItem('tokenId');
+            sessionStorage.clear();
             router.push('/account/login');
-            resultNotifications = await axios(`/api/apps/noti`,{myId});
-            setNot(resultNotifications.data);
       } 
 
       const ChangeStatus = (e) => {
@@ -48,10 +53,15 @@ export default function Header( {user} ){
                   <div className={styles.add}>
                         {myId ?<>
                         <div className={styles.addnewapp}>
+                              <span >
+                                    <Link href={`/profile/usuarios`}>
+                                          <FontAwesomeIcon className={styles.searchIcon} icon={faSearch} />
+                                    </Link>
+                              </span>
                               <span>
-                              <Link href={`/apps/newapp`}>
-                                    <FontAwesomeIcon icon={faPlusSquare} />
-                              </Link>
+                                    <Link href={`/apps/newapp`}>
+                                          <FontAwesomeIcon icon={faPlusSquare} />
+                                    </Link>
                               </span>
                         </div>
       
@@ -61,7 +71,7 @@ export default function Header( {user} ){
                                     <FontAwesomeIcon icon={faBell} />
                               </Link>
                               </span>
-                              <p>{notifications}</p>
+                              <p>{negociations}</p>
                         </div>
                         <p 
                               className={styles.logout} 

@@ -54,11 +54,13 @@ export default function App({ application, userid }){
                     <p className={styles.description}>
                         {application.description.substring(0,45)+'...'}
                     </p>
-                    <a 
-                        href={'www.facebook.com/kidogzone'}
+                    <a
                         target='_blank'
-                        className={styles.link}>
-                            {'Link of the appaijfiosfuyruxwumfryuf7ynx8nu8md980muxf'.substring(0,45)}
+                        className={styles.link} 
+                        target='_blank' 
+                        href={application.link.replace('http://localhost:3000/apps/','')}
+                        rel="noopener noreferrer">
+                            {application.link.substring(0,45)}
                     </a>
                 </div>
 

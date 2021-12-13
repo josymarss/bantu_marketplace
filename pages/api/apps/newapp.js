@@ -10,6 +10,7 @@ export const config = {
 }
 
 export default async (req,res) => {
+    const method = req.method;
      //Database section 
      const db = await ConnectToDatabase();
      const apps = await db.collection('apps');
@@ -24,8 +25,8 @@ export default async (req,res) => {
         
         const data = fs.readFileSync(files.file.filepath);
         fs.writeFileSync(`public/appfiles/${files.file.newFilename}`,data); 
-       
-        const { name, description,link, myId } = fields;
+        if(method ==='POST'){
+            const { name, description,link, myId } = fields;
 
         const appResult = await apps.insertOne(
             {   
@@ -42,6 +43,35 @@ export default async (req,res) => {
             }
         );
             res.send(appResult.ops[0]);
+        }
+        if(method ==='PUT'){
+            const {name,description,link,percent,idapp} = fields;
+            const updatedApp = await apps.findOne({_id:ObjectId(idapp)});
+            updatedApp.name = name;
+            updatedApp.description = description;
+            updatedApp.link = link;
+            updatedApp.avatar = files.file.newFilename;
+            
+            
+            await apps.updateOne({_id:ObjectId(idapp)},{
+                $set:{
+                    _id:updatedApp._id,
+                    userId:updatedApp.userId,
+                    name:updatedApp.name,
+                    description:updatedApp.description,
+                    avatar:updatedApp.avatar,
+                    link:updatedApp.link,
+                    stars:updatedApp.stars,
+                    negociations:updatedApp.negociations,
+                    percent:percent
+                }
+            });
+            res.send({success:'success!'});
+        }
+        if(method ==='DELETE'){
+
+        }
+        
         });
         res.send({resul:'Sucess'})
 }   

@@ -1,11 +1,12 @@
 import {useState,useEffect} from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
+// import {ObjectId} from 'mongodb';
 
 import { ConnectToDatabase } from "../../../db/connection";
 import styles from './allnegociations.module.css';
 
-export default function AllNegotiations({myApps}){
+export default function AllNegotiations({ myApps, user }){
       const router = useRouter();
 
       useEffect(() => {
@@ -14,14 +15,11 @@ export default function AllNegotiations({myApps}){
       const onSeeAllfromThisApp = async () =>{
 
       }
-      const gotToprofile = async () => {
-
-      }
       const onReadMore = async () =>{
 
       }
 
-      const AppContent = ({ appname,description,appphoto,length,idapp }) =>(
+      const AppContent = ({ appname,description,appphoto,length,idapp,nameuser,idUser }) =>(
             <div className={styles.appcontainer}>
                   <div className={styles.acept}>
                         <div className={styles.appsection}>
@@ -35,7 +33,7 @@ export default function AllNegotiations({myApps}){
                   </div>
                   
                   <div className={styles.negociations}>
-                        <p><span onClick={gotToprofile}>@fulano</span> diz:</p>
+                        <p><span onClick={()=> router.push('/profile/'+idUser)}>{`@${nameuser}`}</span> diz:</p>
                         <div className={styles.content}>
                               <p className={styles.description}>
                                     {description? description.substring(0,40)+'...':''}
@@ -58,6 +56,8 @@ export default function AllNegotiations({myApps}){
                                     appphoto={app.avatar?app.avatar:''}
                                     length={app.negociations.length?app.negociations.length:''}
                                     idapp={app._id?app._id:''}
+                                    nameuser = {app.negociations[0].nameuser}
+                                    idUser = {app.negociations[0].idUser}
                               />:''
                         )
                         :'Seus aplicativos não foram negociados'}
@@ -75,9 +75,11 @@ export async function getServerSideProps(context) {
      
       let myApps = apps.filter(app => app.userId == id );
       myApps = JSON.parse(JSON.stringify(myApps));
+      
       return {
             props:{
-                  myApps
+                  myApps,
+                  // user
             }
       }
 

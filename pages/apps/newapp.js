@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import swl from 'sweetalert';
 import axios from 'axios';
 import styles from './newapp.module.css';
 
@@ -10,6 +11,7 @@ export default function NewApp (){
     const [link, updateLink] = useState('');
     const [href, updateHref] = useState('');
     const [myId, updateMyId] = useState('');
+    const [percent, setPercent] = useState('');
     
     useEffect(() => {
         updateMyId(sessionStorage.getItem('tokenId'))
@@ -20,20 +22,32 @@ export default function NewApp (){
     }
     const addApp = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('name',name);
-        formData.append('description',description);
-        formData.append('link',link);
-        formData.append('file',href);
-        formData.append('myId',myId);
-        
-        const result = await axios.post('/api/apps/newapp',formData);
+        if(name && description && link && href && percent){
+            const formData = new FormData();
+            formData.append('name',name);
+            formData.append('description',description);
+            formData.append('link',link);
+            formData.append('file',href);
+            formData.append('percent',percent);
+            formData.append('myId',myId);
+            
+            const result = await axios.post('/api/apps/newapp',formData);
 
-        setTimeout(()=>{
-            router.push(`/profile/${myId}`);
-        },5000)
+            setTimeout(()=>{
+                router.push(`/profile/${myId}`);
+            },5000);
+            return 
+        }else {
+            swl({
+                title:'Algum erro aconteceu',
+                text:`Certifica-se que todos campos foram preenchidos
+                Carrega uma imagem de tamnho 1080 x 1080`,
+                icon:'warning'
+          });
+        }
           
-        } 
+    } 
+
     return (
         <div className={styles.container}>
             <img className={styles.img} src='/addnewapp.png' /> 
@@ -48,6 +62,7 @@ export default function NewApp (){
                         <input type='text' className={styles.input} placeholder='Nome do aplicativo' onChange={e => updateName(e.target.value)}/>
                         <input type='text' className={styles.input} placeholder='descrição' onChange={e => updateDescription(e.target.value)}/>
                         <input type='text' className={styles.input} placeholder='Link de uma mídea social' onChange={e => updateLink(e.target.value)} />
+                        <input type='text' className={styles.input} placeholder='Quanto deseja negociar' onChange={e => setPercent(e.target.value)} />
                     </div>
                     <button className={styles.button} onClick={addApp}>
                         Criar 

@@ -7,11 +7,13 @@ export default async (req,res) => {
     const users = await db.collection('users');
     const { _id,titulo,description, idUser }  = req.body;
 
-    const user = await users.findOne({_id:new ObjectId(idUser)});
-    const { followers, avatar, name } = user;
+    const user = await users.findOne({_id:ObjectId(idUser)});
+    
     //Adicionar negociacao do respectivo app
+   if(req.method ==='POST'){
+    const { followers, avatar, name } = user;
     const result = await apps.updateOne(
-        { _id:new ObjectId(_id) }, 
+        { _id:ObjectId(_id) }, 
         {$push: { 
             negociations:{
                 _id: new ObjectId(), 
@@ -23,11 +25,13 @@ export default async (req,res) => {
             } 
         }}
     );
-    const app = await apps.findOne({ _id:new ObjectId(_id) });
-
-    // Adicionar negociacao solicitada nos meus dados
+    const app = await apps.findOne({ _id:ObjectId(_id) });
+    const {negociations} = app;
+    const idnegociation = negociations.filter(neg => neg._id ? idUser == neg.idUser: '');
+    
+    //Adicionar negociacao solicitada nos meus dados
     const negImade = await users.updateOne({_id:new ObjectId(idUser)},{
-       $push: {negociationsimade:{ titulo, description, idoftheapp:_id }}
+       $push: {negociationsimade:{ titulo, description, idoftheapp:_id,idnegociation:idnegociation[0]._id }}
     });
 
     // Adicionar actividade no feed dos meus seguidores 
@@ -45,7 +49,10 @@ export default async (req,res) => {
                     }
                 }
             });
-            console.log(result);
     });
     res.send(result);
+   }
+   if(req.method ==='PUT'){
+       
+   }
 }

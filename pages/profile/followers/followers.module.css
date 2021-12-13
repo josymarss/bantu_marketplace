@@ -1,0 +1,37 @@
+.container {
+      margin-top:100px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+}
+.profilecontainer {
+      display:flex;
+      flex-direction:column;
+      width:600px;
+}
+.follower {
+      text-align:center;
+      font-size:20px;
+      font-weight:bold;
+      color:rgb(0, 102, 235);
+}
+.headerprofile{
+      display:flex;
+      flex-direction:row;
+      margin-top:-14px;
+      align-items: center;
+      justify-content:flex-start;
+}
+.headerprofile > img {
+      width:40px;
+      height:40px;
+      border-radius:160px;
+}
+.headerprofile p{
+      font-size:14pt;
+      margin-left:10px;
+}
+.headerprofile p:hover{
+      cursor:pointer;
+      text-decoration:underline;
+}

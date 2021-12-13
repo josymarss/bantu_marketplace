@@ -17,7 +17,7 @@ export default function Acept({ app }){
             setId(sessionStorage.getItem('tokenId'));
       },[router.isReady]);
 
-      const onAceitar = async (negociation)=>{
+      const onAceitar = async (negociation,index)=>{
             swl({
                   title:'Aceitar',
                   text:`Tens a certeza que deseja aceitar
@@ -32,23 +32,18 @@ export default function Acept({ app }){
                               negociation,
                               myId
                         });
-                        result ? swl({
+                        result.data? swl({
                               text:'Aceitado com sucesso, redirecionando...',
                               icon:'success'
                         }) : swl({
                               text:'Algum erro ocorreu, redirecionando...',
                               icon:'error'
                   })
-                  setTimeout(() => router.reload(window.location.pathname) ,4000)
+                  setTimeout(() => router.push('/profile/'+myId) ,4000);
             }});
       }
 
-       const  onRejeitar =async (negociation)=> {
-            // const result = await axios.delete('/api/negociation/status',{
-            //       idaapp:app._id,
-            //       negociation,
-            //       myId
-            // });
+       const  onRejeitar =async (negociation,index)=> {
             swl({
                   title:'Rejeitar',
                   text:`Tens a certeza que deseja rejeitar
@@ -58,22 +53,19 @@ export default function Acept({ app }){
 
             }).then(response => {
                   if (response) {
-                        swl({
+                        const result = await axios.delete('/api/negociation/status',{
+                              idaapp:app._id,
+                              negociation,
+                              myId
+                        });
+                        result.data ? swl({
                               text:'Eliminado com sucesso, redirecionando...',
                               icon:'success'
-                        });
+                        }): ''
                   } 
-                  setTimeout(() => router.reload(window.location.pathname) ,4000)
+                  setTimeout(() => router.push('/prodile/'+myId) ,4000);
             });
             //chama o axios e rejeita o app
-            
-      }
-      const onEditar = async (negociation)=>{
-            const result = await axios.put('/api/negociation/status',{
-                  idaapp:app._id,
-                  negociation,
-                  myId
-            });
       }
       
       const AppComponent = () => (
@@ -89,9 +81,9 @@ export default function Acept({ app }){
                                     <div className={styles.situation}>
                                           <p className={styles.title}>{neg.titulo}</p>
                                           <div className={styles.padre}>
-                                                <div onClick={() => onAceitar(neg)}className={styles.greendiv}><span><FontAwesomeIcon icon={faCheck}/> </span></div>
-                                                <div onClick={() => onEditar(neg)}className={styles.yellowdiv}><span><FontAwesomeIcon icon={faPenSquare}/> </span></div>
-                                                <div onClick={() => onRejeitar(neg)}className={styles.reddiv}><span><FontAwesomeIcon icon={faTrash}/> </span></div>
+                                                <div onClick={() => onAceitar(neg,index)}className={styles.greendiv}><span><FontAwesomeIcon icon={faCheck}/> </span></div>
+                                                <div onClick={() => router.push('/negociation/reajustar/'+neg._id)}className={styles.yellowdiv}><span><FontAwesomeIcon icon={faPenSquare}/> </span></div>
+                                                <div onClick={() => onRejeitar(neg,index)}className={styles.reddiv}><span><FontAwesomeIcon icon={faTrash}/> </span></div>
                                           </div>
                                     </div>
                                     <div className={styles.mynegociations}>
@@ -100,9 +92,7 @@ export default function Acept({ app }){
                               </div>
                         )}
                         
-                        {/* Map all negociations */}
-                        
-                        
+                        {/* Map all negociations i solicited */}
                  
             </div>
       )
