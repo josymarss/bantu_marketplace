@@ -44,7 +44,7 @@ export default function Feed({ user }){
                </div>
           </div>   
      )
-     const feedData = user.feed.length == 0 ? <p>Sem actividade, preocure por seguidores.</p>:
+     const FeedData = () =>  user.feed.length == 0 ? <p>Sem actividade, preocure por seguidores.</p>:
           user.feed.map((content,index) =>
                <FeedComponent 
                     avatar={content.avatar?content.avatar:<p>NoPhoto</p>}
@@ -54,14 +54,11 @@ export default function Feed({ user }){
                /> 
           )
      
-     
-
      useEffect(()=>[]);
      return(<>
           <HeadComponent title='Actividades'/>
           <div className={styles.activity}>
-               
-               {feedData}
+               <FeedData/>
           </div>
      </>);
 }

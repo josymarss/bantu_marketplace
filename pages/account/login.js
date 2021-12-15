@@ -1,7 +1,8 @@
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import axios from 'axios'
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import swl from 'sweetalert';
+import axios from 'axios';
 
 import styles from './login.module.css'
 
@@ -23,10 +24,19 @@ export default function Login(){
 
         if(tokenId){
             sessionStorage.setItem('tokenId',tokenId);
-            router.push(`/profile/${tokenId}`);
+            swl({
+                title:'Sucesso',
+                icon:'success'
+            });
+            setTimeout(() => router.push(`/profile/${tokenId}`), 2000);
         }else {
-            const { message } = result;
-            return (<p>{ message }</p>);
+            swl({
+                title:'Erro',
+                text:`Erro ao fazer login, 
+                Verifica se o número está correcto e tem 9 dígitos
+                verifica se a senha está correcta`,
+                icon:'error'
+            });
         }
     }
     return(

@@ -10,7 +10,7 @@ import styles from './profile.module.css';
 import App from '../apps/app';
 import HeadComponent from '../Head';
 
-export default function User({ user,apps,id }){
+export default function User({ user,apps,id,negociationsDone }){
     const router = useRouter();
     const [follow, updateFollow] = useState(false);
     const [myId, updateMyId] = useState();
@@ -35,7 +35,6 @@ export default function User({ user,apps,id }){
                 myId,
                 idUserWhoIwantToFollow:user._id
             });
-            console.log(following)
             if(following.data.state){
                 updateFollow(following.data.state);
             };
@@ -87,7 +86,7 @@ export default function User({ user,apps,id }){
 
                 <dic className={styles.dataapp}>
                     <p>Aplicativos <span>{apps? apps.length: 0}</span></p>
-                    <p>Negociações <span>{apps.negociations > 0 ? apps.negociations.length: 0}</span></p>
+                    <p>Negociações fechadas<span>{negociationsDone ? negociationsDone.length: 0}</span></p>
                     <p className={styles.followers} onClick={() => router.push('/profile/followers/'+id)}>Seguidores <span>{user? user.followers.length: 0}</span></p>
                 </dic>
                 
@@ -117,19 +116,24 @@ export const getServerSideProps = async (context) => {
 
     const id = context.params.id;
     const db = await ConnectToDatabase();
+    const acepted= await db.collection('acepted');
     const users = await db.collection('users');
+
     const data = await users.findOne({"_id": new ObjectId(id)},{password:0});
     const user = JSON.parse(JSON.stringify(data));
 
     const app = await db.collection('apps');
     const dataapp = await app.find({userId:id}).toArray();
     const apps = JSON.parse(JSON.stringify(dataapp));
+    let negociationsDone = await acepted.find({idproprietario:id}).toArray();
+    negociationsDone = JSON.parse(JSON.stringify(negociationsDone));
    
     return{
         props:{
             user,
             apps, 
-            id
+            id,
+            negociationsDone
         }
     }
 

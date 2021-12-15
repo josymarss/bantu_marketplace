@@ -41,6 +41,7 @@ export default function appDetails({ app }){
                   formData.append('file',href);
                   formData.append('percent',percent);
                   formData.append('idapp',idapp);
+                  formData.append('idapp',idapp);
                   
                   axios.put('/api/apps/newapp',formData);
 
@@ -118,6 +119,7 @@ export default function appDetails({ app }){
                                           <input type='text' onChange={(e) => setDescription(e.target.value)} placeholder='Descrição' className={myId != app.userId ? styles.disabled : ''}/>
                                           <input type='text' onChange={(e) => setLink(e.target.value)}placeholder='Link do aplicativo' className={myId != app.userId ? styles.disabled : ''}/>
                                           <input type='text' onChange={(e) => setPercent(e.target.value)} placeholder='Percentam que deseja negociar' className={myId != app.userId ? styles.disabled : ''}/>
+                                          <input type='text' onChange={(e) => setPercent(e.target.value)} placeholder='Categoria, em uma palavra' className={myId != app.userId ? styles.disabled : ''}/>
                                     </div>
                                     <div className={styles.penedit}>
                                           <p>Salvar edições</p>

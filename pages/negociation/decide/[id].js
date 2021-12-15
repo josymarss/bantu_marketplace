@@ -43,7 +43,7 @@ export default function Acept({ app }){
             }});
       }
 
-       const  onRejeitar =async (negociation,index)=> {
+       const onRejeitar = async (negociation,index)  => {
             swl({
                   title:'Rejeitar',
                   text:`Tens a certeza que deseja rejeitar
@@ -51,7 +51,7 @@ export default function Acept({ app }){
                   icon:'warning',
                   buttons:['Não', 'Sim'],
 
-            }).then(response => {
+            }).then(async response => {
                   if (response) {
                         const result = await axios.delete('/api/negociation/status',{
                               idaapp:app._id,
@@ -75,8 +75,8 @@ export default function Acept({ app }){
                         {app.negociations.map((neg,index) =>
                               <div className={styles.negociations} key={index}>
                                     <div className={styles.userdata}>
-                                          <img src={neg.useravatar ? neg.useravatar : ''} /> 
-                                          <p onClick={() => router.push('/profile/'+neg.idUser)}>{neg.nameuser?neg.nameuser:''}</p>
+                                          <img src={neg.useravatar ? '/uploads/'+neg.useravatar : ''} /> 
+                                          <p onClick={() => router.push('/profile/'+neg.idUser)}>{neg.nameuser?'@'+neg.nameuser:''}</p>
                                     </div>
                                     <div className={styles.situation}>
                                           <p className={styles.title}>{neg.titulo}</p>

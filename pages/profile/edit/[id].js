@@ -58,12 +58,13 @@ export default function EditPreofile(){
       
       return (
             <div className={styles.container}>
+                  <p className={styles.title}>Editar seu perfil</p>
                   <input type='file' onChange={onLoad} placeholder='foto' />
                   <input type='text' onChange={e => setFullName(e.target.value)} placeholder='Full name' />
                   <input type='text' onChange={e => setPhone(e.target.value)} placeholder='Telefone' /> 
                   <input type='text' onChange={e => setProvince(e.target.value)} placeholder='Província' /> 
                   <input type='text' onChange={e => setDesc(e.target.value)} placeholder='Descrição' />
-                  <div>
+                  <div className={styles.button}>
                         <button onClick={onSave}>Salvar</button>
                   </div> 
             </div>

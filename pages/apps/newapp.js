@@ -12,6 +12,7 @@ export default function NewApp (){
     const [href, updateHref] = useState('');
     const [myId, updateMyId] = useState('');
     const [percent, setPercent] = useState('');
+    const [categoria, setCategoria] = useState('');
     
     useEffect(() => {
         updateMyId(sessionStorage.getItem('tokenId'))
@@ -30,6 +31,7 @@ export default function NewApp (){
             formData.append('file',href);
             formData.append('percent',percent);
             formData.append('myId',myId);
+            formData.append('categoria',categoria);
             
             const result = await axios.post('/api/apps/newapp',formData);
 
@@ -63,6 +65,7 @@ export default function NewApp (){
                         <input type='text' className={styles.input} placeholder='descrição' onChange={e => updateDescription(e.target.value)}/>
                         <input type='text' className={styles.input} placeholder='Link de uma mídea social' onChange={e => updateLink(e.target.value)} />
                         <input type='text' className={styles.input} placeholder='Quanto deseja negociar' onChange={e => setPercent(e.target.value)} />
+                        <input type='text' className={styles.input} placeholder='Categoria em uma palavra' onChange={e => setCategoria(e.target.value)} />
                     </div>
                     <button className={styles.button} onClick={addApp}>
                         Criar 

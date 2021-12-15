@@ -26,7 +26,7 @@ export default async (req,res) => {
         const data = fs.readFileSync(files.file.filepath);
         fs.writeFileSync(`public/appfiles/${files.file.newFilename}`,data); 
         if(method ==='POST'){
-            const { name, description,link, myId } = fields;
+            const { name, description,link, myId,categoria } = fields;
 
         const appResult = await apps.insertOne(
             {   
@@ -35,6 +35,7 @@ export default async (req,res) => {
                 description,
                 avatar:files.file.newFilename, 
                 link,
+                categoria,
                 stars:{
                     usersid:[],
                     likes:0
@@ -45,12 +46,14 @@ export default async (req,res) => {
             res.send(appResult.ops[0]);
         }
         if(method ==='PUT'){
-            const {name,description,link,percent,idapp} = fields;
+            const {name,description,link,percent,idapp,categoria} = fields;
             const updatedApp = await apps.findOne({_id:ObjectId(idapp)});
             updatedApp.name = name;
             updatedApp.description = description;
             updatedApp.link = link;
             updatedApp.avatar = files.file.newFilename;
+            updatedApp.categoria = categoria;
+            updatedApp.percent = percent;
             
             
             await apps.updateOne({_id:ObjectId(idapp)},{
@@ -63,7 +66,8 @@ export default async (req,res) => {
                     link:updatedApp.link,
                     stars:updatedApp.stars,
                     negociations:updatedApp.negociations,
-                    percent:percent
+                    percent:updatedApp.percent,
+                    categoria: updatedApp.categoria
                 }
             });
             res.send({success:'success!'});

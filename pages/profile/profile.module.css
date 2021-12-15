@@ -1,5 +1,5 @@
 .container{
-    margin-top:60px;
+    margin-top:90px;
     display:flex;
     flex-direction:column;
     display:flex;
@@ -11,7 +11,6 @@
     justify-content:center;
     flex-direction:column;
     margin-bottom:22px;
-    background-color:rgb(237, 237, 237);
 }
 .img{
     margin-top:20px;
@@ -78,7 +77,7 @@
     text-decoration: underline; 
 }
 .descritpion {
-    font-size:24px;
+    font-size:18px;
     text-align:center;
 }
 .notfollowing{
@@ -120,17 +119,26 @@
 }
 .dataapp{
     display:flex;
+    align-items:center;
     flex-direction:row;
-    margin-top:-26px;
+    margin-top:-14px;
+    
 }
 .dataapp p{
     margin-left:18px;
+    background-color:rgb(255, 255, 255);
+    box-shadow: 1px 1px 1px 2px #ededed;
+    padding:10px;
+    border-radius:40px;
 }
 .dataapp p > span{
     margin-left:8px;
     color:rgb(0, 102, 235);
     font-size:12pt;
     font-weight:bold;
+}
+.dataapp p:hover{
+    box-shadow: 1px 1px 1px 3px #e2e2e2;
 }
 
 

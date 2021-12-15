@@ -23,7 +23,7 @@ export default function AllNegotiations({ myApps, user }){
             <div className={styles.appcontainer}>
                   <div className={styles.acept}>
                         <div className={styles.appsection}>
-                              <img src={appphoto?appphoto:''} />
+                              <img src={appphoto?'/appfiles/'+appphoto:''} />
                               <p>{appname?appname:''}</p>
                         </div>
                         <div className={styles.buttons}>

@@ -1,38 +1,44 @@
 .container{
-      margin-top:100px;
+      margin-top:70px;
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
 }
-.searchContainer{
+.category{
       display:flex;
       align-items:center;
       justify-content:center;
       flex-direction:row;
+      flex-wrap:wrap;
+      width:70%;
 }
-.searchContainer button {
-      background-color:rgb(22, 22, 22);
-      border:none;
-      width:100px;
-      height:40px;
-      font-size:16px;
-      color:white;
-      border-radius:2px;
+.categoryP{
+      font-size:18pt;
+}
+.category button {
+      background-color:white;
+      border:2.5px solid rgb(103, 165, 245);
+      width:120px;
+      height:35px;
+      font-size:18px;
+      color:rgb(103, 165, 245);
+      border-radius:50px;
       text-align: center;
-      margin-left:10px;
 }
-.searchContainer button:hover{
-     background-color: rgb(0, 102, 235);
+.category button:hover{
+     border-color: rgb(0, 102, 235);
+     transition:0.1s ease-in-out;
+     color:black;
+     cursor:pointer;
 }
-.input{
-      width:500px;
-      height:30px;
-      padding:18px;
-      font-size:16px;
-      color:black;
-      border-radius:2px;
-      border: 2px solid rgb(216, 216, 216);
+.seemore{
+      color:rgb(0, 102, 235);
+      font-size:12pt;
+}
+.seemore:hover {
+      text-decoration:underline;
+      cursor:pointer;
 }
 .listingapps{
       margin-top:35px;

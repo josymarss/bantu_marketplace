@@ -38,9 +38,15 @@ export default function Create(){
             );
             
             const { tokenId } = result.data;
-            tokenId ? sessionStorage.setItem('tokenId',tokenId):'';
+            if(tokenId){
+                sessionStorage.setItem('tokenId',tokenId);
+                swl({
+                    title:'Sucesso',
+                    text:`Conta criada com sucesso`,
+                    icon:'success'
+                });
             // router.push(`/profile/${tokenId}`)
-            router.push('/account/login'); 
+            setTimeout(() => router.push('/account/login') ,2000); 
 
         }else{
             swl({
@@ -49,10 +55,11 @@ export default function Create(){
                 2- Carrega uma imagem de tamnho 1080 x 1080
                 3- Nenhum campo deve estar vazio`,
                 icon:'error'
-          });
+            });
            
         }
             
+        }
     }
     
     return(
