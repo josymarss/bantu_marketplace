@@ -15,13 +15,13 @@ export default function Feed({ user }){
      const [data,setData] = useState();
      const router = useRouter();
 
+     useEffect(()=>[]);
+
      const FeedComponent = ({avatar, name, app}) =>(
           <div className={styles.feedcomponent}>
                <div className={styles.userdata}>
-                    <Image 
+                    <img 
                          className={styles.userdataimg}
-                         width={45}
-                         height={45} 
                          src={`/uploads/${avatar}`}
                     />
                     <p onClick={() => router.push('/profile/'+user._id)} className={styles.username}>{name} </p>
@@ -52,9 +52,8 @@ export default function Feed({ user }){
                     app={content.app}
                     key={index}
                /> 
-          )
+          );
      
-     useEffect(()=>[]);
      return(<>
           <HeadComponent title='Actividades'/>
           <div className={styles.activity}>

@@ -15,10 +15,7 @@ export default function AllNegotiations({ myApps, user }){
       const onSeeAllfromThisApp = async () =>{
 
       }
-      const onReadMore = async () =>{
-
-      }
-
+      
       const AppContent = ({ appname,description,appphoto,length,idapp,nameuser,idUser }) =>(
             <div className={styles.appcontainer}>
                   <div className={styles.acept}>
@@ -38,7 +35,7 @@ export default function AllNegotiations({ myApps, user }){
                               <p className={styles.description}>
                                     {description? description.substring(0,40)+'...':''}
                               </p>
-                              <p className={styles.readmore} onClick={onReadMore}>Ler mais...</p>
+                             
                         </div>
                   </div>
             </div>
@@ -49,12 +46,12 @@ export default function AllNegotiations({ myApps, user }){
                   <div className={styles.elements}>
                         <h3>Minhas negociações</h3>
                         {myApps.length != 0 ? myApps.map(app => 
-                              app.negociations.length!=0 ?
+                              app.negociations.length>0 ?
                               <AppContent 
                                     appname={app.name}
-                                    description={app.negociations.length!=0? app.negociations[0].description:''}
-                                    appphoto={app.avatar?app.avatar:''}
-                                    length={app.negociations.length?app.negociations.length:''}
+                                    description={app.negociations[0].description}
+                                    appphoto={app.avatar}
+                                    length={app.negociations.length}
                                     idapp={app._id?app._id:''}
                                     nameuser = {app.negociations[0].nameuser}
                                     idUser = {app.negociations[0].idUser}

@@ -35,6 +35,12 @@ export default function NewApp (){
             
             const result = await axios.post('/api/apps/newapp',formData);
 
+            swl({
+                title:'Sucesso!',
+                text:'Aplicativo cadastrado com sucesso',
+                icon:'success'
+            });
+
             setTimeout(()=>{
                 router.push(`/profile/${myId}`);
             },5000);

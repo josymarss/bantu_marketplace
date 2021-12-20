@@ -81,9 +81,9 @@ export default function Acept({ app }){
                                     <div className={styles.situation}>
                                           <p className={styles.title}>{neg.titulo}</p>
                                           <div className={styles.padre}>
-                                                <div onClick={() => onAceitar(neg,index)}className={styles.greendiv}><span><FontAwesomeIcon icon={faCheck}/> </span></div>
-                                                <div onClick={() => router.push('/negociation/reajustar/'+neg._id)}className={styles.yellowdiv}><span><FontAwesomeIcon icon={faPenSquare}/> </span></div>
-                                                <div onClick={() => onRejeitar(neg,index)}className={styles.reddiv}><span><FontAwesomeIcon icon={faTrash}/> </span></div>
+                                                <div onClick={() => onAceitar(neg,index)} className={styles.greendiv}><span><FontAwesomeIcon icon={faCheck}/> </span></div>
+                                                <div onClick={() => router.push('/negociation/reajustar/'+neg._id)} className={styles.yellowdiv}><span><FontAwesomeIcon icon={faPenSquare}/> </span></div>
+                                                <div onClick={() => onRejeitar(neg,index)} className={styles.reddiv}><span><FontAwesomeIcon icon={faTrash}/> </span></div>
                                           </div>
                                     </div>
                                     <div className={styles.mynegociations}>
