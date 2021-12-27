@@ -62,7 +62,5 @@ export default async (req,res) => {
     });
     res.send(result);
    }
-   if(req.method ==='PUT'){
-       
-   }
+   res.send({data:'done'});
 }

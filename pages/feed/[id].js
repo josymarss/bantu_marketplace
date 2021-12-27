@@ -67,7 +67,7 @@ export async function getServerSideProps(context) {
      const id = context.params.id;
      const users = await db.collection('users');
 
-     const data = await users.findOne({_id:new ObjectId(id)},{password:0});
+     const data = await users.findOne({_id:ObjectId(id)},{password:0});
      const user = JSON.parse(JSON.stringify(data));
           
      return {

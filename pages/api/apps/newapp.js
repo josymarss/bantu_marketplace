@@ -26,7 +26,7 @@ export default async (req,res) => {
         const data = fs.readFileSync(files.file.filepath);
         fs.writeFileSync(`public/appfiles/${files.file.newFilename}`,data); 
         if(method ==='POST'){
-            const { name, description,link, myId,categoria } = fields;
+            const { name, description,link, myId,categoria,percent } = fields;
 
         const appResult = await apps.insertOne(
             {   
@@ -40,7 +40,8 @@ export default async (req,res) => {
                     usersid:[],
                     likes:0
                 },
-                negociations:[] 
+                negociations:[],
+                percent,
             }
         );
             res.send(appResult.ops[0]);
@@ -72,10 +73,10 @@ export default async (req,res) => {
             });
             res.send({success:'success!'});
         }
-        if(method ==='DELETE'){
+       
+       
 
-        }
-        
         });
+        
         res.send({resul:'Sucess'})
 }   

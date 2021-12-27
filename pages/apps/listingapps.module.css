@@ -25,6 +25,7 @@
       color:rgb(103, 165, 245);
       border-radius:50px;
       text-align: center;
+      margin-left:5px;
 }
 .category button:hover{
      border-color: rgb(0, 102, 235);

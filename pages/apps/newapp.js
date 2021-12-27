@@ -43,7 +43,7 @@ export default function NewApp (){
 
             setTimeout(()=>{
                 router.push(`/profile/${myId}`);
-            },5000);
+            },3000);
             return 
         }else {
             swl({

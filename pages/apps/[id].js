@@ -16,6 +16,7 @@ export default function appDetails({ app }){
       const [href,setHref] = useState();
       const [percent,setPercent] = useState('');
       const [idapp,setIdap] = useState();
+      const [categoria,setCategoria] = useState();
       const [myId,setId] = useState();
 
 
@@ -41,7 +42,7 @@ export default function appDetails({ app }){
                   formData.append('file',href);
                   formData.append('percent',percent);
                   formData.append('idapp',idapp);
-                  formData.append('idapp',idapp);
+                  formData.append('categoria',categoria);
                   
                   axios.put('/api/apps/newapp',formData);
 
@@ -52,7 +53,7 @@ export default function appDetails({ app }){
                   });
                   setTimeout(()=>{
                         router.push(`/profile/${myId}`);
-                  },5000);
+                  },3000);
 
                   return
             }
@@ -74,8 +75,10 @@ export default function appDetails({ app }){
 
             }).then(async response => {
                   if (response) {
-                        axios.delete('/api/apps/newapp',{idapp});
-                        setTimeout(() => router.push('/profile/'+myId),5000);
+                        const result = await axios.post('/api/apps/delete',{id:app._id});
+                        if(result){
+                              setTimeout(() => router.push('/profile/'+myId),3000);
+                        }
                   }
             });
       }
@@ -100,7 +103,7 @@ export default function appDetails({ app }){
                                                Negociações  <span>{app.negociations.length} </span>
                                           </p>
                                           <p>
-                                               Valor disponível <span>{app.percent ?app.percent : '0%' } </span>
+                                               Valor disponível <span>{app.percent ? app.percent+'%' : '100%' } </span>
                                           </p>
                                     </div>
                               </div>
@@ -119,7 +122,7 @@ export default function appDetails({ app }){
                                           <input type='text' onChange={(e) => setDescription(e.target.value)} placeholder='Descrição' className={myId != app.userId ? styles.disabled : ''}/>
                                           <input type='text' onChange={(e) => setLink(e.target.value)}placeholder='Link do aplicativo' className={myId != app.userId ? styles.disabled : ''}/>
                                           <input type='text' onChange={(e) => setPercent(e.target.value)} placeholder='Percentam que deseja negociar' className={myId != app.userId ? styles.disabled : ''}/>
-                                          <input type='text' onChange={(e) => setPercent(e.target.value)} placeholder='Categoria, em uma palavra' className={myId != app.userId ? styles.disabled : ''}/>
+                                          <input type='text' onChange={(e) => setCategoria(e.target.value)} placeholder='Categoria, em uma palavra' className={myId != app.userId ? styles.disabled : ''}/>
                                     </div>
                                     <div className={styles.penedit}>
                                           <p>Salvar edições</p>
@@ -135,25 +138,6 @@ export default function appDetails({ app }){
             </div>
       );
 }
-// Show app data with good layout 
-      /* 
-            - name 
-            - image 
-            - link 
-            - % of the app who will be nogiciate 
-            - number of negociations
-            - status(negociate or not)
-            - data of the user's app  
-      */
-
-
-// Edit, delete app, 
-
-// Add any description of negociation(% of the apps free and how much to negociate)
-
-// Number of negociations 
-
-// If ap is mine must be able the button edit 
 
 export async function getServerSideProps (context) {
       const db = await ConnectToDatabase();
