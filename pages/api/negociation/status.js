@@ -7,7 +7,8 @@ export default async (req,res) => {
       const apps = await db.collection('apps');
       const aceptednegociations = await db.collection('acepted');
       const notification = await db.collection('notification');
-      let newApp
+      let newApp;
+      let appIwant;
 
       const method = req.method;
       
@@ -22,34 +23,23 @@ export default async (req,res) => {
                   });
                   if(appINeed){
                         if(appINeed.negociations.length > 0){
-                              newApp = appINeed.negociations.filter(neg => neg._id != idnegociation
-                              );
+                              newApp = appINeed.negociations.filter(neg => neg._id != idnegociation);
+                        }
+                        if(appINeed.negociations.length > 0){
+                              appIwant = appINeed.negociations.filter(neg => neg._id == idnegociation);
                         }
                   }
                   await apps.updateOne({ _id:appINeed._id },{
-                        $set: { negociations: { ...newApp } }
+                        $set: { negociations: [ ...newApp ] }
                   });
                   await notification.insertOne({
-                        iduser:newApp.idUser,
-                        appname:newApp.name,
-                        not:newApp.name+' Foi redefinido os termos',
-                        description:desc
+                        iduser:appIwant.idUser,
+                        appname:appIwant.name,
+                        not:appIwant.name+' Foi redefinido os termos',
+                        not:desc
                   });
+                  res.send(true);
 
-
-            //     const { negociations } = appINeed;
-                
-                //Colocar novos termos da negociacao 
-
-                /*Colocar de volta os dados alterados no 
-                array de negociacao do aplicativo em questao*/
-
-                //Colocar nas notificacoes de cada user
-
-                //Como funciona as notificacoes:
-                  //Adiciona um array de notificacoes em cada users
-                  //Nesse array contem apenas o di de cada negociacao
-                  //Em cada mexida notifica o dono e o que solicitou
             break;
 
             case'POST': 

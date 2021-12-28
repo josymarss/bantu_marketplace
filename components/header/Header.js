@@ -4,9 +4,6 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare,faBell, faHome,faTablet,faUser,faInfo,faSearch } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-// import {ObjectId} from 'mongodb';
-
-// import {ConnectToDatabase} from '../db/connection';
 import styles from './Header.module.css';
 
 export default function Header( {user} ){
@@ -67,11 +64,11 @@ export default function Header( {user} ){
       
                         <div className={styles.notifications}>
                               <span>
-                              <Link href={`/negociation/allnegociations/${myId}`}>
-                                    <FontAwesomeIcon icon={faBell} />
-                              </Link>
+                                    <Link href={`/negociation/allnegociations/${myId}`}>
+                                          <FontAwesomeIcon icon={faBell} />
+                                    </Link>
                               </span>
-                              <p>{negociations}</p>
+                              <p>{0}</p>
                         </div>
                         <p 
                               className={styles.logout} 

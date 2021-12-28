@@ -65,5 +65,32 @@
 }
 .details{
     display:flex;
-    flex-direction:row;
+    flex-direction:column;
+}
+.title {
+    font-size:16px;
+    font-weight:bold;
+    color:rgb(39, 98, 247);
+    margin-right:10px;
+}
+.username{
+    font: size 18px;
+    color:rgb(56, 56, 56);
+    margin-right:10px;
+}
+.userdata{
+    display:flex;
+    align-items:center;
+}
+.downloadpdf{
+    color:white;
+    height:35px;
+    width:100px;
+    border:none;
+    border-radius:3px;
+    font-size:14px;
+    background-color:rgb(209, 96, 84);
+}
+.downloadpdf:hover{
+    background-color:rgb(242, 126, 113);
 }

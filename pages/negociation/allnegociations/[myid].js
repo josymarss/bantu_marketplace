@@ -1,12 +1,12 @@
 import {useState,useEffect} from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-// import {ObjectId} from 'mongodb';
+
 
 import { ConnectToDatabase } from "../../../db/connection";
 import styles from './allnegociations.module.css';
 
-export default function AllNegotiations({ myApps, user }){
+export default function AllNegotiations({ myApps, noti }){
       const router = useRouter();
 
       useEffect(() => {
@@ -59,6 +59,16 @@ export default function AllNegotiations({ myApps, user }){
                         )
                         :'Seus aplicativos não foram negociados'}
                   </div>
+                  <h3>Notificações recentes</h3>
+                  <div className={styles.notifications}>
+                       {/* {noti.length > 0 ?
+                              noti.map(not =><>
+                                    <p>{not.appname}</p>
+                                    <p>{not.not}</p>      
+                              </>)
+                              : <p>Sem notificações</p>
+                       } */}
+                  </div>
                    
             </div>    
       );
@@ -72,11 +82,13 @@ export async function getServerSideProps(context) {
      
       let myApps = apps.filter(app => app.userId == id );
       myApps = JSON.parse(JSON.stringify(myApps));
-      
+
+      let noti = await db.collection('notification').find({userId:id}).toArray();
+      noti = JSON.parse(JSON.stringify(noti));
       return {
             props:{
                   myApps,
-                  // user
+                  noti
             }
       }
 

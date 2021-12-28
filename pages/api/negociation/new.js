@@ -31,9 +31,9 @@ export default async (req,res) => {
     //Colocar notificacao no dono do app
 
     await notification.insertOne({
-        iduser:app.userId,
-        appname:appINeed.name,
-        not:appINeed.name+' foi iniciada uma nova negociação.'
+        userId:app.userId,
+        appname:app.name,
+        not:app.name+' foi iniciada uma nova negociação.'
   });
    //Adicionar negociacao solicitada, nos meus dados de solicaitados
     const {negociations} = app;

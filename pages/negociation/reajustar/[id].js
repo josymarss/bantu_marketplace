@@ -13,6 +13,16 @@ export default function Reajustar(){
                   idnegociation:router.query.id,
                   desc
             });
+            if(result){
+                  swl({
+                        title:'Sucesso!',
+                        text:`Negociação editada com sucesso.`,
+                        icon:'success'
+                  })
+                  setTimeout(() =>{
+                        router.push('/');
+                  },3000);
+            }
       }
       
       return (

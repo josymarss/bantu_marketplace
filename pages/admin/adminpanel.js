@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import {useRouter} from 'next/router';
 import axios from 'axios';
+import generatePDF from '../../utils/pdfgenereator';
 
 import { CircularBar,VerticalBar } from '../../utils/chart';
 import {ConnectToDatabase} from '../../db/connection';
@@ -20,6 +21,9 @@ export default function AppsToAcept({ apps, acepted }) {
         const result = await axios.post('/api/admin/resolve',{id});
         result ? router.reload(window.location.pathname) : '' ;
     }
+    function onGerarPdf(acepted){
+        return generatePDF(acepted);
+    }
     function AppData() {
         return(
             apps.length > 0 ? apps.map(app => 
@@ -37,7 +41,17 @@ export default function AppsToAcept({ apps, acepted }) {
     function AceptedAppsDetails(){
         return(
             <div className={styles.details}>
-
+                {acepted.map(acepted =>
+                    <>
+                        <img width={50} height={50} src={'/appfiles/'+acepted.acepetedApp.avatar} />
+                        <p className={styles.title}>Nome do aplicativo: {acepted.acepetedApp.name}</p>
+                        <div className={styles.userdata}>
+                            <p className={styles.username}>Negociador: { acepted.usuariosolicitante.fullName }</p>
+                            <button className={styles.downloadpdf} onClick={onGerarPdf(acepted)}>Gerar PDF</button>
+                        </div>
+                    </> 
+                    
+                )}
             </div>
         );
     }
@@ -58,6 +72,7 @@ export default function AppsToAcept({ apps, acepted }) {
                     <h4>Aplicativos do sistemas</h4>
                     <AppData />
                     <h4>Aplicativos com negociações fechadas</h4>
+                   < AceptedAppsDetails />
                 </div>
             </div>
         </div>
