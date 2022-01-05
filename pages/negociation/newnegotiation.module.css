@@ -1,17 +1,58 @@
 /* import a css file that have the fonts */
 .container{
-      margin-top:100px;
+      margin-top:50px;
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:flex-start;
 }
+.negotiation{
+      padding:18px;
+      display:flex;
+      flex-direction:row;
+}
+.inputs{
+      display:flex;
+      align-items:flex-start;
+      flex-direction:column;
+}
 .container h2{
       font-size:30px;
       color:rgb(7, 7, 7);
 }
-.container p{
+.detail{
       font-size:22px;
+      margin-top:-10px;
+}
+.detailsNegotiations{
+      display:flex;
+      flex-direction:column;
+      margin-left:20px;
+}
+.date{
+     margin-top:12px;
+}
+.date input[type='text']{
+      width:60px;
+      margin-right:2px;
+      height:40px;
+      border:1px solid rgb(226, 226, 226);
+      font-size:16pt;
+}
+.title{
+      font-size:16px;
+      color:rgb(0, 102, 235);
+}
+.values > p {
+      margin-top:12px;
+}
+.values > input[type='text'] {
+      width:160px;
+      margin-right:2px;
+      height:40px;
+      border:1px solid rgb(226, 226, 226);
+      font-size:16pt;
+      margin-top:12px;
 }
 .container p > span {
       color:rgb(0, 102, 235);
@@ -28,7 +69,6 @@
       margin:2px;
       width: 600px;
       height:40px;
-      border: 2px solid rgb(208, 208, 208); 
       border-radius:3px;
 }
 .input {
@@ -40,6 +80,17 @@
       margin-top:8px;
       margin-bottom:8px;
 }
+.selectInput {
+      margin-top:6px;
+      width:200px;
+      padding:10px;
+      height:50px;
+      background-color:#1c1a1d;
+      border: 1.5px solid #2e1e01;
+      border-radius:4px;
+      font-size:18px;
+      color:white;
+  }
 .btnnegociar{
       margin-top:6px;
       background-color:rgb(24, 24, 24);
@@ -50,7 +101,6 @@
       border-radius:3px;
       color:white;
       align-self:flex-start;
-      margin-left:143px;
       border:none;
       margin-bottom:10px;
 }

@@ -1,16 +1,19 @@
 import '../styles/globals.css';
-import {Fragment} from 'react';
-import Head from 'next/head';
+import { Fragment } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 import Header from '../components/header/Header';
 
 
 function MyApp({ Component, pageProps }) {
 
-  return <>
+  return (
+    <Fragment>
         <Header />
         <Component {...pageProps} />
-    </>
+        <ToastContainer/>
+    </Fragment>
+  );
 }
 
 export default MyApp

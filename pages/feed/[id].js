@@ -25,7 +25,7 @@ export default function Feed({ user }){
                          src={`/uploads/${avatar}`}
                     />
                     <p onClick={() => router.push('/profile/'+user._id)} className={styles.username}>{name} </p>
-                    <p><span>iniciou uma umanegociação.</span></p>
+                    <p><span>iniciou uma uma nova negociação.</span></p>
                </div>
                <div className={styles.content}>
                     <div className={styles.appcontent}>
@@ -44,7 +44,7 @@ export default function Feed({ user }){
                </div>
           </div>   
      )
-     const FeedData = () =>  user.feed.length == 0 ? <p>Sem actividade, preocure por seguidores.</p>:
+     const FeedData = () =>  user.feed.length == 0 ? <p>Sem actividade, preocure por seguidores e siga-aos para ver o que têm neogicado.</p>:
           user.feed.map((content,index) =>
                <FeedComponent 
                     avatar={content.avatar?content.avatar:<p>NoPhoto</p>}

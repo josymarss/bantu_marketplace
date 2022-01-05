@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import swl from 'sweetalert';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
 import styles from './login.module.css'
@@ -24,18 +25,15 @@ export default function Login(){
 
         if(tokenId){
             sessionStorage.setItem('tokenId',tokenId);
-            swl({
-                title:'Sucesso',
-                icon:'success'
+            toast.success("Sucesso!",{
+                theme: "dark",
+                delay:1000
             });
-            setTimeout(() => router.push(`/profile/${tokenId}`), 2000);
+            
+            setTimeout(() => router.push(`/profile/${tokenId}`), 3000);
         }else {
-            swl({
-                title:'Erro',
-                text:`Erro ao fazer login, 
-                Verifica se o número está correcto e tem 9 dígitos
-                verifica se a senha está correcta`,
-                icon:'error'
+            toast.error("Algum erro ocorreu, certifica-se que todos campos estãopreenchidos!",{
+                theme: "dark"
             });
         }
     }

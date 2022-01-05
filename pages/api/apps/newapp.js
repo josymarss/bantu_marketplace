@@ -26,7 +26,11 @@ export default async (req,res) => {
         const data = fs.readFileSync(files.file.filepath);
         fs.writeFileSync(`public/appfiles/${files.file.newFilename}`,data); 
         if(method ==='POST'){
-            const { name, description,link, myId,categoria,percent } = fields;
+            const { name, description,link, myId,categoria,percentMax,percentMin } = fields;
+            const date = new Date();
+            const dia = date.getDate();
+            const mes = date.getMonth()+1; 
+            const ano = date.getFullYear();
 
         const appResult = await apps.insertOne(
             {   
@@ -40,8 +44,9 @@ export default async (req,res) => {
                     usersid:[],
                     likes:0
                 },
-                negociations:[],
-                percent,
+                percentMax,
+                percentMin,
+                data: dia+'/'+mes+'/'+ano
             }
         );
             res.send(appResult.ops[0]);

@@ -1,8 +1,9 @@
 import {useState,useEffect} from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import swl from 'sweetalert';
-import styles from './create.module.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import styles from './create.module.css';
 
 export default function Create(){
     const router = useRouter();
@@ -40,23 +41,17 @@ export default function Create(){
             const { tokenId } = result.data;
             if(tokenId){
                 sessionStorage.setItem('tokenId',tokenId);
-                swl({
-                    title:'Sucesso',
-                    text:`Conta criada com sucesso`,
-                    icon:'success'
+                toast.success("Conta criada com sucesso!",{
+                    theme: "dark"
                 });
+                
             // router.push(`/profile/${tokenId}`)
             setTimeout(() => router.push('/account/login') ,2000); 
 
         }else{
-            swl({
-                title:'Algum erro aconteceu',
-                text:`1- As palavras passes devem ser iguais. 
-                2- Carrega uma imagem de tamnho 1080 x 1080
-                3- Nenhum campo deve estar vazio`,
-                icon:'error'
+            toast.error("Algum erro ocorreu, certifica-se que todos campos estãopreenchidos!",{
+                theme: "dark"
             });
-           
         }
             
         }

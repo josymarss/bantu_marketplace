@@ -1,13 +1,18 @@
 .container{
     margin-top:120px;
+    width:100%;
     display:flex;
     flex-direction:row;
     align-items:center;
     justify-content:space-around;
     padding:20px;
 }
+.negotiation{
+    display:flex;
+    flex-direction:row;
+}
 .division{
-    width:600px;
+    width:80%;
     height:auto;
     background-color:#1c1a1d;
     border-radius:6px;
@@ -18,7 +23,7 @@
     padding:18px;
 }
 .img {
-   width:700px;
+   width:600px;
    height:auto;
 }
 .container h2 {
@@ -26,7 +31,6 @@
     width:250px;
     text-align:center;
 }
-
 .inputText{
     display:flex;
     flex-direction:column;
@@ -50,23 +54,45 @@
 }
 .input {
     margin-top:6px;
-    width:400px;
+    width:500px;
     padding:10px;
-    height:40px;
+    height:50px;
     background-color:#1c1a1d;
     border: 1.5px solid #2e1e01;
     border-radius:4px;
     font-size:18px;
     color:white;
 }
+.description{
+    margin-top:6px;
+    width:500px;
+    padding:10px;
+    height:100px;
+    background-color:#1c1a1d;
+    border: 1.5px solid #2e1e01;
+    border-radius:4px;
+    font-size:18px;
+    color:white;
+    resize:none;
+}
+.label{
+    font-size:16px;
+    color:rgb(255, 156, 91);
+    align-self:flex-start;
+}
+.labelAnother{
+    font-size:16px;
+    color:rgb(213, 213, 213);
+    align-self:flex-start;
+}
 .button {
-    margin-top:4px;
-    width:400px;
+    margin-top:8px;
+    width:500px;
     padding:10px;
     height:40px;
     border: 1.5px solid #e6e6e6;
     border-radius:4px;
-    background-color:#ffa502;
+    background-color:rgb(255, 156, 91);
     color:white;
     font-weight:bold;
     font-size:18px;
@@ -74,5 +100,6 @@
 }
 .button:hover{
     cursor:pointer;
-    color:#d08700;
+    background-color:rgb(238, 120, 40);
+    color:white;
 }

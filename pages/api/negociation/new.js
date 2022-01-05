@@ -6,26 +6,30 @@ export default async (req,res) => {
     const apps = await db.collection('apps');
     const users = await db.collection('users');
     const notification = await db.collection('notification');
-    const { _id,titulo,description, idUser }  = req.body;
+    const negotiation = await db.collection('negotiation');
+    const { _id,titulo,description, idUser,dataLimite,percent }  = req.body;
 
     const user = await users.findOne({_id:ObjectId(idUser)});
     
     //Adicionar negociacao do respectivo app
    if(req.method ==='POST'){
-    const { followers, avatar, name } = user;
-    const result = await apps.updateOne(
-        { _id:ObjectId(_id) }, 
-        {$push: { 
-            negociations:{
+        const date = new date();
+        const dia = date.getDate();
+        const mes = date.getMonth() +1;
+        const ano = date.getFullYear();
+        const { followers, avatar, name } = user;
+
+        const result = await negotiation.insertOne({ 
                 _id: new ObjectId(), 
                 titulo, 
                 description, 
                 idUser, 
                 nameuser:name, 
-                useravatar:avatar
-            } 
-        }}
-    );
+                useravatar:avatar,
+                percent,
+                dataLimite,
+                datadanegociacao: dia+'/'+mes+'/'+ano
+            });
     
     const app = await apps.findOne({ _id:ObjectId(_id) });
     //Colocar notificacao no dono do app
