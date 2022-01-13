@@ -25,15 +25,11 @@ export default function Login(){
 
         if(tokenId){
             sessionStorage.setItem('tokenId',tokenId);
-            toast.success("Sucesso!",{
-                theme: "dark",
-                delay:1000
-            });
-            
-            setTimeout(() => router.push(`/profile/${tokenId}`), 3000);
+            setTimeout(() => router.push(`/profile/${tokenId}`), 2000);
         }else {
             toast.error("Algum erro ocorreu, certifica-se que todos campos estãopreenchidos!",{
-                theme: "dark"
+                theme: "dark",
+                delay:2000
             });
         }
     }

@@ -115,7 +115,8 @@
     flex-direction:row;
     flex-wrap:wrap;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-start;
+    width:60%;
 }
 .dataapp{
     display:flex;
@@ -140,7 +141,31 @@
 .dataapp p:hover{
     box-shadow: 1px 1px 1px 3px #e2e2e2;
 }
-
+.listApp{
+    width:100%;
+    display:flex;
+    justify-content:flex-start;
+}
+.app{
+    display: flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+}
+.title{
+    font-size:18pt;
+    color:rgb(0, 102, 235);
+    font-weight:bold;
+    margin-left:10px;
+}
+.title:hover{
+    text-decoration:underline;
+    cursor:pointer;
+}
+.image{
+    width:50px;
+    height:50px;
+}
 
 
 

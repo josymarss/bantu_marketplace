@@ -12,9 +12,9 @@ export default function NewApp (){
     const [link, updateLink] = useState('');
     const [href, updateHref] = useState('');
     const [myId, updateMyId] = useState('');
-    const [percentMax, setPercentMax] = useState('');
-    const [percentMin, setPercentMin] = useState('');
-    const [categoria, setCategoria] = useState('');
+    const [percentMax, setPercentMax] = useState('100');
+    const [percentMin, setPercentMin] = useState('5');
+    const [categoria, setCategoria] = useState('Informações');
     const [startUp, setStartUp] = useState('');
     
     useEffect(() => {
@@ -26,7 +26,8 @@ export default function NewApp (){
     }
     const addApp = async (e) => {
         e.preventDefault();
-        if(name && description && link && href && percent){
+        console.log(categoria);
+        if(name && description && link && href && percentMax&&percentMin&&categoria) {
             const formData = new FormData();
             formData.append('name',name);
             formData.append('description',description);
@@ -36,6 +37,7 @@ export default function NewApp (){
             formData.append('percentMax',percentMax);
             formData.append('myId',myId);
             formData.append('categoria',categoria);
+            console.log(formData);
             
             const result = await axios.post('/api/apps/newapp',formData);
 
@@ -50,7 +52,7 @@ export default function NewApp (){
 
             return 
         }else {
-            toast.info("Algum erro ocorreu!",{
+            toast.error("Algum erro ocorreu!",{
                 theme: "dark"
             });
         }     
@@ -74,30 +76,30 @@ export default function NewApp (){
                     <div className={styles.inputText}>
                         <input type='text' className={styles.input} placeholder='Nome do aplicativo' onChange={e => updateName(e.target.value)}/>
                         <p className={styles.label}>Adiciona uma categoria para o aplicativo</p>
-                        <select className={styles.input}>
-                            <option onChange={(e) => setCategoria(e.target.value)}>Bate-papo ou chat</option>
-                            <option onChange={(e) => setCategoria(e.target.value)}>Serviços</option>
-                            <option onChange={(e) => setCategoria(e.target.value)}>Informações</option>
-                            <option onChange={(e) => setCategoria(e.target.value)}>Comunicação</option>
-                            <option onChange={(e) => setCategoria(e.target.value)}>Mídia Social</option>
-                            <option onChange={(e) => setCategoria(e.target.value)}>Navegador web</option>
-                            <option onChange={(e) => setCategoria(e.target.value)}>Correio eletrônico</option>
-                            <option onChange={(e) => setCategoria(e.target.value)}>Desenvolvimento de aplicações</option>
-                            <option onChange={(e) => setCategoria(e.target.value)}>Telefonia e videoconferência</option>
-                            <option onChange={(e) => setCategoria(e.target.value)}>Desenho industrial, 3D ou edição</option>
-                            <option onChange={(e) => setCategoria(e.target.value)}>Administração Pública e de Processo eletrônico</option>
+                        <select className={styles.input} onChange={(e) => setCategoria(e.target.value)}>
+                            <option value='Bate-papo ou chat'>Bate-papo ou chat</option>
+                            <option value='Serviços'>Serviço</option>
+                            <option value='Informações'>Informações</option>
+                            <option value='Comunicação'>Comunicação</option>
+                            <option value='Mídia Social'>Mídia Social</option>
+                            <option value='Navegador web'>Navegador web</option>
+                            <option value='Correio eletrônico'>Correio eletrônico</option>
+                            <option value='Desenvolvimento de aplicações'>Desenvolvimento de aplicações</option>
+                            <option value='Telefonia e videoconferência'>Telefonia e videoconferência</option>
+                            <option value='Desenho industrial, 3D ou edição'>Desenho industrial, 3D ou edição</option>
+                            <option value='Administração Pública e de Processo eletrônico'>Administração Pública e de Processo eletrônico</option>
                         </select>
                         <p className={styles.label}>Escolha a quantidade de ações que deseja negociar</p>
                         <p className={styles.labelAnother}>Valor mínimo</p>
-                        <select className={styles.input}>
+                        <select className={styles.input} onChange={(e) => setPercentMin(e.target.value)}>
                             {dataValuesActions.map(value =>
-                                <option onChange={(e) => setPercentMin(e.target.value)}>{value+'%'}</option>
+                                <option value={value} >{value+'%'}</option>
                             )}
                         </select>
                         <p className={styles.labelAnother}>Valor máximo</p>
-                        <select className={styles.input}>
+                        <select className={styles.input} onChange={(e) => setPercentMax(e.target.value)}>
                             {dataValuesActions.map(value =>
-                                <option onChange={(e) => setPercentMax(e.target.value)}>{value+'%'}</option>
+                                <option value={value} >{value+'%'}</option>
                             )}
                         </select>
                         <input type='textarea' className={styles.description} placeholder='Descrição do aplicativo' onChange={e => updateDescription(e.target.value)}/>

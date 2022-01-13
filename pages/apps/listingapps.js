@@ -3,7 +3,7 @@ import {useState,useEffect} from 'react';
 import {ConnectToDatabase} from '../../db/connection';
 import axios from 'axios'
 import styles from './listingapps.module.css';
-
+import Tabs from '../../components/tabs/tabs';
 import HeadComponent from '../Head';
 import App from './app';
 
@@ -23,9 +23,8 @@ export default function Apps({ apps,categorias }){
       async function onSearch (){
             
       }
-      return(
-      <>
-            <HeadComponent title='Aplicativos'/>
+      const ListingApps = () =>  (
+            
             <div className={styles.container}>
                   <p className={styles.categoryP}>Categorias de aplicativos</p>
                   <div className={styles.category}>
@@ -43,6 +42,14 @@ export default function Apps({ apps,categorias }){
                   </div>
                  
             </div>
+      );
+      return(
+      <>
+            <Tabs>
+                  <ListingApps label='1'/>
+                  <p label='2'>Another element!</p>
+            </Tabs>
+            
       </>)
 }
 

@@ -1,23 +1,30 @@
 import styles from './tabs.module.css';
-import { useState } from 'react';
+import { useState,useEffect,Fragment } from 'react';
 
-export default function Tabs({ children }){
-      const [active, setActive] = useState();
+export default function Tabs({ children, label }){
+      const [element, setElement] = useState(1);
+
+      useEffect(()=>{
+            
+      },[])
+      
 
       return(
-            <div className={}>
+            <div className={styles.container}>
                   <aside className={styles.list}>
                         <ul>
-                              <li onClick={active?} className={styles.element}>Meus aplicativos</li>
-                              <li className={styles.element}>Favoritos</li>
-                              <li className={styles.element}>Categorias</li>
-                              <li className={styles.element}>Em alta</li>
-                              <li className={styles.element}>lancamentos</li>
+                              <li onClick={() => setElement(1)} className={element=='1' ? styles.active : ''}>Todos aplicativos</li>
+                              <li onClick={() => setElement(2)} className={element=='2' ? styles.active : ''}>Favoritos</li>
+                              <li onClick={() => setElement(3)} className={element=='3' ? styles.active : ''}>Categorias</li>
+                              <li onClick={() => setElement(4)} className={element=='4' ? styles.active : ''}>Em alta</li>
+                              <li onClick={() => setElement(5)} className={element=='5' ? styles.active : ''}>Lancamentos</li>
                         </ul>
                   </aside>
 
-                  <aside className={styles.diplay}>
-                       {children} 
+                  <aside className={styles.display}>
+                       {children.map(child => 
+                             child.props.label == element ? <Fragment>{child}</Fragment> : ''
+                       )}
                   </aside>
             </div>
       );

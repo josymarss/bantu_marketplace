@@ -9,42 +9,29 @@ import styles from './Header.module.css';
 export default function Header( {user} ){
       const router = useRouter();
       const [myId, setId] = useState('');
-      const [notifications,setNot] = useState();
-      const [statusMenu,setStatus] = useState([]);
-      const [negociations,setNeg] = useState([]);
 
       useEffect(async () =>{
             setId(sessionStorage.getItem('tokenId'));
-            const result = await axios.put('/api/negociation/new',{myId});
-            setNeg(result.data.neg);
+            
       },[router.isReady]);
-
-      useEffect(() => { HeaderMenu() },[statusMenu])
 
       const onLogOut = async () =>{
             sessionStorage.removeItem('tokenId');
             sessionStorage.clear();
-            router.push('/account/login');
-      } 
 
-      const ChangeStatus = (e) => {
-            for(let i=0; i<statusMenu.length; i++){
-                  if (i === e) {
-                        statusMenu[i] = true;
-                  }
-                  statusMenu[i] = false;
-            }
-      }
+            router.push('/account/login');
+            
+      } 
       
       const HeaderMenu = () => (
             <nav className={styles.menu}>
                   <h5><Link href='/leading/leading'>bantu-marketplace</Link></h5>
                   <div className={styles.menuElements}>
                         <ul>
-                              <li><Link href={myId ? `/feed/${myId}` : '/'}><FontAwesomeIcon icon={faHome} className={statusMenu[0]?styles.active:''} onClick={() => ChangeStatus(0)}/></Link></li>
-                              <li ><Link href='/apps/listingapps'><FontAwesomeIcon icon={faTablet} className={statusMenu[1]?styles.active:''}onClick={() => ChangeStatus(1)}/></Link></li> 
-                              <li><Link href={myId ? `/profile/${myId}`: '/'} ><FontAwesomeIcon icon={faUser} className={statusMenu[2]?styles.active:''}onClick={() => ChangeStatus(2)}/></Link></li>
-                              <li><Link href={`/terms`} ><FontAwesomeIcon icon={faInfo} className={statusMenu[3]?styles.active:''}onClick={() => ChangeStatus(3)}/></Link></li>
+                              <li><Link href={myId ? `/feed/${myId}` :'/leading/leading'}><FontAwesomeIcon icon={faHome} /></Link></li>
+                              <li ><Link href='/apps/listingapps'><FontAwesomeIcon icon={faTablet}/></Link></li> 
+                              <li><Link href={myId ? `/profile/${myId}` : '/account/login'} ><FontAwesomeIcon icon={faUser} /></Link></li>
+                              <li><Link href={`/terms`} ><FontAwesomeIcon icon={faInfo} /></Link></li>
                          </ul>
                   </div>
                   <div className={styles.add}>

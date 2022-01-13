@@ -9,7 +9,7 @@ import { ConnectToDatabase } from '../../../db/connection';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck,faPenSquare,faTrash } from '@fortawesome/free-solid-svg-icons';
 
-export default function Acept({ app }){
+export default function Acept({ negociation }){
       const [myId, setId] = useState();
       const router = useRouter();
 
@@ -28,7 +28,6 @@ export default function Acept({ app }){
             }).then(async response => {
                   if (response) {
                         const result = await axios.post('/api/negociation/status',{
-                              idapp:app._id,
                               negociation,
                               myId
                         });
@@ -109,13 +108,13 @@ export const getServerSideProps = async (context) =>{
       const db = await ConnectToDatabase();
       const id = context.params.id;
 
-      const cursor = await db.collection('apps').find({_id:new ObjectId(id)});
-      let app = await cursor.toArray();
-      app = app[0];
+      let negociation = await db.collection('negotiation')
+            .findOne({_id:ObjectId(id)});
+      
 
       return {
             props:{
-                  app:JSON.parse(JSON.stringify(app))
+                  negociation:JSON.parse(JSON.stringify(negociation))
             }
       }
 }

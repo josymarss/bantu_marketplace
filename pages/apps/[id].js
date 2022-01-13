@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faPen,faTrash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-export default function appDetails({ app }){
+export default function appDetails({ app,numbers,negotiations }){
       const router = useRouter();
       const [name,setName] = useState();
       const [description,setDescription] = useState();
@@ -19,12 +19,15 @@ export default function appDetails({ app }){
       const [categoria,setCategoria] = useState();
       const [myId,setId] = useState();
 
+      const [edit,setEdit] = useState(false);
 
       useEffect(() => {
             setId(sessionStorage.getItem('tokenId'));
             setIdap(app._id);
       },[router.isReady]);
+
       const onChangeImage = (e) => setHref(e.target.files[0]);
+
       const onSave = (e) => {
             if(name&&description&&link&&href&&percent.length<=3&&idapp){
                   e.preventDefault();
@@ -89,7 +92,10 @@ export default function appDetails({ app }){
                               <img className={styles.img} src ={'/appfiles/'+app.avatar}/>
                            
                               <div className={styles.block}>
-                                    <p>{app.name}</p>
+                                    <div className={styles.nameAndNego}>
+                                          <p className={styles.appName}>{app.name}</p>
+                                          <button className={styles.nego} onClick={() => router.push('/negociation/'+app._id)}>Negociar</button>
+                                    </div>
                                     <span>
                                           <a target='_blank'href='https://www.facebook.com' rel="noopener noreferrer">
                                                 {app.link? app.link.substring(0,50) : 'Aplicativo não tem um link do site' } 
@@ -100,11 +106,26 @@ export default function appDetails({ app }){
                                                 <FontAwesomeIcon icon={faStar} /><span>{app.stars.likes}</span> 
                                           </p>
                                           <p>
-                                               Negociações  <span>{app.negociations.length} </span>
+                                               Negociações  <span>{numbers} </span>
                                           </p>
                                           <p>
-                                               Valor disponível <span>{app.percent ? app.percent+'%' : '100%' } </span>
+                                               Valor disponível=>  Max:<span>{app.percentMax+'%'}  </span>Min:<span>{app.percentMin+'%'}</span>
                                           </p>
+                                          {myId == app.userId ?
+                                                <>
+                                                      <span className={styles.icon}>
+                                                            <FontAwesomeIcon onClick={() => setEdit(!edit)} icon={faPen}/>
+                                                      </span>
+                                                      <p><span  onClick={onDelete} className={styles.iconDelete}>
+                                                            <FontAwesomeIcon icon={faTrash}/>
+                                                      </span></p>
+                                                </>
+                                          :''}
+                                          
+                                    </div>
+                                    <div className={styles.contentapp}>
+                                          <p>Data de publicação: <span>{app.data}</span></p>
+                                          <p>Categoria: <span>{app.categoria}</span></p>
                                     </div>
                               </div>
                              
@@ -114,26 +135,24 @@ export default function appDetails({ app }){
                         </div>
                         <div className={styles.inputandedit}>
                               
-                              {myId == app.userId ?
-                              <div className={styles.aliginEdit}>
-                                    <div className={styles.inputs}>
-                                          <input type='file' onChange={onChangeImage} />
-                                          <input type='text' onChange={(e) => setName(e.target.value)} placeholder='Nome do aplicativo' className={myId != app.userId ? styles.disabled : ''}/>
-                                          <input type='text' onChange={(e) => setDescription(e.target.value)} placeholder='Descrição' className={myId != app.userId ? styles.disabled : ''}/>
-                                          <input type='text' onChange={(e) => setLink(e.target.value)}placeholder='Link do aplicativo' className={myId != app.userId ? styles.disabled : ''}/>
-                                          <input type='text' onChange={(e) => setPercent(e.target.value)} placeholder='Percentam que deseja negociar' className={myId != app.userId ? styles.disabled : ''}/>
-                                          <input type='text' onChange={(e) => setCategoria(e.target.value)} placeholder='Categoria, em uma palavra' className={myId != app.userId ? styles.disabled : ''}/>
-                                    </div>
-                                    <div className={styles.penedit}>
-                                          <p>Salvar edições</p>
-                                          <span className={styles.icon} onClick={onSave}>
-                                                <FontAwesomeIcon icon={faPen}/>
-                                          </span>
-                                          <p><span onClick={onDelete}className={styles.iconDelete}>
-                                                <FontAwesomeIcon icon={faTrash}/>
-                                          </span></p>
-                                    </div>
-                              </div>:''}
+                              {myId == app.userId && edit ?
+                                    <div className={styles.aliginEdit}>
+                              
+                                          <div className={styles.inputs}>
+                                                <input type='file' onChange={onChangeImage} />
+                                                <input type='text' onChange={(e) => setName(e.target.value)} placeholder='Nome do aplicativo' className={myId != app.userId ? styles.disabled : ''}/>
+                                                <input type='text' onChange={(e) => setDescription(e.target.value)} placeholder='Descrição' className={myId != app.userId ? styles.disabled : ''}/>
+                                                <input type='text' onChange={(e) => setLink(e.target.value)}placeholder='Link do aplicativo' className={myId != app.userId ? styles.disabled : ''}/>
+                                                <input type='text' onChange={(e) => setPercent(e.target.value)} placeholder='Percentam que deseja negociar' className={myId != app.userId ? styles.disabled : ''}/>
+                                                <input type='text' onChange={(e) => setCategoria(e.target.value)} placeholder='Categoria, em uma palavra' className={myId != app.userId ? styles.disabled : ''}/>
+                                          </div>
+                                          <div className={styles.penedit}>
+                                                <p>Salvar edições ou apagar aplicativo</p>
+                                                
+                                          </div>
+                                          <button className={styles.btnSave}onClick={onSave}>Salvar</button>
+                                          
+                                    </div>:''}
                         </div>
             </div>
       );
@@ -143,10 +162,15 @@ export async function getServerSideProps (context) {
       const db = await ConnectToDatabase();
       const id = context.params.id;
       const apps = await db.collection('apps').findOne({_id:ObjectId(id)});
+      const negotiationsNumber = await db.collection('negotiation').find({idapp:id}).toArray();
+      const negotiations = await db.collection('negotiation').findOne({idapp:id});
+      let numbers = negotiationsNumber.length;
 
       return {
             props:{
-                  app:JSON.parse(JSON.stringify(apps))
+                  app:JSON.parse(JSON.stringify(apps)),
+                  negotiations:JSON.parse(JSON.stringify(negotiations)),
+                  numbers
             }
       }
 

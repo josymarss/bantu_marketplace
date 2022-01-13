@@ -3,11 +3,9 @@ import {useRouter} from 'next/router';
 import {ObjectId} from 'mongodb';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
 
 import {ConnectToDatabase} from '../../db/connection';
 import styles from './feed.module.css'
-import Image from 'next/image';
 
 import HeadComponent from '../Head'; 
 
@@ -17,14 +15,14 @@ export default function Feed({ user }){
 
      useEffect(()=>[]);
 
-     const FeedComponent = ({avatar, name, app}) =>(
+     const FeedComponent = ({avatar, name, app,id}) =>(
           <div className={styles.feedcomponent}>
                <div className={styles.userdata}>
                     <img 
                          className={styles.userdataimg}
                          src={`/uploads/${avatar}`}
                     />
-                    <p onClick={() => router.push('/profile/'+user._id)} className={styles.username}>{name} </p>
+                    <p onClick={() => router.push('/profile/'+id)} className={styles.username}>{name} </p>
                     <p><span>iniciou uma uma nova negociação.</span></p>
                </div>
                <div className={styles.content}>
@@ -51,6 +49,7 @@ export default function Feed({ user }){
                     name={content.name}
                     app={content.app}
                     key={index}
+                    id={content.iduser}
                /> 
           );
      

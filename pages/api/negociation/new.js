@@ -7,26 +7,33 @@ export default async (req,res) => {
     const users = await db.collection('users');
     const notification = await db.collection('notification');
     const negotiation = await db.collection('negotiation');
-    const { _id,titulo,description, idUser,dataLimite,percent }  = req.body;
+    const { _id,titulo,description,appname,idUser,iduserdonodoapp,dataLimite,percent,negotitationType }  = req.body;
 
     const user = await users.findOne({_id:ObjectId(idUser)});
     
     //Adicionar negociacao do respectivo app
    if(req.method ==='POST'){
-        const date = new date();
+        const date = new Date();
         const dia = date.getDate();
         const mes = date.getMonth() +1;
         const ano = date.getFullYear();
         const { followers, avatar, name } = user;
-
+        const userSolicitante = await users.findOne({_id:ObjectId(idUser)});
+        
         const result = await negotiation.insertOne({ 
                 _id: new ObjectId(), 
+                idapp:_id,
+                appname,
                 titulo, 
                 description, 
-                idUser, 
+                iduserdonodoapp,
+                iddosolicitante:userSolicitante._id,
+                usersolicitantename:userSolicitante.fullName,
+                usersolicitanteavatar: userSolicitante.avatar,
                 nameuser:name, 
                 useravatar:avatar,
                 percent,
+                negotitationType,
                 dataLimite,
                 datadanegociacao: dia+'/'+mes+'/'+ano
             });
@@ -38,16 +45,11 @@ export default async (req,res) => {
         userId:app.userId,
         appname:app.name,
         not:app.name+' foi iniciada uma nova negociação.'
-  });
+    });
    //Adicionar negociacao solicitada, nos meus dados de solicaitados
     const {negociations} = app;
-    const idnegociation = negociations.filter(neg => neg._id ? idUser == neg.idUser: '');
+    // const idnegociation = negociations.filter(neg => neg._id ? idUser == neg.idUser: '');
     
-   
-    const negImade = await users.updateOne({_id:new ObjectId(idUser)},{
-       $push: {negociationsimade:{ titulo, description, idoftheapp:_id,idnegociation:idnegociation[0]._id }}
-    });
-
     // Adicionar actividade no feed dos meus seguidores 
     //bucar meus seguidores 
     //adicionar no feed deles
@@ -56,7 +58,7 @@ export default async (req,res) => {
             { _id:new ObjectId(id) },
             { $push:{
                     feed:{
-                        iduser:id,
+                        iduser:idUser,
                         name,
                         avatar,
                         app,

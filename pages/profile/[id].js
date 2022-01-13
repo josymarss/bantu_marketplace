@@ -14,10 +14,8 @@ export default function User({ user,apps,id,negociationsDone }){
     const router = useRouter();
     const [follow, updateFollow] = useState(false);
     const [myId, updateMyId] = useState();
-    const [countNeg, setNeg] = useState(0);
     
     useEffect(()=>{
-        apps ? apps.map(app => setNeg(countNeg + app.negociations.length)) : 0;
         if(router.isReady){
             updateMyId(sessionStorage.getItem('tokenId'));
             user.followers ? user.followers.map(id => {
@@ -100,12 +98,19 @@ export default function User({ user,apps,id,negociationsDone }){
                     marginTop:'-8px',
                     marginBottom:'12px',
                     borderRadius:'6px',
-                    height:.2,
+                    height:.1,
                     width:'800px',
                     color:'lightgray'
                 }}/>
                 <div className={styles.myapps}>
-                    {apps ? apps.map((app,index) => <App key={index} application={app} userid={user._id}/>) : ''}
+                    {apps ? apps.map((app,index) => 
+                        <div className={styles.listApp}>
+                            <div className={styles.app}>
+                                <img className={styles.image} src={'/appfiles/'+app.avatar}/>
+                                <p className={styles.title} onClick={() =>router.push('/apps/'+app._id)}>{app.name}</p>
+                            </div>
+                        </div>
+                    ): <p>Sem aplicativos para mostrar</p>}
                 </div>
             </div>
         </div>
@@ -119,11 +124,12 @@ export const getServerSideProps = async (context) => {
     const acepted= await db.collection('acepted');
     const users = await db.collection('users');
 
-    const data = await users.findOne({"_id": new ObjectId(id)},{password:0});
+    const data = await users.findOne({_id:ObjectId(id)},{password:0});
     const user = JSON.parse(JSON.stringify(data));
 
     const app = await db.collection('apps');
     const dataapp = await app.find({userId:id}).toArray();
+    
     const apps = JSON.parse(JSON.stringify(dataapp));
     let negociationsDone = await acepted.find({idproprietario:id}).toArray();
     negociationsDone = JSON.parse(JSON.stringify(negociationsDone));

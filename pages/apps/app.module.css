@@ -42,12 +42,23 @@
 .star > span{
       font-size:16pt;
 }
-.star > span:hover{
-      color:rgb(0, 102, 235);
-      transition:0.2s ease-in-out;
-}
 .star > p {
       padding-left:8pt;
+}
+.btnStart{
+      background-color:rgb(29, 29, 29);
+      margin-left:6px;
+      margin-right:10px;
+      padding:8px;
+      color:white;
+      border-radius:4px;
+      width:80px;
+      font-size:14pt;
+      text-align:center;
+}
+.btnStart:hover{
+      background-color:rgb(0, 102, 235);
+      cursor:pointer;
 }
 .content{
       width:100%;

@@ -44,8 +44,8 @@ export default async (req,res) => {
 
             case'POST': 
 
-            const {negociation,myId,idapp} = req.body;
-            const {description,idUser,titulo} = negociation;
+            const {negociation,myId} = req.body;
+            const {description,iduserdonodoapp,titulo,idapp} = negociation;
             //Buscar o App 
             const acepetedApp = await apps.findOne({_id:ObjectId(idapp)});
             const usersolicitou = await users.findOne({_id:ObjectId(idUser)});
@@ -58,7 +58,8 @@ export default async (req,res) => {
                               idapp,
                               acepetedApp,
                               idproprietario:myId,
-                              usuariosolicitante:usersolicitou,
+                              idsolicitante:,
+                              usuariosolicitantename:,
                               titulo,
                               description, 
                         });

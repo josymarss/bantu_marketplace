@@ -7,23 +7,35 @@ import Image from 'next/image';
 import axios from 'axios';
 import styles from './app.module.css';
 
-export default function App({ application, userid }){
+export default function App({ application, userid, me}){
     const router = useRouter();
     const [myId,setId] = useState('');
+    const [stars, setStars] = useState(0);
 
     useEffect(()=>{
         //simulando os dados
         setId(sessionStorage.getItem('tokenId'));
-    },[]);
+        setStars(application.stars.likes !=0 ? application.stars.likes : '' );
+    },[router.isReady]);
 
     const onStar = async () =>{
         if(myId){
-            await axios.put(`/api/apps/${application._id}`,{myId});
+            const result = await axios.put(`/api/apps/${application._id}`,{myId});
+            setStars(result.data);
             router.reload(window.location.pathname);
+            return
         }
         router.push('/account/login');    
     }
-    const PageApp = () => (
+
+    const AddToFavorits = async () => {
+        let id =  application._id;
+        await axios.post('/api/apps/favorits',{
+           id
+        });
+    }
+
+    const PageApp = async () => (
         application ? 
 
             <div className={styles.container}>
@@ -41,11 +53,10 @@ export default function App({ application, userid }){
                             {application.name}
                         </p>
                         <div className={styles.star}>
-                            <span><FontAwesomeIcon 
-                                icon={faStar} 
-                                onClick={ onStar }
-                            /></span>
+                            {myId != application.userId ?<p className={styles.btnStart} onClick={onStar}>curtir</p>:''}
+                            <span> <FontAwesomeIcon icon={faStar}/></span>
                             <p>{application.stars.likes}</p>
+                            
                         </div>
                     </div>
                </div>
@@ -65,11 +76,19 @@ export default function App({ application, userid }){
                 </div>
 
                 { application.userId != myId ? 
-                    <button>
-                        <Link href={myId ? `/negociation/${application._id}`: `/account/login`}>
-                            Negociar
-                        </Link>
-                    </button> :' ' 
+                    <>
+                        <button>
+                            <Link href={myId ? `/negociation/${application._id}`: `/account/login`}>
+                                Negociar
+                            </Link>
+                        </button>
+                        <button>
+                            <Link href={myId ? AddToFavorits : `/account/login`}>
+                                Adicinar aos favoritos
+                            </Link>
+                        </button>
+                    </>
+                     :' ' 
                 }
             </div> :
 

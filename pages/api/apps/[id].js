@@ -30,6 +30,7 @@ export default async (req,res) => {
                     apptoUpdate.stars.usersid.push(myId);
                     apptoUpdate.stars.likes = apptoUpdate.stars.likes +1;
                     await apps.updateOne({_id:new ObjectId(id)},{$set:apptoUpdate});
+                    res.send(true);
                 }else{
                     // Remover o star
                     const apptoUpdate = await apps.findOne({_id: new ObjectId(id)});

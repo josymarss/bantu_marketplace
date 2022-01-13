@@ -71,6 +71,19 @@
       height:40px;
       border-radius:3px;
 }
+.actions{
+      margin-top:6px;
+      width:350px;
+      display:flex;
+      flex-direction:row;
+      align-items:center;
+      justify-content:flex-start;
+}
+.another{
+      margin-left:-480px;
+      width:200px;
+      margin-top:2px
+}
 .input {
       resize:none;
       text-indent: 10px;
