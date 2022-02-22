@@ -23,6 +23,7 @@ export default function Apps({ apps,categorias }){
       async function onSearch (){
             
       }
+      
       const ListingApps = () =>  (
             
             <div className={styles.container}>
@@ -30,15 +31,16 @@ export default function Apps({ apps,categorias }){
                   <div className={styles.category}>
                         {categorias.length > 0 ?
                               categorias.map(category => 
-                                    <button onClick={onSearch}>{category}</button>
+                                    <button key={category} onClick={onSearch}>{category}</button>
                               ): ''
                         }
                   </div>
                   {categorias.length > 10 ? <p className={styles.seemore}>Ver mais...</p>:''}
                   <div className={styles.listingapps}>
-                        {apps ? 
-                              apps.map(app => <App application={app} userid={myId} />) 
-                        : ''}
+                  {apps ? 
+                        apps.map(app => <App application={app} userid={myId} />)
+                        : ''
+                  }
                   </div>
                  
             </div>
