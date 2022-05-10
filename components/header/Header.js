@@ -23,15 +23,23 @@ export default function Header( {user} ){
             
       } 
       
+      const selectPath = (path, id) => {
+            const setPath = `${path}`
+                  if(path === '/feed/' && id) return `${setPath}${id}` 
+                  if(path == '/apps/listingapps') return setPath
+                  if(path === '/profile/' && id) return setPath+id
+                  if(path === '/terms' && id) return setPath
+                  return '/account/login'           
+      }
       const HeaderMenu = () => (
             <nav className={styles.menu}>
                   <h5><Link href='/leading/leading'>bantu-marketplace</Link></h5>
                   <div className={styles.menuElements}>
                         <ul>
-                              <li><Link href={myId ? `/feed/${myId}` :'/leading/leading'}><FontAwesomeIcon icon={faHome} /></Link></li>
-                              <li ><Link href='/apps/listingapps'><FontAwesomeIcon icon={faTablet}/></Link></li> 
-                              <li><Link href={myId ? `/profile/${myId}` : '/account/login'} ><FontAwesomeIcon icon={faUser} /></Link></li>
-                              <li><Link href={`/terms`} ><FontAwesomeIcon icon={faInfo} /></Link></li>
+                              <li><Link href={selectPath('/feed/', myId)}><FontAwesomeIcon icon={faHome} /></Link></li>
+                              <li ><Link href={selectPath('/apps/listingapps', myId)}><FontAwesomeIcon icon={faTablet}/></Link></li> 
+                              <li><Link href={selectPath('/profile/', myId)} ><FontAwesomeIcon icon={faUser} /></Link></li>
+                              <li><Link href={selectPath('/terms', myId)} ><FontAwesomeIcon icon={faInfo} /></Link></li>
                          </ul>
                   </div>
                   <div className={styles.add}>

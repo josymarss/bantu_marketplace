@@ -8,7 +8,6 @@ export default function Tabs({ children, label }){
             
       },[])
       
-
       return(
             <div className={styles.container}>
                   <aside className={styles.list}>
