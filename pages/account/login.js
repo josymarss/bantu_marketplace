@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,10 +8,16 @@ import axios from 'axios';
 import styles from './login.module.css'
 
 export default function Login(){
-
+    
     const router = useRouter();
     const [phone, setPhone] = useState('');
     const [password, setPass] = useState('');
+
+    const loadPage = () => {
+        router.reload()
+    }
+    useEffect(()=>{})
+    
     
     const onLogin = async (event) => {
         event.preventDefault();

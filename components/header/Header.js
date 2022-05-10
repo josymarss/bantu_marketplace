@@ -29,11 +29,15 @@ export default function Header( {user} ){
                   if(path == '/apps/listingapps') return setPath
                   if(path === '/profile/' && id) return setPath+id
                   if(path === '/terms' && id) return setPath
+                  if(path === '/leading/leading'){
+                        if(id) return `/feed/${myId}`
+                        else return '/leading/leading'
+                  }
                   return '/account/login'           
       }
       const HeaderMenu = () => (
             <nav className={styles.menu}>
-                  <h5><Link href='/leading/leading'>bantu-marketplace</Link></h5>
+                  <h5><Link href={selectPath('/leading/leading', myId)}>bantu-marketplace</Link></h5>
                   <div className={styles.menuElements}>
                         <ul>
                               <li><Link href={selectPath('/feed/', myId)}><FontAwesomeIcon icon={faHome} /></Link></li>
