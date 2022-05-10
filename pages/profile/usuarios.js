@@ -2,6 +2,7 @@ import styles from './usuarios.module.css';
 import {useRouter} from 'next/router';
 import {useState,useEffect} from 'react';
 import swl from 'sweetalert';
+import Head from '../Head'
 import axios from 'axios';
 
 export default function Users(){
@@ -65,23 +66,25 @@ export default function Users(){
       );
       
       return(
-            <div className={styles.container}>
-                  <div className={styles.searchContainer}>
+            <>    
+                  <Head title={"Pesquisar"}/>
+                  <div className={styles.container}>
+                        <div className={styles.searchContainer}>
+                        
+                        <input 
+                              id='input'
+                              className={styles.search}
+                              type='text' 
+                              placeholder='Pesquisar um usuário'
+                              onChange={onChange}
+                        />
+                        <button className={styles.buscar} onClick={onSearch}>Buscar</button>
                   
-                    <input 
-                        id='input'
-                        className={styles.search}
-                        type='text' 
-                        placeholder='Pesquisar um usuário'
-                        onChange={onChange}
-                    />
-                    <button className={styles.buscar} onClick={onSearch}>Buscar</button>
-                 
-               </div>
-                  <ListingUsers />
-                  <ListingApps />
-                  
+                  </div>
+                        <ListingUsers />
+                        <ListingApps />
+                        
 
-            </div>
-      );
+                  </div>
+                  </>);
 }
