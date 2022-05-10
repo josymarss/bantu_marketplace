@@ -19,7 +19,7 @@
 }
 .list > ul > li {
       width:100%;
-      padding-top:8px;
+      padding:8px;
       list-style:none;
       font-size:14pt;
       font-weight:300;
@@ -38,8 +38,8 @@
 }
 .active{
       width:100%;
+      padding:8px;
       color:rgb(255, 255, 255);
-      padding:10px;
       display:flex;
       align-items:center;
       justify-content:flex-start;
