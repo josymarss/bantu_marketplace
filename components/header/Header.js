@@ -18,7 +18,6 @@ export default function Header( {user} ){
       const onLogOut = async () =>{
             sessionStorage.removeItem('tokenId');
             sessionStorage.clear();
-
             router.push('/account/login');
             
       } 
@@ -26,7 +25,7 @@ export default function Header( {user} ){
       const selectPath = (path, id) => {
             const setPath = `${path}`
                   if(path === '/feed/' && id) return `${setPath}${id}` 
-                  if(path == '/apps/listingapps') return setPath
+                  if(path == '/apps/listingapps' && id) return setPath
                   if(path === '/profile/' && id) return setPath+id
                   if(path === '/terms' && id) return setPath
                   if(path === '/leading/leading'){
@@ -39,12 +38,13 @@ export default function Header( {user} ){
             <nav className={styles.menu}>
                   <h5><Link href={selectPath('/leading/leading', myId)}>bantu-marketplace</Link></h5>
                   <div className={styles.menuElements}>
-                        <ul>
+                      { myId? <ul>
                               <li><Link href={selectPath('/feed/', myId)}><FontAwesomeIcon icon={faHome} /></Link></li>
                               <li ><Link href={selectPath('/apps/listingapps', myId)}><FontAwesomeIcon icon={faTablet}/></Link></li> 
                               <li><Link href={selectPath('/profile/', myId)} ><FontAwesomeIcon icon={faUser} /></Link></li>
                               <li><Link href={selectPath('/terms', myId)} ><FontAwesomeIcon icon={faInfo} /></Link></li>
                          </ul>
+                       : '' }
                   </div>
                   <div className={styles.add}>
                         {myId ?<>

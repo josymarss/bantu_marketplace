@@ -12,11 +12,8 @@ export default function Login(){
     const router = useRouter();
     const [phone, setPhone] = useState('');
     const [password, setPass] = useState('');
-
-    const loadPage = () => {
-        router.reload()
-    }
-    useEffect(()=>{})
+    
+    useEffect(()=>{}, [])
     
     
     const onLogin = async (event) => {

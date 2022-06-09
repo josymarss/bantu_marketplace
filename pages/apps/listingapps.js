@@ -9,7 +9,7 @@ import App from './app';
 
 export default function Apps({ apps,categorias }){
       const router = useRouter();
-
+      console.log(apps)
       const [myId,setId] = useState();
       const [limit, setLimit] = useState(10);
       const [controlText, setText]= useState('');
