@@ -5,6 +5,7 @@ import { faImage,faFileContract,faLink } from '@fortawesome/free-solid-svg-icons
 import Image from 'next/image';
 
 import styles from './leading.module.css';
+import Footer from '../../components/footer/footer';
 
 export default function LeadingPage(){
     return(
@@ -57,7 +58,7 @@ pessoas específicas para lançar seu aplicativo para o exterior, e cehgar nas m
                     </div>
                 </div>
             </section>
-            <footer className={styles.footer}>{`@bantudev ${new Date().getUTCFullYear()} todos os direitos reservados`}</footer>
+            <Footer/>
         </div>
         
     )
