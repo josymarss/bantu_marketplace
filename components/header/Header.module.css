@@ -1,23 +1,22 @@
 .menu{
     top:0;
     display:flex;
-    height: 60px;
+    height: 2.5rem;
     background-color:#ffffff;
     width:100%;
     align-items:center;
     justify-content: space-between;
     box-shadow: 1px 4px 4px #d0d0d0;
     position:fixed;
-    z-index:9000;
-    padding:20px;
+    padding:1.6rem;
 }
-.menu h5{
+.menu h1{
     margin-left:10px;
     font-size:20px;
     color:#292929;
     
 }
-.menu h5:hover{
+.menu h1:hover{
     cursor:hand;
 }
 .menuElements ul{

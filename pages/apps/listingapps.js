@@ -9,7 +9,6 @@ import App from './app';
 
 export default function Apps({ apps,categorias }){
       const router = useRouter();
-      console.log(apps)
       const [myId,setId] = useState();
       const [limit, setLimit] = useState(10);
       const [controlText, setText]= useState('');
@@ -49,8 +48,8 @@ export default function Apps({ apps,categorias }){
       <>
             <Tabs>
                    {/*label='1' att. of ListingApps*/} 
-                  <ListingApps/>
                   <p label='2'>Another element!</p>
+                  <ListingApps/>
             </Tabs>
             
       </>)

@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare,faBell, faHome,faTablet,faUser,faInfo,faSearch } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
 import styles from './Header.module.css';
 
 export default function Header( {user} ){
@@ -36,7 +35,7 @@ export default function Header( {user} ){
       }
       const HeaderMenu = () => (
             <nav className={styles.menu}>
-                  <h5><Link href={selectPath('/leading/leading', myId)}>bantu-marketplace</Link></h5>
+                  <h1><Link href={selectPath('/leading/leading', myId)}>bantu-marketplace</Link></h1>
                   <div className={styles.menuElements}>
                       { myId? <ul>
                               <li><Link href={selectPath('/feed/', myId)}><FontAwesomeIcon icon={faHome} /></Link></li>

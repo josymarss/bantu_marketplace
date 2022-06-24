@@ -40,9 +40,9 @@ export default function Login(){
         <div className={styles.general}>
             <img src='/crayon-waiting-2.png'/>
             <div className={styles.input}>
-                <h1>
+                <h3>
                     Autenticar 
-                </h1>
+                </h3>
                 <input 
                     type='tel'
                     name='phone'
@@ -57,7 +57,7 @@ export default function Login(){
                 />
                 <button  onClick={onLogin}>Entrar</button>
             </div>
-        <div className= {styles.criarConta}>
+        <div className= {styles.withoutAccount}>
             <p> Ainda não tens uma conta?  
                 <Link href='/account/create'>
                     <a className='semConta'> Clique aqui para criar</a>

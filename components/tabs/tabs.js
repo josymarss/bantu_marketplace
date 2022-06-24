@@ -5,7 +5,7 @@ export default function Tabs({ children, label }){
       const [element, setElement] = useState(1);
      
       useEffect(()=>{
-            
+            console.log(children)
       },[])
       
       return(
@@ -23,8 +23,9 @@ export default function Tabs({ children, label }){
                   <aside className={styles.display}>
                         {/* removed label was props.label */}
                        {[children].map(child => 
-                             child.props == element ? <Fragment>{child}</Fragment> : ''
+                             child.props == element ? "console.log(child) ": ''
                        )}
+                       
                   </aside>
             </div>
       );

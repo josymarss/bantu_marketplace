@@ -1,5 +1,6 @@
 .general{
-    margin-top:70px;
+    height: 100vh;
+    /* margin-top:70px; */
     display:flex;
     align-items:center;
     justify-content:center;
@@ -7,8 +8,8 @@
     padding:20px;
 }
 .general img {
-    width: 300px;
-    height:300px;
+    width: 8rem;
+    height: 8rem;
 }
 .input {
     display:flex;
@@ -16,9 +17,9 @@
     align-items:center;
     justify-content:center; 
     background-color: #1c1a1d;
-    padding:20px;
+    padding: 1.2rem;
     height:auto;
-    width:400px;
+    width:20rem;
     border-radius:8px;
     
 }
@@ -26,26 +27,26 @@
     background-color: #1c1a1d;
     color:white;
 }
-.input h1 {
+.input h3 {
     color:#ffa502;
 }
-.input h1 span{
+.input h3 span{
     text-decoration:underline;
     cursor:cell;
 }
 .input input {
     background-color:#1c1a1d;
     margin-top:6px;
-    width:350px;
+    width:320px;
     padding:10px;
-    height:40px;
+    height: 2rem;
     border: 1.5px solid #2e1e01;
     border-radius:4px;
-    font-size:18px;
+    font-size: 12pt;
 }
 .input button {
     margin-top:6px;
-    width:350px;
+    width:320px;
     padding:10px;
     height:40px;
     border: 1.5px solid #e6e6e6;
@@ -60,18 +61,18 @@
     background-color: #e99802;
     cursor:hand;
 }
-.criarConta  {
+.withoutAccount  {
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
 }
 
-.criarConta a{
+.withoutAccount a{
      text-decoration: underline;
 }
 
-.criarConta a:hover{
+.withoutAccount a:hover{
     text-decoration: none;
     color: rgb(89, 57, 9);
 }
