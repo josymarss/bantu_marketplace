@@ -2,6 +2,7 @@ import { useState,useEffect } from 'react';
 import {useRouter} from 'next/router';
 import Head from './Head'
 import LeadingPage  from './leading/leading';
+import Footer from '../components/footer/footer';
 
 export default function Home() {
   const router = useRouter();
@@ -16,6 +17,7 @@ export default function Home() {
   <>
     <Head title="bantu-marketplace"/>
       {myId ? router.push(`/feed/${myId}`): <LeadingPage />} 
+      <Footer/>
   </>
   
  

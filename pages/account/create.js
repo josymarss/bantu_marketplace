@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './create.module.css';
 import Head from '../Head';
+import Footer from '../../components/footer/footer';
 
 export default function Create(){
     const router = useRouter();
@@ -129,6 +130,7 @@ export default function Create(){
                         </div>
                     </div>
             </div>
+            <Footer />
         </>
        
 
