@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,8 +8,7 @@ import axios from 'axios';
 import Head from '../Head'
 import styles from './login.module.css'
 
-export default function Login(){
-    
+export default function Login(){    
     const router = useRouter();
     const [phone, setPhone] = useState('');
     const [password, setPass] = useState('');
@@ -29,9 +28,11 @@ export default function Login(){
 
         if(tokenId){
             sessionStorage.setItem('tokenId',tokenId);
-            setTimeout(() => router.push(`/profile/${tokenId}`), 2000);
+            setTimeout(() =>{
+                router.push(`/profile/${tokenId}`)
+            }, 2000);
         }else {
-            toast.error("Algum erro ocorreu, certifica-se que todos campos estãopreenchidos!",{
+            toast.error("Algum erro ocorreu, certifica-se que todos campos estão preenchidos!",{
                 theme: "dark",
                 delay:2000
             });

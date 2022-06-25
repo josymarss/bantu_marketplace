@@ -1,22 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare,faBell, faHome,faTablet,faUser,faInfo,faSearch } from '@fortawesome/free-solid-svg-icons';
 import styles from './Header.module.css';
+import {RefreshMenuContext} from '../../pages/_app'
 
 export default function Header( {user} ){
       const router = useRouter();
+      const {refreshMenu, setRefreshMenu} = useContext(RefreshMenuContext);
       const [myId, setId] = useState('');
+  
 
       useEffect(async () =>{
             setId(sessionStorage.getItem('tokenId'));
             
-      },[router.isReady]);
+      },[router.isReady, refreshMenu]);
 
       const onLogOut = async () =>{
             sessionStorage.removeItem('tokenId');
             sessionStorage.clear();
+            setRefreshMenu(v => v +1)
             router.push('/account/login');
             
       } 
