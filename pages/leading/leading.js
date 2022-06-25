@@ -3,12 +3,15 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage,faFileContract,faLink } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
+import Head from '../../pages/Head';
 
 import styles from './leading.module.css';
 import Footer from '../../components/footer/footer';
 
 export default function LeadingPage(){
     return(
+        <>
+        <Head title="bantu-marketplace"/>
         <div className={styles.container}>
            <section className={styles.header}>
                <div className={styles.info}>
@@ -60,6 +63,6 @@ pessoas específicas para lançar seu aplicativo para o exterior, e cehgar nas m
             </section>
             <Footer/>
         </div>
-        
+    </>       
     )
 } 

@@ -65,7 +65,10 @@
     font-size:12pt;
     background-color:rgb(28, 28, 28);
     color:white;
-    border:0.5px solid #1c1200;
+    border:1px solid #000;
+}
+.myForm input:focus{ 
+     border-color:  green;
 }
 /* .input input[type='file']{
     color:white !important;
@@ -111,4 +114,45 @@
 .myform button:hover{
     box-shadow:5px 8px rgb(44, 44, 44);
     color:rgb(51, 51, 51);
+}
+
+@media screen and  (min-width: 300px) and (max-width: 480px){
+        .createaccount {
+             display: none;
+        }
+        .container {
+            height: fit-content;
+            width: 15rem;
+            margin-bottom: 2rem;
+            margin-left: 15%;
+            
+        }
+        .formdata {
+            width: 15rem;
+        }
+        .myForm input, .myForm button, .myForm input[type='textarea']{
+            width: 13rem;
+         }
+
+         .formdata h2{ 
+            font-size: 10pt;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 780px){
+    .createaccount {
+        display: none;
+   }
+   .container {
+    height: fit-content;
+    margin-bottom: 2rem;
+    margin-left: 15%;    
+    }
+}
+
+@media screen and (min-width: 781px){
+    .container {
+        height: fit-content;
+        margin-bottom: 2rem;
+}
 }
