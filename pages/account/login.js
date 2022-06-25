@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
+import Head from '../Head'
 import styles from './login.module.css'
 
 export default function Login(){
@@ -37,34 +38,37 @@ export default function Login(){
         }
     }
     return(
-        <div className={styles.general}>
-            <img src='/crayon-waiting-2.png'/>
-            <div className={styles.input}>
-                <h3>
-                    Autenticar 
-                </h3>
-                <input 
-                    type='tel'
-                    name='phone'
-                    placeholder='phone'
-                    onChange={(e) => setPhone(e.target.value)}
-                />
-                <input 
-                    type='password'
-                    name='password'
-                    placeholder='password'
-                    onChange={(e) => setPass(e.target.value)}
-                />
-                <button  onClick={onLogin}>Entrar</button>
+        <>
+            <Head  title ="Entar no bantu-market"/>
+            <div className={styles.general}>
+                <img src='/crayon-waiting-2.png'/>
+                <div className={styles.input}>
+                    <h3>
+                        Autenticar 
+                    </h3>
+                    <input 
+                        type='tel'
+                        name='phone'
+                        placeholder='phone'
+                        onChange={(e) => setPhone(e.target.value)}
+                    />
+                    <input 
+                        type='password'
+                        name='password'
+                        placeholder='password'
+                        onChange={(e) => setPass(e.target.value)}
+                    />
+                    <button  onClick={onLogin}>Entrar</button>
+                </div>
+            <div className= {styles.withoutAccount}>
+                <p> Ainda não tens uma conta?  
+                    <Link href='/account/create'>
+                        <a className='semConta'> Clique aqui para criar</a>
+                    </Link>
+                </p>
             </div>
-        <div className= {styles.withoutAccount}>
-            <p> Ainda não tens uma conta?  
-                <Link href='/account/create'>
-                    <a className='semConta'> Clique aqui para criar</a>
-                </Link>
-            </p>
-        </div>
 
-    </div>
+        </div>
+    </>
     );
 }
