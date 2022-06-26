@@ -14,15 +14,13 @@ export default function Header( {user} ){
 
       useEffect(async () =>{
             setId(sessionStorage.getItem('tokenId'));
-            
       },[router.isReady, refreshMenu]);
 
       const onLogOut = async () =>{
             sessionStorage.removeItem('tokenId');
             sessionStorage.clear();
             setRefreshMenu(v => v +1)
-            router.push('/account/login');
-            
+            router.push('/account/login');     
       } 
       
       const selectPath = (path, id) => {

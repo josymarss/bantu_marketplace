@@ -104,7 +104,8 @@
     cursor: pointer;
 }
 .myForm button:hover {
-    background-color:rgba(255, 166, 2, 0.727);
+    background-color:rgb(238, 120, 40);
+    color:white;
 }
 .myform textarea{
     width:20rem;
