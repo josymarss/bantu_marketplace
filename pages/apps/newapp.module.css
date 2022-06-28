@@ -42,6 +42,7 @@
     width:50px;
     height:50px;
     border-radius:50px;
+    margin-top: -5px;
 }
 .image input[type='file']{
     color:white !important;
@@ -70,7 +71,7 @@
 }
 .description{
     width:20rem;
-    height:30px;
+    height:25px;
     resize:none;
     background-color:#1c1a1d;
     border:1px solid #000;
@@ -87,11 +88,12 @@
     font-size:11pt;
     color:rgb(213, 213, 213);
     align-self:flex-start;
+    margin-top: -1px;
 }
 .button {
     margin-top:10px;
     width:20rem;
-    height: 2rem;
+    height: 1.8rem;
     border: 1.5px solid #e6e6e6;
     border-radius:4px;
     background-color:#ffffff;
@@ -103,4 +105,35 @@
 .button:hover{
     background-color:rgb(238, 120, 40);
     color:white;
+}
+
+@media screen and (max-width: 960px) {
+    .img {
+        display: none;
+    }
+    .container {
+        display: grid;
+        justify-content: center;
+        margin: 70px 8% auto;
+    }
+}
+@media screen and (max-width: 516px) {
+    .img {
+        display: none;
+    }
+    .container {
+        height: fit-content;
+        width: 15rem;
+        margin: 4rem auto 1rem auto;
+    }
+    .division {
+        width: 15rem;
+    }
+    .input, .button, .description, .inputText select {
+        width: 13rem;
+        font-size: 11pt;
+    }
+    .label, .labelAnother {
+         font-size: 11pt;
+    }
 }

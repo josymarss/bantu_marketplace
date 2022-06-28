@@ -6,6 +6,13 @@ import { faPlusSquare,faBell, faHome,faTablet,faUser,faInfo,faSearch } from '@fo
 import styles from './Header.module.css';
 import {RefreshMenuContext} from '../../pages/_app'
 
+{/* <FontAwesomeIcon icon={faBars} /> menu */}
+{/* <FontAwesomeIcon icon="fal fa-window-close" />  close menu*/}
+{/* <FontAwesomeIcon icon="fal fa-badge-dollar" />  negociation*/}
+{/* <FontAwesomeIcon icon="fal fa-users" /> follors */}
+{/* <FontAwesomeIcon icon="fal fa-code" />  app*/} 
+
+
 export default function Header( {user} ){
       const router = useRouter();
       const {refreshMenu, setRefreshMenu} = useContext(RefreshMenuContext);
