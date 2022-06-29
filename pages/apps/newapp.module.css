@@ -113,21 +113,26 @@
     }
     .container {
         display: grid;
+        grid-template-columns: 1fr;
         justify-content: center;
-        margin: 70px 8% auto;
+        width: 100%;
+    }
+    .division {
+         align-items: center;
+         margin: 0 auto;
     }
 }
-@media screen and (max-width: 516px) {
+@media screen and (max-width: 660px) {
     .img {
         display: none;
     }
     .container {
         height: fit-content;
-        width: 15rem;
-        margin: 4rem auto 1rem auto;
+        width: 30rem;
     }
     .division {
         width: 15rem;
+        margin: 0 auto;
     }
     .input, .button, .description, .inputText select {
         width: 13rem;

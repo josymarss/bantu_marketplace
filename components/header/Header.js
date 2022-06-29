@@ -1,13 +1,11 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusSquare,faBell, faHome,faTablet,faUser,faInfo,faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faPlusSquare,faBell, faBars, faHome,faTablet,faUser,faInfo,faSearch,faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import styles from './Header.module.css';
 import {RefreshMenuContext} from '../../pages/_app'
 
-{/* <FontAwesomeIcon icon={faBars} /> menu */}
-{/* <FontAwesomeIcon icon="fal fa-window-close" />  close menu*/}
 {/* <FontAwesomeIcon icon="fal fa-badge-dollar" />  negociation*/}
 {/* <FontAwesomeIcon icon="fal fa-users" /> follors */}
 {/* <FontAwesomeIcon icon="fal fa-code" />  app*/} 
@@ -17,10 +15,19 @@ export default function Header( {user} ){
       const router = useRouter();
       const {refreshMenu, setRefreshMenu} = useContext(RefreshMenuContext);
       const [myId, setId] = useState('');
-  
-
-      useEffect(async () =>{
+      const [showMenu, setShowMenu] = useState(true);
+      const navWidthRef = useRef();
+      const [navWidth, setNavWidth] = useState()
+      
+      const getSize = ()=>{
+            const newWidth = navWidthRef.current.clientWidth;
+            setNavWidth(newWidth);
+            if(navWidth >= 768) {setShowMenu(true);}
+      }
+      useEffect(()=>{getSize()}, [])
+      useEffect(() =>{
             setId(sessionStorage.getItem('tokenId'));
+            window.addEventListener('resize', getSize);
       },[router.isReady, refreshMenu]);
 
       const onLogOut = async () =>{
@@ -42,9 +49,29 @@ export default function Header( {user} ){
                   }
                   return '/account/login'           
       }
+      const handlerClick = () =>{
+            if(showMenu) return setShowMenu(false)
+            return setShowMenu(true)
+      }
+      const ItemMenuLabel = ({showMenu, title}) =>{
+            return(
+            <>    
+            {
+            showMenu ? '' : 
+                  <span className={styles.itemMenuLabel}>
+                  {title}
+                  </span>
+            }
+            </>
+            )  
+      }
       const HeaderMenu = () => (
-            <nav className={styles.menu}>
-                  <h1><Link href={selectPath('/leading/leading', myId)}>bantu-marketplace</Link></h1>
+            <nav ref={navWidthRef} className={styles.menu} >
+                  <div className={styles.title}>
+                        <h1>
+                              <Link href={selectPath('/leading/leading', myId)}>bantu-marketplace</Link>
+                        </h1>
+                  </div>
                   <div className={styles.menuElements}>
                       { myId? <ul>
                               <li><Link href={selectPath('/feed/', myId)}><FontAwesomeIcon icon={faHome} /></Link></li>
@@ -54,38 +81,50 @@ export default function Header( {user} ){
                          </ul>
                        : '' }
                   </div>
-                  <div className={styles.add}>
+                  <div className={showMenu ? styles.add : styles.showMenuAdd}>
                         {myId ?<>
-                        <div className={styles.addnewapp}>
-                              <span >
-                                    <Link href={`/profile/usuarios`}>
+                        {showMenu? '': 
+                              <div  className={styles.closeWindow}>
+                                    <span onClick={handlerClick}>
+                                          <FontAwesomeIcon icon={faWindowClose} />      
+                                    </span> 
+                              </div>
+                        }
+                        <div className={styles.search} >
+                              <Link href={`/profile/usuarios`}>
+                                    <span >
                                           <FontAwesomeIcon className={styles.searchIcon} icon={faSearch} />
-                                    </Link>
-                              </span>
-                              <span>
-                                    <Link href={`/apps/newapp`}>
+                                          <ItemMenuLabel showMenu={showMenu} title="Pesquisar"/>
+                                    </span>
+                              </Link>
+                        </div>
+                        <div className={styles.addnewapp} >
+                              <Link href={`/apps/newapp`}>
+                                    <span>
                                           <FontAwesomeIcon icon={faPlusSquare} />
-                                    </Link>
-                              </span>
+                                          <ItemMenuLabel showMenu={showMenu} title="Adicionar app"/>
+                                    </span>
+                              </Link>
                         </div>
       
                         <div className={styles.notifications}>
-                              <span>
-                                    <Link href={`/negociation/allnegociations/${myId}`}>
+                              <Link href={`/negociation/allnegociations/${myId}`}>
+                                    <span>
                                           <FontAwesomeIcon icon={faBell} />
-                                    </Link>
-                              </span>
-                              <p>{0}</p>
+                                          <ItemMenuLabel showMenu={showMenu} title="Notificações"/>         
+                                    </span>
+                              </Link>
                         </div>
-                        <p 
-                              className={styles.logout} 
-                              onClick={onLogOut}
-                        >
-                                    {myId ? 'Logout': 'Login'}
+                        <p className={styles.logout} onClick={onLogOut}>
+                              {myId ? 'Logout': 'Login'}
                         </p>     
-                        </>: 
-                        ''}
+                        </>   : ''}
                   </div>
+                  {myId ? 
+                  <div className={styles.menuItem}> 
+                              <FontAwesomeIcon icon={faBars} onClick={handlerClick} />
+                        </div> : ''
+                  }
             </nav>
       ) 
       return (

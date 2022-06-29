@@ -10,14 +10,21 @@
     position:fixed;
     padding:1.6rem;
 }
-.menu h1{
+ .title {
+     width: 40%;
+ }
+.title h1{
     margin-left:10px;
     font-size:20px;
     color:#292929;
     
 }
-.menu h1:hover{
+.title h1:hover{
     cursor:hand;
+}
+.menuElements {
+    width: 40%;
+    margin-left: -120px;
 }
 .menuElements ul{
     display:flex;
@@ -41,16 +48,16 @@
 .logout:hover{
     color:rgb(250, 75, 75);
 }
-
-.searchIcon {
-    margin-right:8px;
+.menuItem {
+     display: none;
 }
+
 .add {
-    width:155px;
+    width: 20%;
     display:flex;
     flex-direction:row;
-    align-items:center;
     justify-content:space-around;
+    align-items: center;
 }
 .add span{
     font-size:16px;
@@ -84,4 +91,62 @@
     font-weight: 570;
 }
 
-/*Adicionando estilização no botão login, face o cursor pointer*/
+@media screen and (max-width: 768px) {
+    .add {
+        display: none;
+     }
+     .showMenuAdd {
+         height: 100vh;
+         width: 90%;
+         position: absolute;
+         display: inline;
+         padding: 1rem;
+         margin-top: 38.2rem;
+
+         box-shadow: 4px 8px 8px #d0d0d0;
+         display: flex;
+         flex-direction: column;
+         line-height: 1.9rem;
+         
+         background: rgba(0, 0, 0, 0.968);
+         color: white;
+         
+     }
+     .search:hover, .addnewapp:hover, .notifications:hover {
+            cursor: pointer;
+            color: #aaaaaa;
+     }
+    .menuItem {
+        display: inline;
+        color: #c5c5c5;
+   }
+   .menuElements {
+     margin-left: -190px;
+   }
+    .addnewapp span, .notifications span, .search span {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.5rem;
+        transition: ease-in-out 200ms;
+    }
+    .closeWindow {
+        align-self: flex-end;
+        color:rgb(255, 79, 79);
+    }
+    .notifications {
+         align-self: flex-start;
+    }
+   .logout {
+       font-weight: 500;
+   }
+}
+
+@media screen and (min-width: 768px) {
+    .showMenuAdd {
+        display: none;
+    }
+}
+
+
