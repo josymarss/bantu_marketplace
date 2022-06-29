@@ -11,7 +11,7 @@
     padding:1.6rem;
 }
  .title {
-     width: 40%;
+     width: fit-content;
  }
 .title h1{
     margin-left:10px;
@@ -102,17 +102,15 @@
          display: inline;
          padding: 1rem;
          margin-top: 38.2rem;
-
          box-shadow: 4px 8px 8px #d0d0d0;
          display: flex;
          flex-direction: column;
          line-height: 1.9rem;
-         
          background: rgba(0, 0, 0, 0.968);
          color: white;
          
      }
-     .search:hover, .addnewapp:hover, .notifications:hover {
+     .search:hover, .addnewapp:hover, .notifications:hover, .headerMenuInMiddle li:hover {
             cursor: pointer;
             color: #aaaaaa;
      }
@@ -123,7 +121,7 @@
    .menuElements {
      margin-left: -190px;
    }
-    .addnewapp span, .notifications span, .search span {
+    .addnewapp span, .notifications span, .search span, .headerMenuInMiddle ul li span, .closeWindow span {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
@@ -132,6 +130,10 @@
         transition: ease-in-out 200ms;
     }
     .closeWindow {
+        align-self: flex-end;
+        color:rgb(255, 54, 54);
+    }
+    .closeWindow:hover {
         align-self: flex-end;
         color:rgb(255, 79, 79);
     }
@@ -150,3 +152,23 @@
 }
 
 
+@media screen and (max-width: 480px) {
+    .menuElements {
+        display: none;
+    }
+    .menu {
+        gap: 10px;
+    }
+    .headerMenuInMiddle ul {
+        list-style: none;
+    }
+    .headerMenuInMiddle  {
+        cursor: pointer;
+    }
+    .headerMenuInMiddle{
+        display: flex;
+        flex-direction: column;
+        margin-left: -40px;
+        line-height: 1.9rem;
+    }
+}

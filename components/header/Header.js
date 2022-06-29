@@ -21,6 +21,7 @@ export default function Header( {user} ){
       
       const getSize = ()=>{
             const newWidth = navWidthRef.current.clientWidth;
+            console.log(newWidth)
             setNavWidth(newWidth);
             if(navWidth >= 768) {setShowMenu(true);}
       }
@@ -57,14 +58,54 @@ export default function Header( {user} ){
             return(
             <>    
             {
-            showMenu ? '' : 
-                  <span className={styles.itemMenuLabel}>
+            showMenu 
+            ? '' : 
+             <span className={styles.itemMenuLabel}>
                   {title}
-                  </span>
+            </span>
             }
             </>
             )  
       }
+      const HeaderMenuInMiddle = ()=>{
+            return (
+                  <ul>
+                  <li>
+                        <Link href={selectPath('/feed/', myId)}>
+                             <span>
+                               <FontAwesomeIcon icon={faHome} /> 
+                               <span> {getSmallSize() ? '' : 'Home'}</span>
+                             </span>
+                        </Link>
+                  </li>
+                  <li >
+                        <Link href={selectPath('/apps/listingapps', myId)}>
+                              <span>
+                              <FontAwesomeIcon icon={faTablet}/> 
+                               <span> {getSmallSize() ? '' : 'Aplicativos'}</span>
+                             </span>
+                        </Link>
+                  </li> 
+                  <li>
+                        <Link href={selectPath('/profile/', myId)} >
+                              <span>
+                              <FontAwesomeIcon icon={faUser} /> 
+                               <span> {getSmallSize() ? '' : 'Perfil'}</span>
+                             </span>
+                        </Link>
+                  </li>
+                  <li>
+                        <Link href={selectPath('/terms', myId)} >
+                              <span>
+                              <FontAwesomeIcon icon={faInfo} />
+                               <span> {getSmallSize() ? '' : 'Termos de responsabilidade'}</span>
+                             </span>
+                        </Link>
+                  </li>
+            </ul> 
+            )
+      }
+      const getSmallSize = () => navWidth >= 480;
       const HeaderMenu = () => (
             <nav ref={navWidthRef} className={styles.menu} >
                   <div className={styles.title}>
@@ -73,13 +114,10 @@ export default function Header( {user} ){
                         </h1>
                   </div>
                   <div className={styles.menuElements}>
-                      { myId? <ul>
-                              <li><Link href={selectPath('/feed/', myId)}><FontAwesomeIcon icon={faHome} /></Link></li>
-                              <li ><Link href={selectPath('/apps/listingapps', myId)}><FontAwesomeIcon icon={faTablet}/></Link></li> 
-                              <li><Link href={selectPath('/profile/', myId)} ><FontAwesomeIcon icon={faUser} /></Link></li>
-                              <li><Link href={selectPath('/terms', myId)} ><FontAwesomeIcon icon={faInfo} /></Link></li>
-                         </ul>
-                       : '' }
+                      { myId? 
+                              <HeaderMenuInMiddle />
+                        : ''
+                        }
                   </div>
                   <div className={showMenu ? styles.add : styles.showMenuAdd}>
                         {myId ?<>
@@ -90,6 +128,9 @@ export default function Header( {user} ){
                                     </span> 
                               </div>
                         }
+                         <div className={styles.headerMenuInMiddle}>
+                              { getSmallSize() ? '' : <HeaderMenuInMiddle/> }
+                        </div>
                         <div className={styles.search} >
                               <Link href={`/profile/usuarios`}>
                                     <span >
