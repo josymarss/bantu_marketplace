@@ -9,6 +9,7 @@
     box-shadow: 1px 4px 4px #d0d0d0;
     position:fixed;
     padding:1.6rem;
+    gap: 2rem;
 }
  .title {
      width: fit-content;
@@ -16,16 +17,12 @@
 .title h1{
     margin-left:10px;
     font-size:20px;
-    color:#292929;
-    
+    color:#292929;  
 }
 .title h1:hover{
     cursor:hand;
 }
-.menuElements {
-    width: 40%;
-    margin-left: -120px;
-}
+
 .menuElements ul{
     display:flex;
     align-self:center;
@@ -145,6 +142,15 @@
    }
 }
 
+@media (min-width: 481px) and  (max-width: 680px) {
+    .title {
+        margin-right: 4.5rem;
+    }
+    .menuElements ul li {
+         font-size: medium;
+    }
+
+}
 @media screen and (min-width: 768px) {
     .showMenuAdd {
         display: none;
