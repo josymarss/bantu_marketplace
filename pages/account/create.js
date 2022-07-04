@@ -4,6 +4,8 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './create.module.css';
+import Head from '../Head';
+import Footer from '../../components/footer/footer';
 
 export default function Create(){
     const router = useRouter();
@@ -17,6 +19,7 @@ export default function Create(){
     const [href, setHref] = useState('');
 
     const loadImage = (e) => {
+        console.log(e.target.files[0])
         setHref(e.target.files[0]);
     }
 
@@ -58,74 +61,78 @@ export default function Create(){
     }
     
     return(
-        <div className={styles.container}>
+        <>
+            <Head  title ="Criar conta"/>
+            <div className={styles.container}>
 
-            <div className={styles.createaccount}>
-                <img src='/createaccount.png'/>
-            </div>
-            
-                <div className={styles.formdata}>
-                    <h2>Crie uma conta para para descubrir aplicativos e divulgar os seus</h2>
-                    <img 
-                        src={href === '' ? '/camera.png' : href }  className={styles.imageContainer}
-                    />
-                    <div className={styles.myForm}>
-                        
-                            <input 
-                                className={styles.upload}
-                                type='file' 
-                                name='file'
-                                onChange={loadImage}
-                            />
-                       
-                            <input 
-                                type='text' 
-                                name='fullname'
-                                placeholder='Primeiro e último nome'
-                                onChange={e => setFullName(e.target.value)}
-                            />
-                            <input 
-                                type='text' 
-                                name='username'
-                                placeholder='Nome de usuário'
-                                onChange={e => setName(e.target.value)}
-                            />
-
-                            <input 
-                                type='text' 
-                                name='province'
-                                placeholder='Província'
-                                onChange={e => setProvince(e.target.value)}
-                            />
-                            <input 
-                                type='tel' 
-                                name='telefone'
-                                placeholder='Telefone'
-                                onChange={e => setPhone(e.target.value)}
-                            />
-                            <input 
-                                type='password' 
-                                name='password'
-                                placeholder='Palavra passe'
-                                onChange={e => setPass(e.target.value)}
-                            />
-                            <input 
-                                type='password' 
-                                name='confirmpassword' 
-                                placeholder='Confirmar palavra passe'
-                                onChange={e => setConfirmPass(e.target.value)}
-                            />
-                            <input 
-                                type='textarea' 
-                                name='description'
-                                placeholder='descrição sobre você' 
-                                onChange={e => setDescription(e.target.value)}
-                            />
-                            <button onClick={onCreateAccount}>Criar conta</button>
-                        
-                    </div>
+                <div className={styles.createaccount}>
+                    <img src='/createaccount.png'/>
                 </div>
-        </div>
+                
+                    <div className={styles.formdata}>
+                        <h2>Crie uma conta para para descubrir <br/> aplicativos e divulgar os seus</h2>
+                        <img 
+                            src={href === '' ? '/camera.png' : href }  className={styles.imageContainer}
+                        />
+                        <div className={styles.myForm}>
+                            
+                                <input 
+                                    className={styles.upload}
+                                    type='file' 
+                                    name='file'
+                                    onChange={loadImage}
+                                />
+                        
+                                <input 
+                                    type='text' 
+                                    name='fullname'
+                                    placeholder='Primeiro e último nome'
+                                    onChange={e => setFullName(e.target.value)}
+                                />
+                                <input 
+                                    type='text' 
+                                    name='username'
+                                    placeholder='Nome de usuário'
+                                    onChange={e => setName(e.target.value)}
+                                />
+
+                                <input 
+                                    type='text' 
+                                    name='province'
+                                    placeholder='Província'
+                                    onChange={e => setProvince(e.target.value)}
+                                />
+                                <input 
+                                    type='tel' 
+                                    name='telefone'
+                                    placeholder='Telefone'
+                                    onChange={e => setPhone(e.target.value)}
+                                />
+                                <input 
+                                    type='password' 
+                                    name='password'
+                                    placeholder='Palavra passe'
+                                    onChange={e => setPass(e.target.value)}
+                                />
+                                <input 
+                                    type='password' 
+                                    name='confirmpassword' 
+                                    placeholder='Confirmar palavra passe'
+                                    onChange={e => setConfirmPass(e.target.value)}
+                                />
+                                <input 
+                                    type='textarea' 
+                                    name='description'
+                                    placeholder='descrição sobre você' 
+                                    onChange={e => setDescription(e.target.value)}
+                                />
+                                <button onClick={onCreateAccount}>Criar conta</button>
+                            
+                        </div>
+                    </div>
+            </div>
+            <Footer />
+        </>
        
 
     )

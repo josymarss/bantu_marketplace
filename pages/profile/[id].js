@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { ObjectId } from 'mongodb';
 import { ConnectToDatabase } from '../../db/connection';
 import axios from 'axios';
@@ -7,11 +7,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './profile.module.css';
-import App from '../apps/app';
 import HeadComponent from '../Head';
+import {RefreshMenuContext } from '../_app';
 
 export default function User({ user,apps,id,negociationsDone }){
     const router = useRouter();
+    const {setRefreshMenu} = useContext(RefreshMenuContext);
     const [follow, updateFollow] = useState(false);
     const [myId, updateMyId] = useState();
     
@@ -23,6 +24,7 @@ export default function User({ user,apps,id,negociationsDone }){
                     updateFollow(true);
                 }
             }) : updateFollow(false) ;
+            setRefreshMenu(v=> v +1)
         }
     },[router.isReady])
    

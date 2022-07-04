@@ -9,7 +9,6 @@ import App from './app';
 
 export default function Apps({ apps,categorias }){
       const router = useRouter();
-
       const [myId,setId] = useState();
       const [limit, setLimit] = useState(10);
       const [controlText, setText]= useState('');
@@ -30,8 +29,8 @@ export default function Apps({ apps,categorias }){
                   <p className={styles.categoryP}>Categorias de aplicativos</p>
                   <div className={styles.category}>
                         {categorias.length > 0 ?
-                              categorias.map(category => 
-                                    <button key={category} onClick={onSearch}>{category}</button>
+                              categorias.map(categoria => 
+                                    <button key={categoria} onClick={onSearch}>{categoria}</button>
                               ): ''
                         }
                   </div>
@@ -48,8 +47,9 @@ export default function Apps({ apps,categorias }){
       return(
       <>
             <Tabs>
-                  <ListingApps label='1'/>
+                   {/*label='1' att. of ListingApps*/} 
                   <p label='2'>Another element!</p>
+                  <ListingApps/>
             </Tabs>
             
       </>)

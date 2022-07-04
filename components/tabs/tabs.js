@@ -3,12 +3,11 @@ import { useState,useEffect,Fragment } from 'react';
 
 export default function Tabs({ children, label }){
       const [element, setElement] = useState(1);
-
+     
       useEffect(()=>{
-            
+            console.log(children)
       },[])
       
-
       return(
             <div className={styles.container}>
                   <aside className={styles.list}>
@@ -22,9 +21,11 @@ export default function Tabs({ children, label }){
                   </aside>
 
                   <aside className={styles.display}>
-                       {children.map(child => 
-                             child.props.label == element ? <Fragment>{child}</Fragment> : ''
+                        {/* removed label was props.label */}
+                       {[children].map(child => 
+                             child.props == element ? "console.log(child) ": ''
                        )}
+                       
                   </aside>
             </div>
       );
