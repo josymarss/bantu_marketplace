@@ -1,4 +1,4 @@
-import styles from './seach.module.css';
+import styles from './search.module.css';
 import {useRouter} from 'next/router';
 import {useState,useEffect} from 'react';
 import swl from 'sweetalert';
@@ -48,7 +48,7 @@ export default function Users(){
                         <p onClick={() =>router.push('/profile/'+user._id)}>{user.fullName}</p>
                         {user._id !== myId ? 
                               <p 
-                                    className={styles.seguir} 
+                                    className={styles.follow} 
                                     onClick={() => onSeguir(user._id)}>
                                           {following ? 'Seguindo': 'Seguir'}
                               </p> : ''}
@@ -73,10 +73,10 @@ export default function Users(){
                                     id='input'
                                     className={styles.search}
                                     type='text' 
-                                    placeholder='Pesquisar um usuário'
+                                    placeholder='Pesquisar'
                                     onChange={onChange}
                                />
-                               <button className={styles.buscar} onClick={onSearch}>Buscar</button>
+                               <button className={styles.searchButton} onClick={onSearch}>Buscar</button>
                   
                         </div>
                         <ListingUsers />

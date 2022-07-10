@@ -10,9 +10,9 @@
       align-items:center;
       justify-content:center;
  }
- .buscar{
+ .searchButton{
       margin-left:10px;
-      width:100px;
+      width: 5rem;
       height:40px;
       border:none !important;
       font-size:12pt;
@@ -20,13 +20,13 @@
       color:white;
       border-radius:2px;
  }
- .buscar:hover{
+ .searchButton:hover{
       background-color:rgb(0, 102, 235);
       transition: 0.1s ease-in-out;
      
  }
  .search{
-      width:380px;
+      width: 18rem;
       height:40px;
       border: 1px solid rgb(213, 213, 213);
       font-size:12pt;
@@ -52,12 +52,11 @@
      font-weight:bold;
 }
 .content > p:hover{
-     text-decoration:underline;
      cursor:pointer;
 }
-.seguir{
+.follow{
      padding: 4px;
-     font: size 12px;
+     font-size: 12px;
      text-align:center;
      background-color:rgb(29, 29, 29);
      color:white;
@@ -65,6 +64,24 @@
      font-weight:normal !important;
      width:100px;
 }
-.seguir:hover{
+.follow:hover{
      background-color:rgb(0, 102, 235);
+}
+
+@media screen and (max-width: 450px) {
+     .search{
+          width: 12rem;
+          height:35px;
+          font-size:11pt;
+     }
+     .searchButton{
+          width: 4rem;
+          height:35px;
+          font-size:11pt;
+          padding: 0.1rem;
+     }
+     .content p{
+          font-size: 11pt;
+     }
+     
 }
