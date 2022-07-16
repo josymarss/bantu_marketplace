@@ -16,8 +16,11 @@ export default function Acept({ negociation }){
       useEffect(() =>{
             setId(sessionStorage.getItem('tokenId'));
       },[router.isReady]);
+      useEffect(()=> {
+            console.log(negociation);
+      }, []);
 
-      const onAceitar = async (negociation,index)=>{
+      const onAceitar = async (negociation)=>{
             swl({
                   title:'Aceitar',
                   text:`Tens a certeza que deseja aceitar
@@ -42,7 +45,7 @@ export default function Acept({ negociation }){
             }});
       }
 
-       const onRejeitar = async (negociation,index)  => {
+       const onRejeitar = async (negociation)  => {
             swl({
                   title:'Rejeitar',
                   text:`Tens a certeza que deseja rejeitar
@@ -69,27 +72,27 @@ export default function Acept({ negociation }){
       
       const AppComponent = () => (
             <div className={styles.appcontent}>
-                  <p className={styles.appname}>{app.name}</p>
+                  <p className={styles.appname}>{negociation.appname}</p>
                   
-                        {app.negociations.map((neg,index) =>
-                              <div className={styles.negociations} key={index}>
+                        
+                              <div className={styles.negociations}>
                                     <div className={styles.userdata}>
-                                          <img src={neg.useravatar ? '/uploads/'+neg.useravatar : ''} /> 
-                                          <p onClick={() => router.push('/profile/'+neg.idUser)}>{neg.nameuser?'@'+neg.nameuser:''}</p>
+                                          <img src={negociation.useravatar ? '/uploads/'+negociation.useravatar : ''} /> 
+                                          <p onClick={() => router.push('/profile/'+negociation.idUser)}>{negociation.nameuser?'@'+negociation.nameuser:''}</p>
                                     </div>
                                     <div className={styles.situation}>
-                                          <p className={styles.title}>{neg.titulo}</p>
+                                          <p className={styles.title}>{negociation.titulo}</p>
                                           <div className={styles.padre}>
-                                                <div onClick={() => onAceitar(neg,index)} className={styles.greendiv}><span><FontAwesomeIcon icon={faCheck}/> </span></div>
-                                                <div onClick={() => router.push('/negociation/reajustar/'+neg._id)} className={styles.yellowdiv}><span><FontAwesomeIcon icon={faPenSquare}/> </span></div>
-                                                <div onClick={() => onRejeitar(neg,index)} className={styles.reddiv}><span><FontAwesomeIcon icon={faTrash}/> </span></div>
+                                                <div onClick={() => onAceitar(negociation)} className={styles.greendiv}><span><FontAwesomeIcon icon={faCheck}/> </span></div>
+                                                <div onClick={() => router.push('/negociation/reajustar/'+negociation._id)} className={styles.yellowdiv}><span><FontAwesomeIcon icon={faPenSquare}/> </span></div>
+                                                <div onClick={() => onRejeitar(negociation)} className={styles.reddiv}><span><FontAwesomeIcon icon={faTrash}/> </span></div>
                                           </div>
                                     </div>
                                     <div className={styles.mynegociations}>
-                                          <p>{neg.description?neg.description:''}</p>
+                                          <p>{negociation.description?negociation.description:''}</p>
                                     </div>
                               </div>
-                        )}
+      
                         
                         {/* Map all negociations i solicited */}
                  

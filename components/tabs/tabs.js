@@ -12,7 +12,7 @@ export default function Tabs({ children, label }){
             <div className={styles.container}>
                   <aside className={styles.list}>
                         <ul>
-                              <li onClick={() => setElement(1)} className={element=='1' ? styles.active : ''}>Todos aplicativos</li>
+                              {/* <li onClick={() => setElement(1)} className={element=='1' ? styles.active : ''}>Todos aplicativos</li> */}
                               <li onClick={() => setElement(2)} className={element=='2' ? styles.active : ''}>Favoritos</li>
                               <li onClick={() => setElement(3)} className={element=='3' ? styles.active : ''}>Categorias</li>
                               <li onClick={() => setElement(4)} className={element=='4' ? styles.active : ''}>Em alta</li>

@@ -58,8 +58,8 @@ export default async (req,res) => {
                               idapp,
                               acepetedApp,
                               idproprietario:myId,
-                              idsolicitante:,
-                              usuariosolicitantename:,
+                              idsolicitante,
+                              usuariosolicitantename,
                               titulo,
                               description, 
                         });

@@ -1,11 +1,13 @@
 import styles from './search.module.css';
 import {useRouter} from 'next/router';
 import {useState,useEffect} from 'react';
+import ObjectId from 'mongodb'
 import swl from 'sweetalert';
+import {ConnectToDatabase} from '../../db/connection';
 import Head from '../Head'
 import axios from 'axios';
 
-export default function Users(){
+export default function Users({user}){
       const router = useRouter();
       const [data, setData] = useState(null);
       const [users,setUser] = useState(null);
@@ -16,6 +18,7 @@ export default function Users(){
 
       useEffect(() => {
             setId(sessionStorage.getItem('tokenId'));
+            console.log(user)
       },[]);
 
       const onChange = (e) => {
@@ -82,5 +85,17 @@ export default function Users(){
                         <ListingUsers />
                         <ListingApps />
                   </div>
-                  </>);
+            </>);
+}
+
+export async function getServerSideProps (){
+      const db = await ConnectToDatabase();
+      const user = await db.collection('users').findOne({_id: ObjectId('62797c80b44bbd26e4290792')});
+
+      return {
+            props:{
+                   user
+            }
+      }
+
 }

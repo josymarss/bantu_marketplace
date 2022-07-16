@@ -19,7 +19,6 @@ export default function Create(){
     const [href, setHref] = useState('');
 
     const loadImage = (e) => {
-        console.log(e.target.files[0])
         setHref(e.target.files[0]);
     }
 
