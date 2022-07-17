@@ -10,6 +10,7 @@
     position:fixed;
     padding:1.6rem;
     gap: 2rem;
+    z-index: 1;
 }
  .title {
      width: fit-content;

@@ -16,8 +16,9 @@ export default function Home() {
   return (
   <>
     <Head title="bantu-marketplace"/>
-      {myId ? router.push(`/feed/${myId}`): <LeadingPage />} 
-      <Footer/>
+      {
+      myId ? router.push(`/feed/${myId}`): <LeadingPage />
+      } 
   </>
   
  

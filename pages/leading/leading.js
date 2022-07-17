@@ -61,7 +61,6 @@ pessoas específicas para lançar seu aplicativo para o exterior, e cehgar nas m
                     </div>
                 </div>
             </section>
-            <Footer/>
         </div>
     </>       
     )

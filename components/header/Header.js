@@ -13,18 +13,22 @@ export default function Header( {user} ){
       const [myId, setId] = useState('');
       const [showMenu, setShowMenu] = useState(true);
       const navWidthRef = useRef();
-      const [navWidth, setNavWidth] = useState()
+      const [navWidth, setNavWidth] = useState();
+
+      useEffect(()=>{
+            getSize()
+      }, [])
+
+      useEffect(() =>{
+            setId(sessionStorage.getItem('tokenId'));
+            window.addEventListener('resize', getSize);
+      },[router.isReady, refreshMenu]);
       
       const getSize = ()=>{
             const newWidth = navWidthRef.current.clientWidth;
             setNavWidth(newWidth);
             if(navWidth >= 768) {setShowMenu(true);}
       }
-      useEffect(()=>{getSize()}, [])
-      useEffect(() =>{
-            setId(sessionStorage.getItem('tokenId'));
-            window.addEventListener('resize', getSize);
-      },[router.isReady, refreshMenu]);
 
       const onLogOut = async () =>{
             sessionStorage.removeItem('tokenId');
@@ -69,38 +73,38 @@ export default function Header( {user} ){
       const HeaderMenuInMiddle = ()=>{
             return (
                   <ul>
-                  <li>
-                        <Link  href={selectPath('/feed/', myId)}>
-                             <span onClick ={handlerClickCloseSmallMenu}>
-                              <FontAwesomeIcon icon={faHome} /> 
-                              <span> {getSmallSize() ? '' : 'Home'}</span>
-                             </span>
-                        </Link>
-                  </li>
-                  <li>
-                        <Link href={selectPath('/apps/listingapps', myId)}>
+                        <li>
+                              <Link  href={selectPath('/feed/', myId)}>
                               <span onClick ={handlerClickCloseSmallMenu}>
-                              <FontAwesomeIcon icon={faTablet}/> 
-                              <span> {getSmallSize() ? '' : 'Aplicativos'}</span>
-                             </span>
-                        </Link>
-                  </li> 
-                  <li>
-                        <Link href={selectPath('/profile/', myId)}>
-                              <span onClick ={handlerClickCloseSmallMenu}>
-                              <FontAwesomeIcon icon={faUser} /> 
-                              <span> {getSmallSize() ? '' : 'Perfil'}</span>
-                             </span>
-                        </Link>
-                  </li>
-                  <li>
-                        <Link href={selectPath('/terms', myId)} >
-                              <span onClick ={handlerClickCloseSmallMenu}>
-                              <FontAwesomeIcon icon={faInfo} />
-                              <span> {getSmallSize() ? '' : 'Termos de responsabilidade'}</span>
-                             </span>
-                        </Link>
-                  </li>
+                                    <FontAwesomeIcon icon={faHome} /> 
+                                    <span> {getSmallSize() ? '' : 'Home'}</span>
+                              </span>
+                              </Link>
+                        </li>
+                        <li>
+                              <Link href={selectPath('/apps/listingapps', myId)}>
+                                    <span onClick ={handlerClickCloseSmallMenu}>
+                                    <FontAwesomeIcon icon={faTablet}/> 
+                                    <span> {getSmallSize() ? '' : 'Aplicativos'}</span>
+                              </span>
+                              </Link>
+                        </li> 
+                        <li>
+                              <Link href={selectPath('/profile/', myId)}>
+                                    <span onClick ={handlerClickCloseSmallMenu}>
+                                    <FontAwesomeIcon icon={faUser} /> 
+                                    <span> {getSmallSize() ? '' : 'Perfil'}</span>
+                              </span>
+                              </Link>
+                        </li>
+                        <li>
+                              <Link href={selectPath('/terms', myId)} >
+                                    <span onClick ={handlerClickCloseSmallMenu}>
+                                    <FontAwesomeIcon icon={faInfo} />
+                                    <span> {getSmallSize() ? '' : 'Termos de responsabilidade'}</span>
+                              </span>
+                              </Link>
+                        </li>
             </ul> 
             )
       }

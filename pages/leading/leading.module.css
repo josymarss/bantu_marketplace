@@ -2,6 +2,7 @@
 .contanier {
     /* margin-top:200px; */
     display:flex;
+    z-index: 2;
     
 }
 .container h2 {
