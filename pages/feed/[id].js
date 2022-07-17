@@ -13,8 +13,7 @@ export default function Feed({ user }){
      const [data,setData] = useState();
      const router = useRouter();
 
-     useEffect(()=>[]);
-
+     useEffect(()=>{},[]);
      const FeedComponent = ({avatar, name, app,id}) =>(
           <div className={styles.feedcomponent}>
                <div className={styles.userdata}>
@@ -42,9 +41,11 @@ export default function Feed({ user }){
                </div>
           </div>   
      )
+
+
      const FeedData = () =>  user.feed.length == 0 ? <p>Sem actividade, preocure por seguidores e siga-aos para ver o que têm neogicado.</p>:
           user.feed.map((content,index) =>
-               <FeedComponent 
+               <FeedComponent  
                     avatar={content.avatar?content.avatar:<p>NoPhoto</p>}
                     name={content.name}
                     app={content.app}

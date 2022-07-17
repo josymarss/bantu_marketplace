@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
+import AppCard from '../Appcard/appcard';
+import styles from './launchapps.module.css'
 const Launchapps = ({apps}) => {
 
     useEffect(()=> {
-        console.log(apps)
+
     }, [])
 
     return (
-        <div>
-            <h1>Hello!!!</h1>
+        <div className={styles.container}>
+        {
+            apps.map((elem, index)=> <AppCard app={elem} index={index}/> )
+        }
         </div>
     );
 }

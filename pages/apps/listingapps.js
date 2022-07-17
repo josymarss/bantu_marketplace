@@ -1,13 +1,14 @@
 import {useRouter} from 'next/router';
-import {useState,useEffect} from 'react';
+import {useState,useEffect, useContext} from 'react';
 import {ConnectToDatabase} from '../../db/connection';
-import axios from 'axios'
 import styles from './listingapps.module.css';
 import Tabs from '../../components/tabs/tabs';
 import HeadComponent from '../Head';
 import Launchapps from '../../components/launchapps/launchapps';
+import { AppContext } from '../_app';
 
 export default function Apps({ apps,categorias }){
+      const {element} = useContext(AppContext);
       const router = useRouter();
       const [myId,setId] = useState();
       const [limit, setLimit] = useState(10);
@@ -22,13 +23,28 @@ export default function Apps({ apps,categorias }){
       async function onSearch (){
             
       }
+  
+      const AppsTolist = ()=>{
+            switch(element){
+                  case 1 : return (<h1> {"Todos aplicativos"}</h1>);
+                  case 2 : return (<h1> {"Favoritos"}</h1>);
+                  case 3 : return (<h1> {"Categorias"}</h1>);
+                  case 4 : return (<h1> {"Em alta"}</h1>);
+                  case 5 : return (<Launchapps apps={apps}/>);
+                  default: {
+                        return (<Launchapps apps={apps}/>);
+                  }
+            }
+      }
       
       return(
             <>
                   <HeadComponent title= "Aplicativos"/>
                   <div className={styles.container}>
                         <Tabs/>
-                        <Launchapps apps = {apps}/>
+                        <div className={styles.container_app}>
+                              <AppsTolist/>
+                        </div>
                   </div>      
             </>
       );

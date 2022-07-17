@@ -16,7 +16,7 @@ export default function Tabs(){
                               <li onClick={() => setElement(2)} className={element=='2' ? styles.active : ''}>Favoritos</li>
                               <li onClick={() => setElement(3)} className={element=='3' ? styles.active : ''}>Categorias</li>
                               <li onClick={() => setElement(4)} className={element=='4' ? styles.active : ''}>Em alta</li>
-                              <li onClick={() => setElement(5)} className={element=='5' ? styles.active : ''}>Lancamentos</li>
+                              <li onClick={() => setElement(5)} className={element=='5' ? styles.active : ''}>Lançamentos</li>
                         </ul>
                   </aside>
       );
