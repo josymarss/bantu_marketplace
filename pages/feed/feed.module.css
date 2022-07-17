@@ -38,44 +38,4 @@
      text-decoration:underline;
      cursor:pointer;
 }
-.content{
-     border-radius:4px;
-     width:500px;
-     height:100%;
-     border:2px solid rgb(204, 204, 204);
-     margin:10px 0px 24px 0px;
-     padding:6px 0px 6px 14px;
-}
-.appcontent{
-     display:flex;
-     flex-direction:column;
-     height:20%;
-     align-items:flex-start;
-}
-.appcontent p > span{
-     color:rgb(136, 136, 136);
-     font-size:20px;
-}
-.appname{
-     color:rgb(0, 102, 235);
-     font-weight:bold;
-     font-size:17px;
-     margin-top:35px;
-}
-.appname:hover{
-     cursor:pointer;
-     text-decoration:underline;
-}
-.star{
-     display:flex;
-     flex-direction:row;
-     align-items:center;
-     justify-content:flex-start;
-     height:20%;
-}
-.star span{
-     margin-right:10px;
-}
-.star span:hover{
-     color:rgb(0, 102, 235);
-}
+
