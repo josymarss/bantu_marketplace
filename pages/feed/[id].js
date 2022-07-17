@@ -8,6 +8,7 @@ import {ConnectToDatabase} from '../../db/connection';
 import styles from './feed.module.css'
 
 import HeadComponent from '../Head'; 
+import AppCard from '../../components/Appcard/appcard';
 
 export default function Feed({ user }){
      const [data,setData] = useState();
@@ -24,21 +25,7 @@ export default function Feed({ user }){
                     <p onClick={() => router.push('/profile/'+id)} className={styles.username}>{name} </p>
                     <p><span>iniciou uma uma nova negociação.</span></p>
                </div>
-               <div className={styles.content}>
-                    <div className={styles.appcontent}>
-                         <p 
-                              onClick={() => router.push('/apps/'+app._id)} 
-                              className={styles.appname}
-                         >
-                              {app.name}
-                         </p>
-                         <p><span>{app.description.length>50?app.description.substring(0,55)+'...':app.description}</span></p>
-                    </div>
-                    <div className={styles.star}>
-                         <span><FontAwesomeIcon icon={faStar} /></span>
-                         <p>{app.stars.likes}</p>
-                    </div>
-               </div>
+                    <AppCard app= {app}/>
           </div>   
      )
 
