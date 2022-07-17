@@ -5,18 +5,19 @@ import { ToastContainer } from 'react-toastify';
 import Header from '../components/header/Header';
 import { createContext } from 'react';
 
-export const RefreshMenuContext = createContext(null);
+export const AppContext = createContext(null);
 
 function MyApp({ Component, pageProps }) {
   const [refreshMenu, setRefreshMenu] = useState(0);
+  const [element, setElement] = useState(0);
 
   return (
     <Fragment>
-        <RefreshMenuContext.Provider value= {{refreshMenu, setRefreshMenu}}>
+        <AppContext.Provider value= {{refreshMenu, setRefreshMenu, element, setElement}}>
           <Header />
           <Component {...pageProps} />
           <ToastContainer/>
-        </RefreshMenuContext.Provider>
+        </AppContext.Provider>
     </Fragment>
   );
 }

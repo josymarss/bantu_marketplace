@@ -4,12 +4,12 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare,faBell, faBars, faHome,faTablet,faUser,faInfo,faSearch,faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import styles from './Header.module.css';
-import {RefreshMenuContext} from '../../pages/_app'
+import {AppContext} from '../../pages/_app'
 
 
 export default function Header( {user} ){
       const router = useRouter();
-      const {refreshMenu, setRefreshMenu} = useContext(RefreshMenuContext);
+      const {refreshMenu, setRefreshMenu} = useContext(AppContext);
       const [myId, setId] = useState('');
       const [showMenu, setShowMenu] = useState(true);
       const navWidthRef = useRef();

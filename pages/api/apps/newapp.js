@@ -23,14 +23,14 @@ export default async (req,res) => {
     
     form.parse(req, async (err, fields, files) => { 
         
-        const data = fs.readFileSync(files.file.filepath);
-        fs.writeFileSync(`public/appfiles/${files.file.newFilename}`,data); 
+        const dataFileImage = fs.readFileSync(files.file.filepath);
+        fs.writeFileSync(`public/appfiles/${files.file.newFilename}`,dataFileImage); 
         if(method ==='POST'){
             const { name, description,link, myId,categoria,percentMax,percentMin } = fields;
-            const date = new Date();
-            const dia = date.getDate();
-            const mes = date.getMonth()+1; 
-            const ano = date.getFullYear();
+            const currentDate = new Date();
+            const dia = currentDate.getDate();
+            const mes = currentDate.getMonth()+1; 
+            const ano = currentDate.getFullYear();
 
         const appResult = await apps.insertOne(
             {   
@@ -46,7 +46,7 @@ export default async (req,res) => {
                 },
                 percentMax,
                 percentMin,
-                data: dia+'/'+mes+'/'+ano
+                createdAt: dia+'/'+mes+'/'+ano
             }
         );
             res.send(appResult.ops[0]);
@@ -60,8 +60,7 @@ export default async (req,res) => {
             updatedApp.avatar = files.file.newFilename;
             updatedApp.categoria = categoria;
             updatedApp.percent = percent;
-            
-            
+             
             await apps.updateOne({_id:ObjectId(idapp)},{
                 $set:{
                     _id:updatedApp._id,
@@ -78,10 +77,6 @@ export default async (req,res) => {
             });
             res.send({success:'success!'});
         }
-       
-       
-
-        });
-        
+    });
         res.send({resul:'Sucess'})
 }   

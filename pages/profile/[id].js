@@ -8,11 +8,11 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './profile.module.css';
 import HeadComponent from '../Head';
-import {RefreshMenuContext } from '../_app';
+import {AppContext } from '../_app';
 
 export default function User({ user,apps,id,negociationsDone }){
     const router = useRouter();
-    const {setRefreshMenu} = useContext(RefreshMenuContext);
+    const {setRefreshMenu} = useContext(AppContext);
     const [follow, updateFollow] = useState(false);
     const [myId, updateMyId] = useState();
     

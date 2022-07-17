@@ -5,7 +5,7 @@ import axios from 'axios'
 import styles from './listingapps.module.css';
 import Tabs from '../../components/tabs/tabs';
 import HeadComponent from '../Head';
-import App from './app';
+import Launchapps from '../../components/launchapps/launchapps';
 
 export default function Apps({ apps,categorias }){
       const router = useRouter();
@@ -23,36 +23,15 @@ export default function Apps({ apps,categorias }){
             
       }
       
-      const ListingApps = () =>  (
-            
-            <div className={styles.container}>
-                  <p className={styles.categoryP}>Categorias de aplicativos</p>
-                  <div className={styles.category}>
-                        {categorias.length > 0 ?
-                              categorias.map(categoria => 
-                                    <button key={categoria} onClick={onSearch}>{categoria}</button>
-                              ): ''
-                        }
-                  </div>
-                  {categorias.length > 10 ? <p className={styles.seemore}>Ver mais...</p>:''}
-                  <div className={styles.listingapps}>
-                  {apps ? 
-                        apps.map(app => <App application={app} userid={myId} />)
-                        : ''
-                  }
-                  </div>
-                 
-            </div>
-      );
       return(
-      <>
-            <Tabs>
-                   {/*label='1' att. of ListingApps*/} 
-                  <p label='2'>Another element!</p>
-                  <ListingApps/>
-            </Tabs>
-            
-      </>)
+            <>
+                  <HeadComponent title= "Aplicativos"/>
+                  <div className={styles.container}>
+                        <Tabs/>
+                        <Launchapps apps = {apps}/>
+                  </div>      
+            </>
+      );
 }
 
 export async function getServerSideProps (context) {
