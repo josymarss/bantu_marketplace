@@ -37,7 +37,6 @@ export default function appDetails({ app,numbers,negotiations }){
                   if(position >= 0){
                         percent.replace('%','');
                         setPercent(percent+'%');                  }
-                  console.log(percent);
 
                   formData.append('name',name);
                   formData.append('description',description);

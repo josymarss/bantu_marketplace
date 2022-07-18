@@ -9,7 +9,6 @@ export const AppContext = createContext(null);
 function MyApp({ Component, pageProps }) {
   const [refreshMenu, setRefreshMenu] = useState(0);
   const [element, setElement] = useState(1);
-  const [updateAppCard, setUpdateAppCar] = useState(0);
 
   return (
     <Fragment>
