@@ -11,19 +11,21 @@ const AppCard = ({app}) => {
     const [myId,setId] = useState();
     const [appId,setAppId] = useState();
     const [appUserId,setAppUserId] = useState();
+    const [likes, setLikes] = useState(app.stars.likes);
 
     useEffect(() => {
       let auxId = sessionStorage.getItem('tokenId');
       setId(auxId);
       setAppId(app._id);
       setAppUserId(app.userId);
-    } ,[]);
+    } ,[likes]);
 
-    const addLike = async ()=> {
+    const addLike =()=> {
       if(myId === appUserId){
           return;
       }
-        const res = await axios.post('/api/apps/addlike', {myId, appId}); 
+       axios.post('/api/apps/addlike', {myId, appId})
+       .then(res =>{ setLikes(v => v + res.data.like) });
     }
     return (
         <div className={styles.content}>
@@ -37,7 +39,7 @@ const AppCard = ({app}) => {
              <p><span>{app.description.length>50?app.description.substring(0,55)+'...':app.description}</span></p>
              <div className={styles.star}>
                <span  onClick={addLike}><FontAwesomeIcon icon={faStar} /></span>
-               <p>{app.stars.likes}</p>
+               <p>{likes}</p>
              </div>
         </div>
    </div>
