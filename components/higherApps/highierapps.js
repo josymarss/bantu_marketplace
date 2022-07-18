@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import AppCard from '../Appcard/appcard';
-import styles from './launchapps.module.css'
-const Launchapps = ({apps}) => {
+import styles from './highierapp.module.css'
+const HighierApp = ({apps}) => {
     return (
         <div className={styles.container}>
             <h2>Lançamento</h2>
@@ -15,4 +15,4 @@ const Launchapps = ({apps}) => {
     );
 }
 
-export default Launchapps;
+export default HighierApp;

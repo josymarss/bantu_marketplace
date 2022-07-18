@@ -14,5 +14,4 @@ const Allapps = ({apps}) => {
     </div>
     );
 }
-
 export default Allapps;
