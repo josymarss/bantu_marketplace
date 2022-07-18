@@ -5,6 +5,7 @@ import styles from './listingapps.module.css';
 import Tabs from '../../components/tabs/tabs';
 import HeadComponent from '../Head';
 import Launchapps from '../../components/launchapps/launchapps';
+import Allapps from '../../components/allapps/allapps';
 import { AppContext } from '../_app';
 
 export default function Apps({ apps,categorias }){
@@ -26,14 +27,15 @@ export default function Apps({ apps,categorias }){
   
       const AppsTolist = ()=>{
             switch(element){
-                  case 1 : return (<h1> {"Todos aplicativos"}</h1>);
+                  case 1 : return (
+                        <Allapps apps={apps} />
+                  );
                   case 2 : return (<h1> {"Favoritos"}</h1>);
                   case 3 : return (<h1> {"Categorias"}</h1>);
                   case 4 : return (<h1> {"Em alta"}</h1>);
-                  case 5 : return (<Launchapps apps={apps}/>);
-                  default: {
-                        return (<Launchapps apps={apps}/>);
-                  }
+                  case 5 : return (
+                        <Launchapps apps={apps}/>);
+
             }
       }
       
@@ -55,6 +57,8 @@ export async function getServerSideProps (context) {
       const app = await db.collection('apps');
       
       const dataapp = await app.find({}).toArray();
+      
+      // const dataapp = await app.find({}).toArray();
       const apps = JSON.parse(JSON.stringify(dataapp));
 
       let categorias = [];

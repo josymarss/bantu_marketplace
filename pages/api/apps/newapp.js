@@ -28,8 +28,8 @@ export default async (req,res) => {
         if(method ==='POST'){
             const { name, description,link, myId,categoria,percentMax,percentMin } = fields;
             const currentDate = new Date();
-            const dia = currentDate.getDate();
-            const mes = currentDate.getMonth()+1; 
+            const dia =  currentDate.getDate() < 10 ? 0+""+currentDate.getDate() : currentDate.getDate();
+            const mes = currentDate.getMonth()+1 < 10 ? 0+""+(currentDate.getMonth()+1) : currentDate.getMonth()+1; 
             const ano = currentDate.getFullYear();
 
         const appResult = await apps.insertOne(

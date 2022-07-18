@@ -9,10 +9,14 @@ const Launchapps = ({apps}) => {
 
     return (
         <div className={styles.container}>
-        {
-            apps.map((elem, index)=> <AppCard app={elem} index={index}/> )
-        }
+            <h2>Lançamento</h2>
+            <div className={styles.containerApp}>
+            {
+                apps.map((elem, index)=> <AppCard app={elem} index={index}/>)
+            }
+            </div>
         </div>
+
     );
 }
 

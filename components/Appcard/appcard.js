@@ -1,23 +1,42 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, {useEffect, useState } from 'react';
+import axios from 'axios';
 import styles from './appcard.module.css';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 const AppCard = ({app}) => {
     const router = useRouter();
+    const [myId,setId] = useState();
+    const [appId,setAppId] = useState();
+    const [appUserId,setAppUserId] = useState();
+
+    useEffect(() => {
+      let auxId = sessionStorage.getItem('tokenId');
+      setId(auxId);
+      setAppId(app._id);
+      setAppUserId(app.userId);
+    } ,[]);
+
+    const addLike = async ()=> {
+      if(myId === appUserId){
+          return;
+      }
+        const res = await axios.post('/api/apps/addlike', {myId, appId}); 
+    }
     return (
         <div className={styles.content}>
         <div className={styles.appcontent}>
              <p 
-                  onClick={() => router.push('/apps/'+app._id)} 
+                  onClick={() => router.push('/apps/'+appId)} 
                   className={styles.appname}
              >
                   {app.name}
              </p>
              <p><span>{app.description.length>50?app.description.substring(0,55)+'...':app.description}</span></p>
              <div className={styles.star}>
-               <span><FontAwesomeIcon icon={faStar} /></span>
+               <span  onClick={addLike}><FontAwesomeIcon icon={faStar} /></span>
                <p>{app.stars.likes}</p>
              </div>
         </div>
