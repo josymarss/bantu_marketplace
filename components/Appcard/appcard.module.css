@@ -29,11 +29,36 @@
     flex-direction:row;
     align-items:center;
     justify-content:flex-start;
-    height:20%;
+}
+.star p{
+    font-size: small;
 }
 .star span{
-    margin-right:10px;
+    display: flex;
+    justify-content: space-around;
+    width: 2rem;
+     
 }
 .star span:hover{
     color:rgb(0, 102, 235);
+}
+
+.favourite {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+}
+.favourite p{
+    visibility: hidden;
+}
+.favourite:hover {
+    color: rgba(240, 37, 37, 0.852);
+}
+
+.favourites {
+     display: flex;
+     justify-content: space-around;
+     width: 7rem;
+     margin-left: -20px;
 }
