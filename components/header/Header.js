@@ -4,32 +4,31 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare,faBell, faBars, faHome,faTablet,faUser,faInfo,faSearch,faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import styles from './Header.module.css';
-import {RefreshMenuContext} from '../../pages/_app'
-
-{/* <FontAwesomeIcon icon="fal fa-badge-dollar" />  negociation*/}
-{/* <FontAwesomeIcon icon="fal fa-users" /> follors */}
-{/* <FontAwesomeIcon icon="fal fa-code" />  app*/} 
+import {AppContext} from '../../pages/_app'
 
 
 export default function Header( {user} ){
       const router = useRouter();
-      const {refreshMenu, setRefreshMenu} = useContext(RefreshMenuContext);
+      const {refreshMenu, setRefreshMenu} = useContext(AppContext);
       const [myId, setId] = useState('');
       const [showMenu, setShowMenu] = useState(true);
       const navWidthRef = useRef();
-      const [navWidth, setNavWidth] = useState()
-      
-      const getSize = ()=>{
-            const newWidth = navWidthRef.current.clientWidth;
-            console.log(newWidth)
-            setNavWidth(newWidth);
-            if(navWidth >= 768) {setShowMenu(true);}
-      }
-      useEffect(()=>{getSize()}, [])
+      const [navWidth, setNavWidth] = useState();
+
+      useEffect(()=>{
+            getSize()
+      }, [])
+
       useEffect(() =>{
             setId(sessionStorage.getItem('tokenId'));
             window.addEventListener('resize', getSize);
       },[router.isReady, refreshMenu]);
+      
+      const getSize = ()=>{
+            const newWidth = navWidthRef.current.clientWidth;
+            setNavWidth(newWidth);
+            if(navWidth >= 768) {setShowMenu(true);}
+      }
 
       const onLogOut = async () =>{
             sessionStorage.removeItem('tokenId');
@@ -67,41 +66,45 @@ export default function Header( {user} ){
             </>
             )  
       }
+      const handlerClickCloseSmallMenu = () => {
+            if(showMenu) return;
+            return setShowMenu(true)
+      }
       const HeaderMenuInMiddle = ()=>{
             return (
                   <ul>
-                  <li>
-                        <Link href={selectPath('/feed/', myId)}>
-                             <span>
-                               <FontAwesomeIcon icon={faHome} /> 
-                               <span> {getSmallSize() ? '' : 'Home'}</span>
-                             </span>
-                        </Link>
-                  </li>
-                  <li >
-                        <Link href={selectPath('/apps/listingapps', myId)}>
-                              <span>
-                              <FontAwesomeIcon icon={faTablet}/> 
-                               <span> {getSmallSize() ? '' : 'Aplicativos'}</span>
-                             </span>
-                        </Link>
-                  </li> 
-                  <li>
-                        <Link href={selectPath('/profile/', myId)} >
-                              <span>
-                              <FontAwesomeIcon icon={faUser} /> 
-                               <span> {getSmallSize() ? '' : 'Perfil'}</span>
-                             </span>
-                        </Link>
-                  </li>
-                  <li>
-                        <Link href={selectPath('/terms', myId)} >
-                              <span>
-                              <FontAwesomeIcon icon={faInfo} />
-                               <span> {getSmallSize() ? '' : 'Termos de responsabilidade'}</span>
-                             </span>
-                        </Link>
-                  </li>
+                        <li>
+                              <Link  href={selectPath('/feed/', myId)}>
+                              <span onClick ={handlerClickCloseSmallMenu}>
+                                    <FontAwesomeIcon icon={faHome} /> 
+                                    <span> {getSmallSize() ? '' : 'Home'}</span>
+                              </span>
+                              </Link>
+                        </li>
+                        <li>
+                              <Link href={selectPath('/apps/listingapps', myId)}>
+                                    <span onClick ={handlerClickCloseSmallMenu}>
+                                    <FontAwesomeIcon icon={faTablet}/> 
+                                    <span> {getSmallSize() ? '' : 'Aplicativos'}</span>
+                              </span>
+                              </Link>
+                        </li> 
+                        <li>
+                              <Link href={selectPath('/profile/', myId)}>
+                                    <span onClick ={handlerClickCloseSmallMenu}>
+                                    <FontAwesomeIcon icon={faUser} /> 
+                                    <span> {getSmallSize() ? '' : 'Perfil'}</span>
+                              </span>
+                              </Link>
+                        </li>
+                        <li>
+                              <Link href={selectPath('/terms', myId)} >
+                                    <span onClick ={handlerClickCloseSmallMenu}>
+                                    <FontAwesomeIcon icon={faInfo} />
+                                    <span> {getSmallSize() ? '' : 'Termos de responsabilidade'}</span>
+                              </span>
+                              </Link>
+                        </li>
             </ul> 
             )
       }
@@ -132,8 +135,8 @@ export default function Header( {user} ){
                               { getSmallSize() ? '' : <HeaderMenuInMiddle/> }
                         </div>
                         <div className={styles.search} >
-                              <Link href={`/profile/usuarios`}>
-                                    <span >
+                              <Link href={`/profile/search`}>
+                                    <span onClick ={handlerClickCloseSmallMenu} >
                                           <FontAwesomeIcon className={styles.searchIcon} icon={faSearch} />
                                           <ItemMenuLabel showMenu={showMenu} title="Pesquisar"/>
                                     </span>
@@ -141,7 +144,7 @@ export default function Header( {user} ){
                         </div>
                         <div className={styles.addnewapp} >
                               <Link href={`/apps/newapp`}>
-                                    <span>
+                                    <span onClick ={handlerClickCloseSmallMenu}>
                                           <FontAwesomeIcon icon={faPlusSquare} />
                                           <ItemMenuLabel showMenu={showMenu} title="Adicionar app"/>
                                     </span>
@@ -150,14 +153,14 @@ export default function Header( {user} ){
       
                         <div className={styles.notifications}>
                               <Link href={`/negociation/allnegociations/${myId}`}>
-                                    <span>
+                                    <span onClick ={handlerClickCloseSmallMenu}>
                                           <FontAwesomeIcon icon={faBell} />
                                           <ItemMenuLabel showMenu={showMenu} title="Notificações"/>         
                                     </span>
                               </Link>
                         </div>
                         <p className={styles.logout} onClick={onLogOut}>
-                              {myId ? 'Logout': 'Login'}
+                              {myId ? 'Sair': 'Entrar'}
                         </p>     
                         </>   : ''}
                   </div>

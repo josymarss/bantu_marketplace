@@ -10,6 +10,7 @@
     position:fixed;
     padding:1.6rem;
     gap: 2rem;
+    z-index: 1;
 }
  .title {
      width: fit-content;
@@ -41,6 +42,8 @@
     margin-right:20px;
     cursor: pointer;
     font-size: 14px;
+    font-weight: bold;
+    color:rgba(250, 75, 75, .7);
 }
 .logout:hover{
     color:rgb(250, 75, 75);
@@ -100,12 +103,12 @@
          padding: 1rem;
          margin-top: 38.2rem;
          box-shadow: 4px 8px 8px #d0d0d0;
+         border-radius: 0.3rem;
          display: flex;
          flex-direction: column;
          line-height: 1.9rem;
          background: rgba(0, 0, 0, 0.968);
-         color: white;
-         
+         color: white;     
      }
      .search:hover, .addnewapp:hover, .notifications:hover, .headerMenuInMiddle li:hover {
             cursor: pointer;

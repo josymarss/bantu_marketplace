@@ -6,7 +6,6 @@ import Image from 'next/image';
 import Head from '../../pages/Head';
 
 import styles from './leading.module.css';
-import Footer from '../../components/footer/footer';
 
 export default function LeadingPage(){
     return(
@@ -61,7 +60,6 @@ pessoas específicas para lançar seu aplicativo para o exterior, e cehgar nas m
                     </div>
                 </div>
             </section>
-            <Footer/>
         </div>
     </>       
     )

@@ -11,7 +11,6 @@ export default async (req,res) => {
     const method = req.method;
     //De todos os usuarios buscar seus feed e actualizar app stars
     const resultApps = await users.findOne({feed: {app:{_id:new ObjectId(id) }}}); 
-    console.log(resultApps);
 
     switch(method){
     //retorna specific app
