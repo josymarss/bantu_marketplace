@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import 'antd/dist/antd.css';
 import { Fragment } from 'react';
 import { ToastContainer } from 'react-toastify';
 
