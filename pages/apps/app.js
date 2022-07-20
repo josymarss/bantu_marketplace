@@ -68,7 +68,6 @@ export default function App({ application, userid, me}){
                     <a
                         target='_blank'
                         className={styles.link} 
-                        target='_blank' 
                         href={application.link.replace('http://localhost:3000/apps/','')}
                         rel="noopener noreferrer">
                             {application.link.substring(0,45)}

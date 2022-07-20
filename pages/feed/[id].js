@@ -8,13 +8,13 @@ import {ConnectToDatabase} from '../../db/connection';
 import styles from './feed.module.css'
 
 import HeadComponent from '../Head'; 
+import AppCard from '../../components/Appcard/appcard';
 
 export default function Feed({ user }){
      const [data,setData] = useState();
      const router = useRouter();
 
-     useEffect(()=>[]);
-
+     useEffect(()=>{},[]);
      const FeedComponent = ({avatar, name, app,id}) =>(
           <div className={styles.feedcomponent}>
                <div className={styles.userdata}>
@@ -25,26 +25,14 @@ export default function Feed({ user }){
                     <p onClick={() => router.push('/profile/'+id)} className={styles.username}>{name} </p>
                     <p><span>iniciou uma uma nova negociação.</span></p>
                </div>
-               <div className={styles.content}>
-                    <div className={styles.appcontent}>
-                         <p 
-                              onClick={() => router.push('/apps/'+app._id)} 
-                              className={styles.appname}
-                         >
-                              {app.name}
-                         </p>
-                         <p><span>{app.description.length>50?app.description.substring(0,55)+'...':app.description}</span></p>
-                    </div>
-                    <div className={styles.star}>
-                         <span><FontAwesomeIcon icon={faStar} /></span>
-                         <p>{app.stars.likes}</p>
-                    </div>
-               </div>
+                    <AppCard app= {app}/>
           </div>   
      )
+
+
      const FeedData = () =>  user.feed.length == 0 ? <p>Sem actividade, preocure por seguidores e siga-aos para ver o que têm neogicado.</p>:
           user.feed.map((content,index) =>
-               <FeedComponent 
+               <FeedComponent  
                     avatar={content.avatar?content.avatar:<p>NoPhoto</p>}
                     name={content.name}
                     app={content.app}

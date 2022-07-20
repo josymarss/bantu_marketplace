@@ -37,7 +37,6 @@ export default function appDetails({ app,numbers,negotiations }){
                   if(position >= 0){
                         percent.replace('%','');
                         setPercent(percent+'%');                  }
-                  console.log(percent);
 
                   formData.append('name',name);
                   formData.append('description',description);
@@ -109,7 +108,7 @@ export default function appDetails({ app,numbers,negotiations }){
                                                Negociações  <span>{numbers} </span>
                                           </p>
                                           <p>
-                                               Valor disponível=>  Max:<span>{app.percentMax+'%'}  </span>Min:<span>{app.percentMin+'%'}</span>
+                                               Valor disponível =&gt;  Max:<span>{app.percentMax? app.percentMax : 0}%  </span>Min:<span>{app.percentMin? app.percentMin: 0}%</span>
                                           </p>
                                           {myId == app.userId ?
                                                 <>
