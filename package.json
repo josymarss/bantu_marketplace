@@ -1,6 +1,6 @@
 {
   "name": "bantu-marketplace",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -12,7 +12,6 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "antd": "^4.21.7",
     "axios": "^0.21.1",
     "chart.js": "^3.7.0",
     "form-data": "^4.0.0",
@@ -29,5 +28,18 @@
     "react-dom": "^17.0.2",
     "react-toastify": "^8.1.0",
     "sweetalert": "^2.1.2"
-  }
+  },
+  "description": "the version 0.2.0 - REFATORING ",
+  "main": "next.config.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josymarss/bantu_marketplace.git"
+  },
+  "author": "Josemar Silva && Rodrigo Lima",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josymarss/bantu_marketplace/issues"
+  },
+  "homepage": "https://github.com/josymarss/bantu_marketplace#readme"
 }

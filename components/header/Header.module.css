@@ -1,25 +1,29 @@
 .menu{
     top:0;
     display:flex;
-    height: 60px;
+    height: 2.5rem;
     background-color:#ffffff;
     width:100%;
     align-items:center;
     justify-content: space-between;
     box-shadow: 1px 4px 4px #d0d0d0;
     position:fixed;
-    z-index:9000;
-    padding:20px;
+    padding:1.6rem;
+    gap: 2rem;
+    z-index: 1;
 }
-.menu h5{
+ .title {
+     width: fit-content;
+ }
+.title h1{
     margin-left:10px;
     font-size:20px;
-    color:#292929;
-    
+    color:#292929;  
 }
-.menu h5:hover{
+.title h1:hover{
     cursor:hand;
 }
+
 .menuElements ul{
     display:flex;
     align-self:center;
@@ -38,20 +42,22 @@
     margin-right:20px;
     cursor: pointer;
     font-size: 14px;
+    font-weight: bold;
+    color:rgba(250, 75, 75, .7);
 }
 .logout:hover{
     color:rgb(250, 75, 75);
 }
-
-.searchIcon {
-    margin-right:8px;
+.menuItem {
+     display: none;
 }
+
 .add {
-    width:130px;
+    width: 20%;
     display:flex;
     flex-direction:row;
-    align-items:center;
     justify-content:space-around;
+    align-items: center;
 }
 .add span{
     font-size:16px;
@@ -85,4 +91,93 @@
     font-weight: 570;
 }
 
-/*Adicionando estilização no botão login, face o cursor pointer*/
+@media screen and (max-width: 768px) {
+    .add {
+        display: none;
+     }
+     .showMenuAdd {
+         height: 100vh;
+         width: 90%;
+         position: absolute;
+         display: inline;
+         padding: 1rem;
+         margin-top: 38.2rem;
+         box-shadow: 4px 8px 8px #d0d0d0;
+         border-radius: 0.3rem;
+         display: flex;
+         flex-direction: column;
+         line-height: 1.9rem;
+         background: rgba(0, 0, 0, 0.968);
+         color: white;     
+     }
+     .search:hover, .addnewapp:hover, .notifications:hover, .headerMenuInMiddle li:hover {
+            cursor: pointer;
+            color: #aaaaaa;
+     }
+    .menuItem {
+        display: inline;
+        color: #c5c5c5;
+   }
+   .menuElements {
+     margin-left: -190px;
+   }
+    .addnewapp span, .notifications span, .search span, .headerMenuInMiddle ul li span, .closeWindow span {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.5rem;
+        transition: ease-in-out 200ms;
+    }
+    .closeWindow {
+        align-self: flex-end;
+        color:rgb(255, 54, 54);
+    }
+    .closeWindow:hover {
+        align-self: flex-end;
+        color:rgb(255, 79, 79);
+    }
+    .notifications {
+         align-self: flex-start;
+    }
+   .logout {
+       font-weight: 500;
+   }
+}
+
+@media (min-width: 481px) and  (max-width: 680px) {
+    .title {
+        margin-right: 4.5rem;
+    }
+    .menuElements ul li {
+         font-size: medium;
+    }
+
+}
+@media screen and (min-width: 768px) {
+    .showMenuAdd {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .menuElements {
+        display: none;
+    }
+    .menu {
+        gap: 10px;
+    }
+    .headerMenuInMiddle ul {
+        list-style: none;
+    }
+    .headerMenuInMiddle  {
+        cursor: pointer;
+    }
+    .headerMenuInMiddle{
+        display: flex;
+        flex-direction: column;
+        margin-left: -40px;
+        line-height: 1.9rem;
+    }
+}
