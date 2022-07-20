@@ -12,6 +12,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "antd": "^4.21.7",
     "axios": "^0.21.1",
     "chart.js": "^3.7.0",
     "form-data": "^4.0.0",
@@ -31,7 +32,6 @@
   },
   "description": "the version 0.2.0 - REFATORING ",
   "main": "next.config.js",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/josymarss/bantu_marketplace.git"

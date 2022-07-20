@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import { Inpu } from 'antd';
 
 import Head from '../Head'
 import styles from './login.module.css'
