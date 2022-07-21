@@ -40,9 +40,8 @@
      
 }
 .star span:hover{
-    color:rgb(0, 102, 235);
+    transform: scale(1.2);
 }
-
 .favourite {
     display:flex;
     flex-direction:row;
@@ -52,13 +51,27 @@
 .favourite p{
     visibility: hidden;
 }
-.favourite:hover {
-    color: rgba(240, 37, 37, 0.852);
-}
-
 .favourites {
      display: flex;
      justify-content: space-around;
      width: 7rem;
      margin-left: -20px;
 }
+.star_blue{
+    color:rgb(0, 102, 235);
+    transform: scale(1.2);
+}
+.star_number {
+     color: #000000;
+}
+.star_black{
+    color:#000000;
+    transform: scale(1.2);
+}
+.favourites_selected {
+    color: rgba(240, 37, 37, 0.852);
+}
+ .favourites_selected:hover {
+    transform: scale(1.2);
+} 
+

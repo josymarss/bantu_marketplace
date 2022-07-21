@@ -8,10 +8,12 @@ const Allapps = ({apps}) => {
         <h2>Todos aplicativos</h2>
         <div className={styles.containerApp}>
         {
-            apps.map((elem, index)=> <AppCard app={elem} index={index}/>)
+            apps.map((elem, index)=> <AppCard app={elem} key={index}/>)
         }
         </div>
     </div>
     );
 }
+
+
 export default Allapps;

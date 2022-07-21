@@ -12,6 +12,16 @@ const AppCard = ({app}) => {
     const [appId,setAppId] = useState();
     const [appUserId,setAppUserId] = useState();
     const [likes, setLikes] = useState(app.stars.likes);
+    const [likeToggle, setLikeToggle] = useState();
+    const [favourite, setFavourite] = useState(false);
+
+     useEffect(()=> {
+          if(myId !== undefined){
+               savedFavourires(myId, appId)
+               liked()
+          }
+
+     })
 
     useEffect(() => {
       let auxId = sessionStorage.getItem('tokenId');
@@ -20,16 +30,37 @@ const AppCard = ({app}) => {
       setAppUserId(app.userId);
     } ,[likes]);
 
+
+     const savedFavourires = (myId, appId) => {
+          axios.put('/api/user/favourites', {myId: myId, appId:appId})
+          .then(res =>{
+               setFavourite(res.data.value)
+          });
+     }  
+     const addFavourite =()=> {
+          axios.post('/api/user/favourites', {myId, appId})
+          .then(res => {
+               setFavourite(res.data.value)
+          });
+    }
+
     const addLike =()=> {
       if(myId === appUserId){
           return;
       }
        axios.post('/api/apps/addlike', {myId, appId})
-       .then(res =>{ setLikes(v => v + res.data.like) });
+       .then(res =>{ 
+          setLikes(v => v + res.data.like) 
+     });
     }
-    const addFavourite =()=> {
 
-    }
+      const liked = () => {
+          axios.put('/api/apps/addlike', {myId, appId})
+          .then(res =>{ 
+               setLikeToggle(res.data.value)
+          });
+      }
+
     return (
         <div className={styles.content}>
           <div className={styles.appcontent}>
@@ -41,12 +72,12 @@ const AppCard = ({app}) => {
                </p>
                <p><span>{app.description.length>50?app.description.substring(0,55)+'...':app.description}</span></p>
                <div className={styles.favourites}>
-               <div className={styles.star}>
+               <div className={likeToggle?`${styles.star} ${styles.star_blue}` : `${styles.star} ${styles.star_black}`}>
                     <span  onClick={addLike}><FontAwesomeIcon icon={faStar} /></span>
-                    <p>{likes}</p>
+                    <p className={styles.star_number}>{likes}</p>
                </div>
                <div className={styles.favourite}>
-                    <span  onClick={addFavourite}><FontAwesomeIcon icon={faHeart} /></span>
+                    <span className={favourite ? styles.favourites_selected : styles.unfavourites_selected} onClick={addFavourite}><FontAwesomeIcon icon={faHeart} /></span>
                     <p>0</p>
                </div>
                </div> 
