@@ -5,12 +5,12 @@ export default async (req,res) => {
      const {myId, appId} = req.body
      const db = await ConnectToDatabase();
      const httpMethod = req.method;
+     const apps = await db.collection('apps');
+     const  app = await apps.findOne({_id: ObjectId(appId)});
+
+     const userExist = app.stars.usersid.includes(myId);
 
      if(httpMethod === 'POST'){
-        const apps = await db.collection('apps');
-        const  app = await apps.findOne({_id: ObjectId(appId)});
-
-        const userExist = app.stars.usersid.includes(myId);
 
         if(!userExist){
                await apps.updateOne({_id: ObjectId(appId)}, {$push:{"stars.usersid":myId }});
@@ -25,4 +25,11 @@ export default async (req,res) => {
                return res.send({like: -1});
         }
      }
+
+        if(httpMethod === 'PUT'){
+
+       if(userExist) return  res.send({value: true});
+       return res.send({value: false});
+          
+   }
 }

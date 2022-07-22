@@ -77,17 +77,17 @@ export default function NewApp (){
                             <input type='text' className={styles.input} placeholder='Nome do aplicativo' onChange={e => updateName(e.target.value)}/>
                             <p className={styles.label}>Adiciona uma categoria para o aplicativo</p>
                             <select className={styles.input} onChange={(e) => setCategoria(e.target.value)}>
-                                <option value='Bate-papo ou chat'>Bate-papo ou chat</option>
+                                <option value='Bate_papo_ou_chat'>Bate-papo ou chat</option>
                                 <option value='Servicos'>Serviço</option>
                                 <option value='Informacoes'>Informações</option>
                                 <option value='Comunicacao'>Comunicação</option>
-                                <option value='Midia Social'>Mídia Social</option>
-                                <option value='Navegador web'>Navegador web</option>
-                                <option value='Correio eletronico'>Correio eletrônico</option>
-                                <option value='Desenvolvimento de aplicacoes'>Desenvolvimento de aplicações</option>
-                                <option value='Telefonia e videoconferencia'>Telefonia e videoconferência</option>
-                                <option value='Desenho industrial, 3D ou edicao'>Desenho industrial, 3D ou edição</option>
-                                <option value='Administracao publica e de Processo eletronico'>Administração Pública e de Processo eletrônico</option>
+                                <option value='Midia_social'>Mídia Social</option>
+                                <option value='Navegador_web'>Navegador web</option>
+                                <option value='Correio_eletronico'>Correio eletrônico</option>
+                                <option value='Desenvolvimento_de_aplicacoes'>Desenvolvimento de aplicações</option>
+                                <option value='Telefonia_e_videoconferencia'>Telefonia e videoconferência</option>
+                                <option value='Desenho_industrial_3D_ou_edicao'>Desenho industrial, 3D ou edição</option>
+                                <option value='Administracao_publica_e_de_Processo_eletronico'>Administração Pública e de Processo eletrônico</option>
                             </select>
                             <p className={styles.label}>Escolha a quantidade de ações que deseja negociar</p>
                             <p className={styles.labelAnother}>Valor mínimo</p>

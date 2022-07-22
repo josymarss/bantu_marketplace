@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import { Fragment, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import Header from '../components/header/Header';
 import { createContext } from 'react';

@@ -52,7 +52,8 @@ export default async (req,res) => {
                 avatar:files.file.newFilename,
                 feed:[],
                 followers:[],
-                negociationsimade:[]
+                negociationsimade:[],
+                favourites:[]
             });
              
             const { _id } = result.ops[0];

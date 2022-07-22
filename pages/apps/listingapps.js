@@ -8,17 +8,12 @@ import Launchapps from '../../components/launchapps/launchapps';
 import Allapps from '../../components/allapps/allapps';
 import { AppContext } from '../_app';
 import HighierApp from '../../components/higherApps/highierapps';
+import FavouriteApp from '../../components/favourites/favouriteApp';
+import Categoryapps from '../../components/category/categoryapps';
 
-export default function Apps({ apps,categorias, appsSorted, appsHighier }){
+export default function Apps({ apps,category, appsSorted, appsHighier }){
       const {element} = useContext(AppContext);
-      const router = useRouter();
       const [myId,setId] = useState();
-      const [limit, setLimit] = useState(10);
-      const [controlText, setText]= useState('');
- 
-      useEffect(()=>{
-
-      },[limit]);
 
       useEffect(() => setId(sessionStorage.getItem('tokenId')),[]);
 
@@ -27,8 +22,8 @@ export default function Apps({ apps,categorias, appsSorted, appsHighier }){
                   case 1 : return (
                         <Allapps apps={apps} />
                   );
-                  case 2 : return (<h1> {"Favoritos"}</h1>);
-                  case 3 : return (<h1> {"Categorias"}</h1>);
+                  case 2 : return (<FavouriteApp myId={myId} />);
+                  case 3 : return (<Categoryapps category={category}/>);
                   case 4 : return (<HighierApp apps={appsHighier}/>);
                   case 5 : return (
                         <Launchapps apps={appsSorted}/>);
@@ -65,13 +60,22 @@ export async function getServerSideProps (context) {
       const appsHighier = JSON.parse(JSON.stringify(highierApp));
      
 
-      let categorias = [];
-      apps.map(app => categorias.push(app.categoria));
+     
+      const category =  apps.reduce((acc, elem)=>{
+            if(acc[elem.categoria]){
+                  acc[elem.categoria].push(elem);
+            } else {
+                  acc[elem.categoria] = [];
+                  acc[elem.categoria].push(elem);     
+            }
+            return acc;
+        }, {})
+
 
       return {
             props:{
                   apps,
-                  categorias,
+                  category,
                   appsSorted,
                   appsHighier
             }
