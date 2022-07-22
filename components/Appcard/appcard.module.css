@@ -68,10 +68,14 @@
     color:#000000;
     transform: scale(1.2);
 }
+.unfavourites_selected:hover {
+    transform: scale(1.2);
+} 
+.favourites_selected:hover {
+    transform: scale(1.2);
+}
 .favourites_selected {
     color: rgba(240, 37, 37, 0.852);
 }
- .favourites_selected:hover {
-    transform: scale(1.2);
-} 
+
 

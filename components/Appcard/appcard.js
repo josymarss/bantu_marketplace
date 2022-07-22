@@ -7,59 +7,58 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const AppCard = ({app}) => {
-    const router = useRouter();
-    const [myId,setId] = useState();
-    const [appId,setAppId] = useState();
-    const [appUserId,setAppUserId] = useState();
-    const [likes, setLikes] = useState(app.stars.likes);
-    const [likeToggle, setLikeToggle] = useState();
-    const [favourite, setFavourite] = useState(false);
+     const router = useRouter();
+     const [myId,setId] = useState();
+     const [appId,setAppId] = useState();
+     const [appUserId,setAppUserId] = useState();
+     const [likes, setLikes] = useState(app.stars.likes);
+     const [likeToggle, setLikeToggle] = useState();
+     const [favourite, setFavourite] = useState();
 
-     useEffect(()=> {
-          if(myId !== undefined){
-               savedFavourires(myId, appId)
-               liked()
+          useEffect(()=> {
+               if(myId !== undefined){
+                    savedFavourires(myId, appId)
+                    liked()
+               }
+          })
+
+     useEffect(() => {
+          let auxId = sessionStorage.getItem('tokenId');
+          setId(auxId);
+          setAppId(app._id);
+          setAppUserId(app.userId);
+     } ,[likes]);
+
+
+          const savedFavourires = (myId, appId) => {
+               axios.put('/api/user/favourites', {myId: myId, appId:appId})
+               .then(res =>{
+                    setFavourite(res.data.value)
+               });
+          }  
+          const addFavourite =()=> {
+               axios.post('/api/user/favourites', {myId, appId})
+               .then(res => {
+                    setFavourite(res.data.value)
+               });
+     }
+
+     const addLike =()=> {
+          if(myId === appUserId){
+               return;
           }
-
-     })
-
-    useEffect(() => {
-      let auxId = sessionStorage.getItem('tokenId');
-      setId(auxId);
-      setAppId(app._id);
-      setAppUserId(app.userId);
-    } ,[likes]);
-
-
-     const savedFavourires = (myId, appId) => {
-          axios.put('/api/user/favourites', {myId: myId, appId:appId})
-          .then(res =>{
-               setFavourite(res.data.value)
-          });
-     }  
-     const addFavourite =()=> {
-          axios.post('/api/user/favourites', {myId, appId})
-          .then(res => {
-               setFavourite(res.data.value)
-          });
-    }
-
-    const addLike =()=> {
-      if(myId === appUserId){
-          return;
-      }
-       axios.post('/api/apps/addlike', {myId, appId})
-       .then(res =>{ 
-          setLikes(v => v + res.data.like) 
-     });
-    }
-
-      const liked = () => {
-          axios.put('/api/apps/addlike', {myId, appId})
+          axios.post('/api/apps/addlike', {myId, appId})
           .then(res =>{ 
-               setLikeToggle(res.data.value)
+               setLikes(v => v + res.data.like) 
           });
-      }
+     }
+
+          const liked = () => {
+               axios.put('/api/apps/addlike', {myId, appId})
+               .then(res =>{ 
+                    setLikeToggle(res.data.value)
+               });
+          }
 
     return (
         <div className={styles.content}>

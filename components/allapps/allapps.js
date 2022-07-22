@@ -5,15 +5,13 @@ import styles from './allapps.module.css'
 const Allapps = ({apps}) => {
     return (
         <div className={styles.container}>
-        <h2>Todos aplicativos</h2>
-        <div className={styles.containerApp}>
-        {
-            apps.map((elem, index)=> <AppCard app={elem} key={index}/>)
-        }
+            <h2>Todos aplicativos</h2>
+            <div className={styles.containerApp}>
+                {
+                   apps.length === 0 ? <p> Sem favoritos</p> : apps.map((elem, index)=> <AppCard app={elem} key={index}/>)
+                }
+            </div>
         </div>
-    </div>
     );
 }
-
-
 export default Allapps;
