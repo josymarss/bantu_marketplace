@@ -29,11 +29,53 @@
     flex-direction:row;
     align-items:center;
     justify-content:flex-start;
-    height:20%;
+}
+.star p{
+    font-size: small;
 }
 .star span{
-    margin-right:10px;
+    display: flex;
+    justify-content: space-around;
+    width: 2rem;
+     
 }
 .star span:hover{
-    color:rgb(0, 102, 235);
+    transform: scale(1.2);
 }
+.favourite {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+}
+.favourite p{
+    visibility: hidden;
+}
+.favourites {
+     display: flex;
+     justify-content: space-around;
+     width: 7rem;
+     margin-left: -20px;
+}
+.star_blue{
+    color:rgb(0, 102, 235);
+    transform: scale(1.2);
+}
+.star_number {
+     color: #000000;
+}
+.star_black{
+    color:#000000;
+    transform: scale(1.2);
+}
+.unfavourites_selected:hover {
+    transform: scale(1.2);
+} 
+.favourites_selected:hover {
+    transform: scale(1.2);
+}
+.favourites_selected {
+    color: rgba(240, 37, 37, 0.852);
+}
+
+
