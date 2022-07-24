@@ -1,5 +1,5 @@
 import styles from './reajustar.module.css';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import axios from 'axios';
 import swl from 'sweetalert';
@@ -7,12 +7,16 @@ import swl from 'sweetalert';
 export default function Reajustar(){
       const [desc,setDescription] = useState();
       const router = useRouter();
+      const [myId, setMyId] = useState();
+
+      useEffect(()=>{
+            setMyId(sessionStorage.getItem("tokenId"));
+           
+      }, [])
 
       const onReajust = async() =>{
-            const result = await axios.put('/api/negociation/status',{
-                  idnegociation:router.query.id,
-                  desc
-            });
+            const result = await axios.put('/api/negociation/status', {desc,  idnegociation:router.query.id});
+
             if(result){
                   swl({
                         title:'Sucesso!',
@@ -20,10 +24,10 @@ export default function Reajustar(){
                         icon:'success'
                   })
                   setTimeout(() =>{
-                        router.push('/');
+                        router.push('/feed/'+myId);
                   },3000);
             }
-      }
+      } 
       
       return (
             <div className={styles.container}>

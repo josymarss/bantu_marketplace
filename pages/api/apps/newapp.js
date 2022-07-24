@@ -47,7 +47,8 @@ export default async (req,res) => {
                 percentMax,
                 percentMin,
                 data:  dia+'/'+mes+'/'+ano,
-                createdAt:currentDate
+                createdAt:currentDate,
+                notification: [],
             }
         );
             res.send(appResult.ops[0]);

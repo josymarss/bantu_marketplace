@@ -14,4 +14,4 @@ const AppSchema = new Schema(
         description:{type:String},
     }]
 }) 
-export default monggose.model('App', AppSchema);
+export default mongoose.model('App', AppSchema);

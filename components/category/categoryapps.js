@@ -32,19 +32,37 @@ const Categoryapps = ({category}) => {
             <h2>Categorias</h2>
             <nav className={styles.categoryMenu}>
                     <ul>
-                        <li><a href='#servico'>Serviços</a></li>
-                        <li><a href='#informacoes'>Informações</a></li>
+                        <li>
+                            <a href='#servico'>Serviços</a>
+                        </li>
+                        <li>
+                            <a href='#informacoes'>Informações</a>
+                        </li>
                         <li><a href='#comunicacao'>Comunicação</a></li>
-                        <li><a href='#midia_social'>Mídia Social</a></li>
-                        <li><a href='#navegador_web'>Navegador web</a></li>
-                        <li><a href='#correio_eletronico'>Correio eletrônico</a></li>
-                        <li><a href='#desenvolvimento_de_aplicacoes'>Desenvolvimento <br/> de aplicações</a></li>
-                        <li><a href='#telefonia_e_videoconferencia'>Telefonia e videoconferência</a></li>
-                        <li><a href='#Desenho_industrial_3D_ou_edicao'>Desenho industrial <br/> 3D ou edição</a></li>
-                        <li><a href='#administracao_publica_e_de_Processo_eletronico'>Administração Pública <br/> e de Processo eletrônico</a></li>
+                        <li>
+                            <a href='#midia_social'>Mídia Social</a>
+                        </li>
+                        <li>
+                            <a href='#navegador_web'>Navegador web</a>
+                        </li>
+                        <li>
+                            <a href='#correio_eletronico'>Correio eletrônico</a>
+                        </li>
+                        <li>
+                            <a href='#desenvolvimento_de_aplicacoes'>Desenvolvimento <br/> de aplicações</a>
+                        </li>
+                        <li>
+                            <a href='#telefonia_e_videoconferencia'>Telefonia e videoconferência</a>
+                        </li>
+                        <li>
+                            <a href='#Desenho_industrial_3D_ou_edicao'>Desenho industrial <br/> 3D ou edição</a>
+                        </li>
+                        <li>
+                            <a href='#administracao_publica_e_de_Processo_eletronico'>Administração Pública <br/> e de Processo eletrônico</a>
+                        </li>
                     </ul>
             </nav>
-            {verifyArray(Servicos)? '' : <h3 id="servico">Serviços</h3>}
+            {verifyArray(Servicos) ? '' : <h3 id="servico">Serviços</h3>}
             <CategoryApp arr={Servicos} />
 
             {verifyArray(Informacoes)? '' : <h3 id="informacoes">Informações</h3>}

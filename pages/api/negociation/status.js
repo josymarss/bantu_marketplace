@@ -7,38 +7,37 @@ export default async (req,res) => {
       const apps = await db.collection('apps');
       const aceptednegociations = await db.collection('acepted');
       const notification = await db.collection('notification');
-      let newApp;
+      // let newApp;
       let appIwant;
 
       const method = req.method;
-      
+     
       switch(method){
             case 'PUT':
                 // receber os dados, idapp, idneg e iduser 
                 const {idnegociation, desc} = req.body;
                 //Buscar o aplicativo 
-                  const appINeed = await apps.findOne({ negociations: {
-                              $elemMatch: { _id:ObjectId(idnegociation) }
-                        }
-                  });
+                  const appINeed = await apps.findOne({ negociations: {$elemMatch:{ _id:ObjectId(idnegociation)}}});
+
                   if(appINeed){
-                        if(appINeed.negociations.length > 0){
-                              newApp = appINeed.negociations.filter(neg => neg._id != idnegociation);
-                        }
+                        // if(appINeed.negociations.length > 0){
+                        //       newApp = appINeed.negociations.filter(neg => neg._id != idnegociation);
+                        // }
                         if(appINeed.negociations.length > 0){
                               appIwant = appINeed.negociations.filter(neg => neg._id == idnegociation);
                         }
                   }
-                  await apps.updateOne({ _id:appINeed._id },{
-                        $set: { negociations: [ ...newApp ] }
-                  });
+                  // await apps.updateOne({ _id:appINeed._id },{
+                  //       $set: { negociations: [ ...newApp ] }
+                  // });
+                  const [ name] = appIwant
                   await notification.insertOne({
-                        iduser:appIwant.idUser,
-                        appname:appIwant.name,
-                        not:appIwant.name+' Foi redefinido os termos',
-                        not:desc
+                        iduser: appIwant[0].idapp,
+                        appname: appIwant[0].appname,
+                        not_: appIwant[0].appname+' Foi redefinido os termos',
+                        not: desc
                   });
-                  res.send(true);
+                  res.send(appIwant[0].idapp);
 
             break;
 
