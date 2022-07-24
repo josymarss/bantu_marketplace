@@ -1,8 +1,10 @@
 .container{
-    margin-top:90px;
-    display:flex;
-    flex-direction:column;
-    display:flex;
+    height: 100vh;
+    display: grid;
+    margin-top: 8rem;
+    grid-template-columns: 20% 70%;
+    grid-template-rows: 1fr 1fr;
+    justify-content: center;
 }   
 .profile{
     display:flex;
@@ -11,6 +13,8 @@
     justify-content:center;
     flex-direction:column;
     margin-bottom:22px;
+    grid-row: 1/2;
+    grid-column: 1/2;
 }
 .img{
     margin-top:20px;
@@ -20,90 +24,95 @@
     border-radius:200px;
 }
 .username{
-    font-size:18px;
+    font-size:15pt;
+    font-weight: bolder;
     font-weight:normal;
     color:rgb(10, 10, 10);
+  
 }
 .username:hover{
     text-decoration:underline;
     cursor:pointer;
 }
-.followers:hover{
-    color:rgb(0, 102, 235);
-    cursor:pointer;
-}
-.edit{
+
+.user_data_name{
     display:flex;
-    flex-direction:row;
-    align-items:center;
-    justify-content:center;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+  
 }
-.edit >span{
-    font-size:10pt;
-    margin-left:14px;
-    margin-top:-24px;
-    padding:8px 12px;
-    border-radius:4px;
-    background-color:rgb(223, 223, 223);
-    background-size: 50px;
+.user_data_name >span{
+    margin-bottom: -25px;  
+
 }
-.edit >span:hover{ 
-    background-color:rgb(0, 102, 235);
-    color:white;
-    transition:0.1s ease-in;
+
+ .tofollow{
+    position: absolute;
+    top: 3.5rem;
+    right: 1rem;
 }
-.fullName{
-    margin-top:-24px;
-    margin-top:4px;
-    font-size:28px;
-    color:rgb(0, 102, 235);
-}
-.tofollow{
-    margin-top:-40px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex-direction:row;
-}
-.tofollow > span {
+/* .tofollow > span {
     margin-left:12px;
+} */ 
+
+
+.fullName {
+    display: flex;
 }
-.seguindo:hover{
-    text-decoration: underline; 
+.fullName span {
+   margin: 1.8rem 0 0 1rem;
 }
-.notfollowing:hover{
-    text-decoration: underline; 
+.fullName p{
+    font-size: 20pt;
+    color:rgb(0, 102, 235);
+    margin-bottom: 8px;
 }
 .descritpion {
-    font-size:18px;
     text-align:center;
+    margin-bottom: 10px;
+}
+.descritpion p{
+    font-size:15pt;
+    margin-bottom: 105px;
 }
 .notfollowing{
-    font-size:14px;
+    font-size:11pt;
     color:rgb(255, 255, 255);
     width:85px;
     height:28px;
     border-radius:90px;
     padding:3px;
     text-align: center;
-    background-color:rgb(0, 102, 235);
+    background-color:rgba(0, 102, 235, 0.824);
 }
 .seguindo {
-    padding:14px;
+    /* padding:14px; */
     color:rgb(255, 255, 255);
-    font-size:14px;
+    font-size: 11pt;
     width:85px;
     height:28px;
     border-radius:90px;
-    padding:3px;
+    padding:4px;
     text-align: center;
-    background-color:rgb(99, 99, 99);
+    background-color:rgb(12, 221, 96);
+}
+.seguindo:hover {
+    background-color:rgba(12, 221, 96, 0.753);
+
+}
+ .notfollowing:hover{
+    font-size: 11.5pt;
+    background-color:rgba(0, 102, 235);
 }
 .appSection{
     display:flex;
     align-items:center;
     justify-content:center;
     flex-direction:column;
+    grid-row: 2/3;
+    grid-column: 2/3;
+    margin-top: -12rem;
 }
 .appSection > h4 {
     color:rgb(0, 102, 235);
@@ -117,28 +126,31 @@
     width:60%;
 }
 .dataapp{
-    display:flex;
-    align-items:center;
-    flex-direction:row;
-    margin-top:-14px;
-    
+        /* top: 4rem;
+        left: 4rem;
+        position: absolute; */
+        display: flex;
+        flex-direction: column;
+        grid-column: 1/2;
+        grid-row: 2/3;
+        margin-top: -70px;
 }
-.dataapp p{
-    margin-left:18px;
-    background-color:rgb(255, 255, 255);
-    box-shadow: 1px 1px 1px 2px #ededed;
-    padding:10px;
-    border-radius:40px;
+.dataapp ul{
+     display: flex;
+     flex-direction: column;
+     list-style: none;
+
 }
-.dataapp p > span{
-    margin-left:8px;
-    color:rgb(0, 102, 235);
-    font-size:12pt;
-    font-weight:bold;
+.dataapp ul li:hover {
+    color: #333;
+    cursor: pointer;
 }
-.dataapp p:hover{
-    box-shadow: 1px 1px 1px 3px #e2e2e2;
+.dataapp ul li {
+     font-size: 11pt;
+     font-weight: 500;
+     margin-bottom: -1rem;
 }
+
 .listApp{
     width:100%;
     display:flex;

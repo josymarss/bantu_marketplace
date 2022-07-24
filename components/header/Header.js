@@ -155,7 +155,8 @@ export default function Header( {user} ){
                               <Link href={`/negociation/allnegociations/${myId}`}>
                                     <span onClick ={handlerClickCloseSmallMenu}>
                                           <FontAwesomeIcon icon={faBell} />
-                                          <ItemMenuLabel showMenu={showMenu} title="Notificações"/>         
+                                          <ItemMenuLabel showMenu={showMenu} title="Notificações"/>      
+                                    <sup  className={styles.notificationNumber}>{2}</sup>
                                     </span>
                               </Link>
                         </div>

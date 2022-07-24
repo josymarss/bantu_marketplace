@@ -38,6 +38,27 @@ export default async (req,res) => {
                 datadanegociacao: dia+'/'+mes+'/'+ano
             });
     
+
+    await apps.updateOne({ _id:ObjectId(_id)},{ 
+        $push: {negociations: {
+            _id: new ObjectId(), 
+            idapp:_id,
+            appname,
+            titulo, 
+            description, 
+            iduserdonodoapp,
+            iddosolicitante:userSolicitante._id,
+            usersolicitantename:userSolicitante.fullName,
+            usersolicitanteavatar: userSolicitante.avatar,
+            nameuser:name, 
+            useravatar:avatar,
+            percent,
+            negotitationType,
+            dataLimite,
+            datadanegociacao: dia+'/'+mes+'/'+ano
+
+        } }
+    });       
     const app = await apps.findOne({ _id:ObjectId(_id) });
     //Colocar notificacao no dono do app
 
