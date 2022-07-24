@@ -1,79 +1,42 @@
 .container{
     height: 100vh;
     display: grid;
-    margin-top: 8rem;
-    grid-template-columns: 20% 70%;
+    margin-top: 5rem;
+    grid-template-columns: 25% 50%;
     grid-template-rows: 1fr 1fr;
     justify-content: center;
-}   
-.profile{
-    display:flex;
-    height:230px;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    margin-bottom:22px;
-    grid-row: 1/2;
-    grid-column: 1/2;
-}
-.img{
-    margin-top:20px;
-    width:110px; 
-    height:110px;
-    border-radius:160px;
-    border-radius:200px;
-}
-.username{
-    font-size:15pt;
-    font-weight: bolder;
-    font-weight:normal;
-    color:rgb(10, 10, 10);
-  
-}
-.username:hover{
-    text-decoration:underline;
-    cursor:pointer;
+} 
+
+.profile {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     grid-column: 1/2;
+     border: 1px solid red;
 }
 
-.user_data_name{
-    display:flex;
-    flex-direction:column;
-    justify-content: center;
-    align-items: center;
-  
+.img {
+     height: 80px;
+     width: 80px;
+     border-radius: 160px;
+     grid-template-columns: 1/2;
 }
-.user_data_name >span{
-    margin-bottom: -25px;  
-
-}
-
- .tofollow{
-    position: absolute;
-    top: 3.5rem;
-    right: 1rem;
-}
-/* .tofollow > span {
-    margin-left:12px;
-} */ 
-
 
 .fullName {
-    display: flex;
+
 }
 .fullName span {
    margin: 1.8rem 0 0 1rem;
-}
+}  
 .fullName p{
-    font-size: 20pt;
+    /* font-size: 18pt;
     color:rgb(0, 102, 235);
-    margin-bottom: 8px;
-}
+    margin-bottom: 8px; */
+} 
 .descritpion {
-    text-align:center;
-    margin-bottom: 10px;
+
 }
 .descritpion p{
-    font-size:15pt;
+    font-size:10.5pt;
     margin-bottom: 105px;
 }
 .notfollowing{
@@ -105,35 +68,23 @@
     font-size: 11.5pt;
     background-color:rgba(0, 102, 235);
 }
-.appSection{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    grid-row: 2/3;
-    grid-column: 2/3;
-    margin-top: -12rem;
-}
+
 .appSection > h4 {
     color:rgb(0, 102, 235);
 }
-.myapps{
+/* .myapps{
     display:flex;
     flex-direction:row;
     flex-wrap:wrap;
     align-items:center;
     justify-content:flex-start;
-    width:60%;
-}
+    grid-column: 2/3;
+} */
 .dataapp{
-        /* top: 4rem;
-        left: 4rem;
-        position: absolute; */
         display: flex;
         flex-direction: column;
         grid-column: 1/2;
         grid-row: 2/3;
-        margin-top: -70px;
 }
 .dataapp ul{
      display: flex;
@@ -176,8 +127,4 @@
     width:50px;
     height:50px;
 }
-
-
-
-
 

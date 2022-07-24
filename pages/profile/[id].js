@@ -69,17 +69,15 @@ export default function User({ user,apps,id,negociationsDone }){
                             </span>: ''}
                     </span>
                     <span>
-                    <p className={styles.username}>{`@${user.name}`}</p>       
+                         <p className={styles.username}>{`@${user.name}`}</p>       
                     </span>
                     <span className={styles.descritpion}>
-                    <p >{user.description}</p>        
+                          <p >{user.description}</p>        
                     </span>
-
-
                 </div>
-
-                    
-                <div className={styles.tofollow}>
+            </div>
+            
+            <div className={styles.tofollow}>
                     {user._id !== myId ?
                     
                     <> 
@@ -93,8 +91,6 @@ export default function User({ user,apps,id,negociationsDone }){
                     :  ''
                    
                 }
-                </div>
-   
             </div>
 
             <aside className={styles.dataapp}>
@@ -108,15 +104,6 @@ export default function User({ user,apps,id,negociationsDone }){
 
             <div className={styles.appSection}>
                 <h4>Meus aplicativos</h4>
-                <hr
-                style={{
-                    marginTop:'-8px',
-                    marginBottom:'12px',
-                    borderRadius:'6px',
-                    height:.1,
-                    width:'800px',
-                    color:'lightgray'
-                }}/>
                 <div className={styles.myapps}>
                     {apps ? apps.map((app,index) => 
                         <div className={styles.listApp}>
