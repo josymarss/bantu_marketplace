@@ -18,7 +18,6 @@ export default function Users({user}){
 
       useEffect(() => {
             setId(sessionStorage.getItem('tokenId'));
-            console.log(user)
       },[]);
 
       const onChange = (e) => {

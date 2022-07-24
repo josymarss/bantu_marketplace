@@ -90,6 +90,11 @@
     margin-bottom:38px;
     font-weight: 570;
 }
+.notificationNumber {
+     color:rgb(250, 75, 75);
+     font-size: small;
+     font-weight: bold;
+}
 
 @media screen and (max-width: 768px) {
     .add {

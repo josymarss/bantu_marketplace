@@ -12,26 +12,24 @@ import { faCheck,faPenSquare,faTrash } from '@fortawesome/free-solid-svg-icons';
 export default function Acept({ negociation }){
       const [myId, setId] = useState();
       const router = useRouter();
+      const [negociatiion, setNegociatiion] = useState(negociation.negociations);
 
       useEffect(() =>{
             setId(sessionStorage.getItem('tokenId'));
       },[router.isReady]);
-      useEffect(()=> {
-            console.log(negociation);
-      }, []);
 
-      const onAceitar = async (negociation)=>{
+      const onAceitar = async ()=>{
             swl({
                   title:'Aceitar',
                   text:`Tens a certeza que deseja aceitar
-                  a soliciatção de: ${negociation.nameuser}`,
+                  a soliciatção de: ${negociatiion.nameuser}`,
                   icon:'warning',
                   buttons:['Não', 'Sim'],
 
             }).then(async response => {
                   if (response) {
                         const result = await axios.post('/api/negociation/status',{
-                              negociation,
+                              negociatiion,
                               myId
                         });
                         result.data? swl({
@@ -45,11 +43,11 @@ export default function Acept({ negociation }){
             }});
       }
 
-       const onRejeitar = async (negociation)  => {
+       const onRejeitar = async ()  => {
             swl({
                   title:'Rejeitar',
                   text:`Tens a certeza que deseja rejeitar
-                  a soliciatção de: ${negociation.nameuser}`,
+                  a soliciatção de: ${negociatiion.nameuser}`,
                   icon:'warning',
                   buttons:['Não', 'Sim'],
 
@@ -57,7 +55,7 @@ export default function Acept({ negociation }){
                   if (response) {
                         const result = await axios.delete('/api/negociation/status',{
                               idaapp:app._id,
-                              negociation,
+                              negociatiion,
                               myId
                         });
                         result.data ? swl({
@@ -72,30 +70,25 @@ export default function Acept({ negociation }){
       
       const AppComponent = () => (
             <div className={styles.appcontent}>
-                  <p className={styles.appname}>{negociation.appname}</p>
+                  <p className={styles.appname}>{negociatiion[0].appname}</p>
                   
-                        
-                              <div className={styles.negociations}>
-                                    <div className={styles.userdata}>
-                                          <img src={negociation.useravatar ? '/uploads/'+negociation.useravatar : ''} /> 
-                                          <p onClick={() => router.push('/profile/'+negociation.idUser)}>{negociation.nameuser?'@'+negociation.nameuser:''}</p>
-                                    </div>
-                                    <div className={styles.situation}>
-                                          <p className={styles.title}>{negociation.titulo}</p>
-                                          <div className={styles.padre}>
-                                                <div onClick={() => onAceitar(negociation)} className={styles.greendiv}><span><FontAwesomeIcon icon={faCheck}/> </span></div>
-                                                <div onClick={() => router.push('/negociation/reajustar/'+negociation._id)} className={styles.yellowdiv}><span><FontAwesomeIcon icon={faPenSquare}/> </span></div>
-                                                <div onClick={() => onRejeitar(negociation)} className={styles.reddiv}><span><FontAwesomeIcon icon={faTrash}/> </span></div>
-                                          </div>
-                                    </div>
-                                    <div className={styles.mynegociations}>
-                                          <p>{negociation.description?negociation.description:''}</p>
+                        <div className={styles.negociations}>
+                              <div className={styles.userdata}>
+                                    <img src={negociatiion[0].useravatar ? '/uploads/'+negociatiion[0].useravatar : ''} /> 
+                                    <p onClick={() => router.push('/profile/'+negociatiion[0].idUser)}>{negociatiion[0].nameuser?'@'+negociatiion[0].nameuser:''}</p>
+                              </div>
+                              <div className={styles.situation}>
+                                    <p className={styles.title}>{negociatiion[0].titulo}</p>
+                                    <div className={styles.padre}>
+                                          <div onClick={() => onAceitar()} className={styles.greendiv}><span><FontAwesomeIcon icon={faCheck}/> </span></div>
+                                          <div onClick={() => router.push('/negociation/reajustar/'+negociatiion[0]._id)} className={styles.yellowdiv}><span><FontAwesomeIcon icon={faPenSquare}/> </span></div>
+                                          <div onClick={() => onRejeitar()} className={styles.reddiv}><span><FontAwesomeIcon icon={faTrash}/> </span></div>
                                     </div>
                               </div>
-      
-                        
-                        {/* Map all negociations i solicited */}
-                 
+                              <div className={styles.mynegociations}>
+                                    <p>{negociatiion[0].description?negociatiion[0].description:''}</p>
+                              </div>
+                        </div>
             </div>
       )
       return(
@@ -111,9 +104,8 @@ export const getServerSideProps = async (context) =>{
       const db = await ConnectToDatabase();
       const id = context.params.id;
 
-      let negociation = await db.collection('negotiation')
-            .findOne({_id:ObjectId(id)});
-      
+      let negociation = await db.collection('apps')
+            .findOne({ negociations: {$elemMatch:{ _id:ObjectId(id)}}});
 
       return {
             props:{

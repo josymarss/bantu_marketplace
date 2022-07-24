@@ -6,7 +6,7 @@ import { ConnectToDatabase } from "../../../db/connection";
 import Head from '../../Head'
 import styles from './allnegociations.module.css';
 
-export default function AllNegotiations({ myNegs, noti }){
+export default function AllNegotiations({ myNegs, noti}){
       const router = useRouter();
 
       useEffect(() => {
@@ -21,19 +21,23 @@ export default function AllNegotiations({ myNegs, noti }){
                   <div className={styles.container}>
                         <div className={styles.elements}>
                               <h3>Minhas negociações</h3>
-                              {myNegs.length > 0 ? myNegs.map(neg => 
-                                    <Fragment>
+                              {myNegs.length > 0 ? myNegs.map((neg, index) => 
+                              
+                                    <Fragment key={index}>
                                           <div className={styles.dataapp}>
+                                          <p>{neg.negociations[0].appname}</p>
                                                 <div className={styles.user}>
-                                                      <img className={styles.img} src={`/uploads/${neg.usersolicitanteavatar}`} />
-                                                      <p>{neg.idusersolicitantename}</p>
+                                                      <img className={styles.img} src={`/uploads/${neg.negociations[0].usersolicitanteavatar}`} />
+                                                      <p>{neg.negociations[0].idusersolicitantename}</p>
                                                 </div>
-                                                <h4 >{neg.appname}</h4>
-                                                <p><span>Tipo: </span>{neg.titulo}</p>
-                                                <p><span>Percentual: </span>{neg.percent}</p>
-                                                <p><span>Data limite: </span>{neg.dataLimite}</p>
-                                                <button onClick={() => router.push('/negociation/decide/'+neg._id)}>Ver detalhes</button>
+                                                <h4 >{neg.negociations[0].appname}</h4>
+                                                <p><span>Tipo: </span>{neg.negociations[0].titulo}</p>
+                                                <p><span>Percentual: </span>{neg.negociations[0].percent}</p>
+                                                <p><span>Data limite: </span>{neg.negociations[0].dataLimite}</p>
+                                                <button onClick={() => router.push('/negociation/decide/'+neg.negociations[0]._id)}>Ver detalhes</button>
                                           </div>
+                                       
+                                          {/* {console.log(neg.negociations)} */}
                                     </Fragment>) 
                                           
                                     : <p>Sem negociações por enquanto</p>
@@ -47,27 +51,16 @@ export default function AllNegotiations({ myNegs, noti }){
 }
 export async function getServerSideProps(context) {
       const db = await ConnectToDatabase();
-      const negotiation = await db.collection('negotiation');
+      const apps = await db.collection('apps');
       const id = context.params.myid;
-      const cursor = await db.collection('apps').find();
-      //Procurar por negociaoes que solicitei
-      const apps = await cursor.toArray();
-     
-      let myApps = []
-      // let myNegs = []
 
-      let negoctiations = await negotiation.find({}).toArray();
-      let myNegs = negoctiations.filter(neg => neg.iduserdonodoapp == id); 
-
-      myApps = JSON.parse(JSON.stringify(myApps));
-
-      let noti = await db.collection('notification').find({userId:id}).toArray();
-      noti = JSON.parse(JSON.stringify(noti));
+      let negoctiations= await apps.find({negociations: {$elemMatch: {iduserdonodoapp: id}} }).toArray();
+      let myNegs = JSON.parse(JSON.stringify(negoctiations));
 
       return {
             props:{
-                  myNegs:JSON.parse(JSON.stringify(myNegs)),
-                  noti
+                  myNegs,
+                  // noti
             }
       }
 
