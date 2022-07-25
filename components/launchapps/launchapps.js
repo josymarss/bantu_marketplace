@@ -7,7 +7,7 @@ const Launchapps = ({apps}) => {
             <h2>Lançamento</h2>
             <div className={styles.containerApp}>
             {
-                apps.length === 0 ? <p> Sem favoritos</p> : apps.map((elem, index)=> <AppCard app={elem} key={index}/>)
+                apps.length === 0 ? <p> Sem Lançamento</p> : apps.map((elem, index)=> <AppCard app={elem} key={index}/>)
             }
             </div>
         </div>

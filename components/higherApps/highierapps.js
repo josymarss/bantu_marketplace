@@ -7,7 +7,7 @@ const HighierApp = ({apps}) => {
             <h2>Em alta</h2>
             <div className={styles.containerApp}>
             {
-                apps.length === 0 ? <p> Sem favoritos</p> : apps.map((elem, index)=> <AppCard app={elem} key={index}/>)
+                apps.length === 0 ? <p> Sem Aplicativos</p> : apps.map((elem, index)=> <AppCard app={elem} key={index}/>)
             }
             </div>
         </div>
