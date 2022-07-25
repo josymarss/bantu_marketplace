@@ -52,45 +52,48 @@ export default function User({ user,apps,id,negociationsDone }){
         <div className={styles.container}>
            
             <div className={styles.profile}>  
-                <img 
-                    className={styles.img}
-                    src={user.avatar ? `/uploads/${user.avatar}` : '/camera.png' }
-                /> 
                 
                 <div className={styles.user_data_name}>
-                    <span className={styles.fullName}>
-                        <p>{user.fullName}</p>
-                        {user._id === myId ?
-                            <span>
-                                <FontAwesomeIcon 
-                                    onClick={() => router.push('/profile/edit/'+myId) }
-                                    icon={faPen} 
-                                />
-                            </span>: ''}
-                    </span>
-                    <span>
-                         <p className={styles.username}>{`@${user.name}`}</p>       
+                    <div className={styles.imgFullname}>
+                        <img 
+                            className={styles.img}
+                            src={user.avatar ? `/uploads/${user.avatar}` : '/camera.png' }
+                        /> 
+                        <span className={styles.fullName}>
+                                <p>{user.fullName}</p>
+                                {user._id === myId ?
+                                    <span>
+                                        <FontAwesomeIcon 
+                                            onClick={() => router.push('/profile/edit/'+myId) }
+                                            icon={faPen} 
+                                        />
+                                    </span>: ''}
+                            </span>
+                    </div>
+
+
+                    <span className={styles.username}>
+                         <p >{`@${user.name}`}</p>       
                     </span>
                     <span className={styles.descritpion}>
                           <p >{user.description}</p>        
                     </span>
                 </div>
-            </div>
-            
-            <div className={styles.tofollow}>
-                    {user._id !== myId ?
+                    <div className={styles.tofollow}>
+                        {user._id !== myId ?
+                        
+                        <> 
+                            <span>
+                                <p className={follow ? styles.seguindo : styles.notfollowing} onClick={ verifyFollow }>
+                                        {follow? 'seguindo' : 'seguir'}
+                                </p>
+                            </span>
+                        
+                        </>
+                        :  ''
                     
-                    <> 
-                        <span>
-                            <p className={follow ? styles.seguindo : styles.notfollowing} onClick={ verifyFollow }>
-                                    {follow? 'seguindo' : 'seguir'}
-                            </p>
-                        </span>
-                    
-                    </>
-                    :  ''
-                   
-                }
+                    }
+                </div>
             </div>
 
             <aside className={styles.dataapp}>
@@ -103,16 +106,16 @@ export default function User({ user,apps,id,negociationsDone }){
             </aside>
 
             <div className={styles.appSection}>
-                <h4>Meus aplicativos</h4>
+                <h4> {user._id === myId ? 'Meus': 'Seus' } aplicativos</h4>
                 <div className={styles.myapps}>
-                    {apps ? apps.map((app,index) => 
+                    {apps .length > 0 ? apps.map((app,index) => 
                         <div className={styles.listApp}>
                             <div className={styles.app}>
                                 <img className={styles.image} src={'/appfiles/'+app.avatar}/>
                                 <p className={styles.title} onClick={() =>router.push('/apps/'+app._id)}>{app.name}</p>
                             </div>
                         </div>
-                    ): <p>Sem aplicativos para mostrar</p>}
+                    ): <p className={styles.withoutApp}>Sem aplicativos para mostrar</p>}
                 </div>
             </div>
         </div>

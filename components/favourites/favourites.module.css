@@ -2,6 +2,9 @@
     display: grid;
     grid-template-columns: 1fr;
 }
+.container h2 {
+    color: rgb(255, 178, 34);
+}
 .containerApp {
      display: grid;
      grid-template-columns: 1fr 1fr;
