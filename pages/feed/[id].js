@@ -3,6 +3,7 @@ import {useRouter} from 'next/router';
 import {ObjectId} from 'mongodb';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { Message } from 'theme-ui';
 
 import {ConnectToDatabase} from '../../db/connection';
 import styles from './feed.module.css'
@@ -30,7 +31,7 @@ export default function Feed({ user }){
      )
 
 
-     const FeedData = () =>  user.feed.length == 0 ? <p>Sem actividade, preocure por seguidores e siga-aos para ver o que têm neogicado.</p>:
+     const FeedData = () =>  user.feed.length == 0 ? <Message ><span style={{color:'white'}}>Sem actividade, preocure por seguidores e siga-aos para ver o que têm neogicado.</span></Message>:
           user.feed.map((content,index) =>
                <FeedComponent  
                     avatar={content.avatar?content.avatar:<p>NoPhoto</p>}

@@ -1,0 +1,74 @@
+.container{
+    position: absolute;
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.card{
+    display:flex;
+    flex-direction: column;
+    padding:20px;
+    align-items: center;
+    justify-content: center;
+    width:480px;
+    height:490px;
+    background-color:rgb(241, 241, 241);
+    z-index:1000;
+    box-shadow: 8px 8px 8px rgb(208, 208, 208);
+    flex-wrap: nowrap;
+}
+.img{
+    width:380px;
+    height:300px
+}
+.card h3{
+    text-align:center;
+    color:rgb(255, 147, 39);
+}
+.card p{
+    text-align:center;
+    margin-top: -10px;
+    color:gray;
+}
+.buttons{
+    margin-top:-20px;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items:center;
+    padding:30px;
+}
+.button{
+    width:100px;
+    padding:8px;
+    border-radius:50px;
+    border:none;
+    background-color:rgb(39, 136, 255);
+    color:white;
+    font-size:12pt;
+    padding:10px;
+}
+.buttonRed{
+    width:100px;
+    padding:8px;
+    border-radius:50px;
+    border:none;
+    background-color:rgb(245, 87, 87);
+    color:white;
+    font-size:12pt;
+    padding:10px;
+}
+.buttonRed:hover{
+    background-color:rgb(69, 68, 68);
+    transition:0.2 ease-in;
+}
+.button:hover{
+    background-color:rgb(30, 30, 30);
+    transition:0.2 ease-in;
+}
+.none{
+    border:none;
+}
